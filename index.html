@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>青椒模拟器团队 · 让 AI 拓展游戏想象</title>
+<meta name="description" content="青椒模拟器团队 / Feed-Scription —— 用大模型重新想象游戏可能性。AI 剧情、AI 对话、Agent 博弈、AI 算法设计与 KAL 引擎。">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --paper: #f6f0e2;
+    --paper-soft: #ede5d2;
+    --paper-deep: #e3d8bd;
+    --ink: #1c1a16;
+    --ink-soft: #4a443a;
+    --moss: #3a7a55;
+    --moss-deep: #265c3e;
+    --clay: #b85c1c;
+    --clay-soft: #d68a4f;
+    --rule: #c9bda6;
+    --rule-soft: #ddd3bb;
+    --mute: #8a8170;
+
+    --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+    --sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", -apple-system, sans-serif;
+    --latin: "Fraunces", Georgia, "Noto Serif SC", serif;
+
+    --maxw: 1180px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern", "liga";
+    line-height: 1.6;
+  }
+
+  ::selection { background: var(--moss); color: var(--paper); }
+
+  a { color: var(--moss-deep); text-decoration: none; border-bottom: 1px solid var(--rule); transition: color .15s, border-color .15s; }
+  a:hover { color: var(--clay); border-bottom-color: var(--clay); }
+
+  .container { max-width: var(--maxw); margin: 0 auto; padding: 0 6vw; }
+
+  /* ---- masthead (top bar like a newspaper nameplate) ---- */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 22px 0 18px;
+    background: var(--paper);
+  }
+  .masthead-inner {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap;
+  }
+  .nameplate {
+    font-family: var(--latin);
+    font-weight: 600; font-style: italic;
+    font-size: 1.3rem;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .nameplate .dot { color: var(--clay); font-style: normal; margin: 0 .4em; }
+  .nav {
+    display: flex; gap: 26px;
+    font-size: 0.85rem; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+  .nav a { color: var(--mute); border: none; }
+  .nav a:hover { color: var(--moss-deep); }
+
+  /* ---- hero ---- */
+  .hero {
+    padding: 9vh 0 7vh;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .hero .eyebrow {
+    font-family: var(--latin); font-style: italic;
+    font-size: 1.05rem; color: var(--moss);
+    letter-spacing: 0.04em; margin-bottom: 1.2rem;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(2.4rem, 5.4vw, 4.8rem);
+    line-height: 1.08;
+    letter-spacing: -0.005em;
+    margin-bottom: 1.4rem;
+  }
+  .hero h1 .em { color: var(--clay); }
+  .hero h1 .bracket { color: var(--moss); font-weight: 700; }
+  .hero .lede {
+    font-family: var(--serif);
+    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+    max-width: 38em;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 2.4rem;
+  }
+  .hero .lede strong { color: var(--ink); font-weight: 700; }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 14px 36px;
+    font-size: 0.92rem; color: var(--mute);
+    border-top: 1px dashed var(--rule);
+    padding-top: 1.6rem;
+  }
+  .hero-meta b { color: var(--ink); font-weight: 600; margin-right: .5em; }
+
+  /* ---- section ---- */
+  section.work {
+    padding: 8vh 0 4vh;
+    border-bottom: 1px solid var(--rule);
+  }
+  .sec-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+    margin-bottom: 4.5vh;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .sec-num {
+    font-family: var(--latin); font-style: italic;
+    font-size: 1.05rem; color: var(--moss);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.6rem;
+  }
+  .sec-head h2 {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+    line-height: 1.1;
+  }
+  .sec-head h2 .em { color: var(--clay); }
+  .sec-head .sec-blurb {
+    max-width: 26em;
+    color: var(--ink-soft);
+    font-family: var(--serif);
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  /* ---- category subhead ---- */
+  .cat {
+    display: flex; align-items: center;
+    gap: 14px; margin: 3.6vh 0 2vh;
+    color: var(--moss-deep);
+    font-family: var(--latin); font-style: italic;
+    font-size: 0.95rem; letter-spacing: 0.08em;
+  }
+  .cat::before {
+    content: ""; width: 22px; height: 1px; background: var(--moss);
+  }
+  .cat-zh {
+    font-family: var(--sans); font-style: normal;
+    color: var(--ink); font-weight: 700;
+    letter-spacing: 0.02em; font-size: 0.98rem;
+  }
+
+  /* ---- card grid ---- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 28px;
+  }
+  .card {
+    background: var(--paper-soft);
+    border: 1px solid var(--rule);
+    transition: border-color .2s, transform .2s;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .card:hover { border-color: var(--moss); }
+  .card-thumb {
+    width: 100%; aspect-ratio: 16/10;
+    background: var(--paper-deep);
+    overflow: hidden; position: relative;
+    border-bottom: 1px solid var(--rule);
+  }
+  .card-thumb img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center;
+    transition: transform .4s ease;
+    filter: saturate(0.92);
+  }
+  .card:hover .card-thumb img { transform: scale(1.03); filter: saturate(1.05); }
+  .card-thumb.svg {
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--paper-deep), var(--paper-soft));
+  }
+  .card-thumb.svg svg { width: 38%; height: auto; opacity: 0.55; color: var(--moss-deep); }
+
+  .card-body { padding: 22px 24px 8px; flex: 1; display: flex; flex-direction: column; }
+  .card-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: .7rem;
+  }
+  .tag {
+    font-size: 0.72rem; letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--moss-deep);
+    padding: 2px 8px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .tag.clay { color: var(--clay); }
+  .card h3 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 1.45rem;
+    line-height: 1.25;
+    margin-bottom: .5rem;
+    color: var(--ink);
+  }
+  .card h3 .lat {
+    font-family: var(--latin); font-style: italic;
+    font-weight: 500; color: var(--mute);
+    font-size: 0.85em; margin-left: .35em;
+  }
+  .card .one-liner {
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+    line-height: 1.65;
+    margin-bottom: 1.1rem;
+  }
+
+  /* details/summary */
+  details {
+    border-top: 1px dashed var(--rule);
+    padding: 12px 0 4px;
+    margin-top: auto;
+  }
+  details summary {
+    list-style: none;
+    cursor: pointer;
+    font-family: var(--latin); font-style: italic;
+    font-size: 0.92rem;
+    color: var(--moss-deep);
+    letter-spacing: 0.04em;
+    user-select: none;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::after {
+    content: "＋";
+    font-style: normal; font-family: var(--sans);
+    color: var(--moss); font-weight: 300;
+    font-size: 1.2rem; line-height: 1;
+    transition: transform .2s;
+  }
+  details[open] summary::after { content: "－"; }
+  details summary:hover { color: var(--clay); }
+  .card .detail-body {
+    padding-top: 14px;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .detail-body p + p { margin-top: .7rem; }
+  .detail-body ul { list-style: none; padding: 0; margin: .4rem 0 .8rem; }
+  .detail-body li { padding: 3px 0; position: relative; padding-left: 1.2em; }
+  .detail-body li::before {
+    content: "·"; color: var(--clay); font-weight: 700;
+    position: absolute; left: 0.3em; top: -2px;
+    font-size: 1.4em;
+  }
+  .detail-body .links {
+    display: flex; flex-wrap: wrap; gap: 18px;
+    margin-top: 1rem; padding-top: .8rem;
+    border-top: 1px dashed var(--rule);
+    font-size: 0.86rem; letter-spacing: 0.04em;
+  }
+  .detail-body .links a {
+    font-family: var(--latin); font-style: italic;
+    color: var(--moss-deep);
+    border-bottom: 1px solid var(--rule);
+  }
+  .detail-body .links a:hover { color: var(--clay); border-bottom-color: var(--clay); }
+  .detail-body .tech { color: var(--mute); font-size: 0.82rem; margin-top: .6rem; }
+  .detail-body .tech b { color: var(--ink-soft); font-weight: 600; }
+
+  /* ---- about / footer ---- */
+  section.about {
+    padding: 8vh 0;
+    background: var(--paper-soft);
+    border-bottom: 1px solid var(--rule);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 6vw;
+  }
+  .about h2 {
+    font-family: var(--serif); font-weight: 900;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    line-height: 1.15; margin-bottom: 1rem;
+  }
+  .about h2 .em { color: var(--clay); }
+  .about p {
+    font-family: var(--serif);
+    font-size: 1.05rem; color: var(--ink-soft);
+    line-height: 1.85; margin-bottom: 1rem;
+  }
+  .about .stats {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 2.4vh 2.4vw; margin-top: 2vh;
+  }
+  .stat {
+    border-top: 1px solid var(--rule);
+    padding-top: 1.1rem;
+  }
+  .stat .n {
+    font-family: var(--latin); font-style: italic;
+    font-size: 2.4rem; font-weight: 600;
+    color: var(--moss-deep); line-height: 1;
+    margin-bottom: .35rem;
+  }
+  .stat .l { font-size: 0.85rem; color: var(--mute); letter-spacing: 0.06em; }
+
+  footer {
+    padding: 4vh 0 5vh;
+    font-size: 0.85rem;
+    color: var(--mute);
+  }
+  .foot-row {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+  }
+  .foot-row .latin { font-family: var(--latin); font-style: italic; }
+
+  /* ---- responsive ---- */
+  @media (max-width: 720px) {
+    .container { padding: 0 6vw; }
+    .nav { display: none; }
+    .hero { padding: 7vh 0 5vh; }
+    .about-grid { grid-template-columns: 1fr; gap: 4vh; }
+    .grid { grid-template-columns: 1fr; gap: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="container masthead-inner">
+    <div class="nameplate">青椒模拟器团队 <span class="dot">·</span> <i>Feed-Scription</i></div>
+    <nav class="nav">
+      <a href="#games">AI Games</a>
+      <a href="#tools">Tools</a>
+      <a href="#about">About</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="eyebrow">Vol. I · 2026</div>
+    <h1>
+      让 <span class="em">AI</span> 拓展<br>
+      游戏的<span class="bracket">「</span>想象边界<span class="bracket">」</span>
+    </h1>
+    <p class="lede">
+      我们是一支用大模型重新想象游戏可能性的小队。
+      过去一年做了 <strong>6 款 AI 游戏</strong>和 <strong>2 套游戏工具</strong>：
+      让剧情随玩家走、让 NPC 真的能聊、让 Agent 互相博弈、让玩家亲手设计算法。
+      把"AI 能在游戏里做什么"这件事，一个 demo 一个 demo 地推前去。
+    </p>
+    <div class="hero-meta">
+      <span><b>主创</b>青椒模拟器</span>
+      <span><b>关键词</b>AI 剧情 · Agent 博弈 · 算法可玩化</span>
+      <span><b>状态</b>持续招新中</span>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="games">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <div class="sec-num">I · Games</div>
+        <h2>AI <span class="em">游戏</span></h2>
+      </div>
+      <p class="sec-blurb">从"AI 给剧情"到"玩家给 AI 设计算法"——我们沿着大模型能做事的四条路径，各做一个能玩的 demo。</p>
+    </div>
+
+    <!-- ──── AI 剧情走向 ──── -->
+    <div class="cat"><span class="cat-zh">AI 剧情走向</span> · Plot-by-LLM</div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-thumb"><img src="assets/gameplay_main.png" alt="青椒模拟器界面"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="tag">模拟经营</span><span class="tag clay">已上线</span></div>
+          <h3>青椒模拟器 <span class="lat">Tenure-Track Chili</span></h3>
+          <p class="one-liner">扮演高校青年教师，在科研、教学、人际中挣扎晋升 —— LLM 让每一季度都长出独一无二的故事。</p>
+          <details>
+            <summary>展开 · 怎么玩 / 技术</summary>
+            <div class="detail-body">
+              <p>季度回合制：分配精力鞭策/安慰学生、申请基金、应对随机事件（报销风波、论文被抢发、学生退学危机…），AI 实时生成结算叙事。</p>
+              <ul>
+                <li>核心张力：产出 vs 学生心理 vs 自己理智，没有最优解</li>
+                <li>WeChili 即时通讯：用自然语言劝学生留校 / 读博</li>
+                <li>"学术造假"分支、Breaking Bad 化学系彩蛋</li>
+                <li>小红书爆款："硕博生的尽头 game"</li>
+              </ul>
+              <p class="tech"><b>技术</b>React · KAL Engine · LLM 叙事生成 · 多终点结算</p>
+              <div class="links">
+                <a href="https://github.com/Jacob-Zhou/Tenure-Track-Chili" target="_blank">GitHub</a>
+              </div>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-thumb"><img src="assets/pupu.png" alt="噗噗模拟器界面"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="tag">模拟经营</span><span class="tag">社媒互动</span></div>
+          <h3>噗噗模拟器 <span class="lat">Make Duckerican Quack Again</span></h3>
+          <p class="one-liner">扮演一只走上权力顶峰的特殊鸭子，通过决策与社媒发声体验荒诞领导人生。</p>
+          <details>
+            <summary>展开 · 怎么玩 / 技术</summary>
+            <div class="detail-body">
+              <p>避免数值优化陷阱：隐藏数值、开放结局、AI 动态生成事件文本，让每局都长出不同剧本而非套模板。</p>
+              <ul>
+                <li>核心循环：行政日程 + 推特发言 + 国际事件回应</li>
+                <li>无"胜利/失败"二元结局，只有多元叙事走向</li>
+                <li>i18n + PWA，可装到手机随时刷</li>
+              </ul>
+              <p class="tech"><b>技术</b>React 19 · Vite · Zustand · Wortou SDK · Vercel Serverless</p>
+              <div class="links">
+                <a href="https://github.com/zhliu0106/trump-simulator" target="_blank">GitHub</a>
+              </div>
+            </div>
+          </details>
+        </div>
+      </article>
+    </div>
+
+    <!-- ──── AI 对话 ──── -->
+    <div class="cat"><span class="cat-zh">AI 对话</span> · Dialogue & Persona</div>
+    <div class="grid">
+      <article class="card">
+        <div class="card-thumb"><img src="assets/fate_river.png" alt="逆命之河"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="tag">叙事冒险</span><span class="tag clay">已上线</span></div>
+          <h3>逆命之河 <span class="lat">Fate River</span></h3>
+          <p class="one-liner">扮演历史人物改命试试：「武则天若让孩子活下来，会不会弥补遗憾？」</p>
+          <details>
+            <summary>展开 · 怎么玩 / 技术</summary>
+            <div class="detail-body">
+              <p>玩家进入历史人物视角，每个回合在 LLM 生成的命运分支中做选择，或自由输入（被另一个 LLM 评估可行性）。蝴蝶效应引擎记录每一次偏离原历史的轨迹，结局根据偏移度生成。</p>
+              <ul>
+                <li>Phase Router 流程 + 蝴蝶效应引擎</li>
+                <li>所有 Prompt 在 API 端、前端不可见，防 prompt 泄露</li>
+                <li>OAuth 玩家计费，自带账号体系</li>
+              </ul>
+              <p class="tech"><b>技术</b>React · Vercel Serverless · Wortou SDK · 历史人物数据集</p>
+              <div class="links">
+                <a href="https://github.com/Feed-Scription/fate-river" target="_blank">GitHub</a>
+              </div>
+            </div>
+          </details>
+        </div>
+      </article>
+    </div>
+
+    <!-- ──── Agent 博弈 ──── -->
+    <div class="cat"><span class="cat-zh">Agent 博弈</span> · Multi-Agent Arena</div>
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-thumb svg">
+          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="14" y="18" width="22" height="32" rx="2"/>
+            <rect x="42" y="34" width="22" height="32" rx="2"/>
+            <rect x="64" y="22" width="22" height="32" rx="2"/>
+            <circle cx="25" cy="34" r="2.5" fill="currentColor"/>
+            <circle cx="53" cy="50" r="2.5" fill="currentColor"/>
+            <circle cx="75" cy="38" r="2.5" fill="currentColor"/>
+            <path d="M22 70 H 88" stroke-dasharray="3 3"/>
+            <text x="50" y="88" font-family="serif" font-size="10" text-anchor="middle" fill="currentColor" stroke="none">All-in</text>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-tags"><span class="tag">Multi-Agent</span><span class="tag">实时复盘</span></div>
+          <h3>大模型德扑 <span class="lat">Cyber Cricket</span></h3>
+          <p class="one-liner">6 个大模型在浏览器里同桌打 No-Limit 德州 —— 谁更会 bluff？</p>
+          <details>
+            <summary>展开 · 怎么玩 / 技术</summary>
+            <div class="detail-body">
+              <p>Gemini / Claude / ChatGPT / DeepSeek / Kimi / Qwen 在一张桌上对局。每个 Agent 只能看到公共信息和自己的手牌，自带长期记忆、策略与对手画像；每手结束自动复盘并更新画像。</p>
+              <ul>
+                <li>纯前端跑扑克引擎，OpenRouter 路由全部模型</li>
+                <li>实时展示思考流、思考 token 数</li>
+                <li>统计面板：筹码曲线、胜率、弃牌率、GTO 起手矩阵</li>
+              </ul>
+              <p class="tech"><b>技术</b>React 19 · Vite · TypeScript · Zustand · OpenRouter</p>
+              <div class="links">
+                <a href="https://github.com/Feed-Scription/poker-quguer" target="_blank">GitHub</a>
+              </div>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-thumb"><img src="assets/platform.png" alt="赛博蛐蛐儿平台"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="tag">Trustless</span><span class="tag">Commit-Reveal</span></div>
+          <h3>赛博蛐蛐儿 <span class="lat">QuQuer</span></h3>
+          <p class="one-liner">一个让外部 Agent 公平博弈的可审计平台 —— 自己带模型来打，靠 Commit-Reveal 防作弊。</p>
+          <details>
+            <summary>展开 · 怎么玩 / 技术</summary>
+            <div class="detail-body">
+              <p>用户带自己的 Agent 通过 REST + SSE 接入平台，在石头剪刀布 (含 bluff 回合)、Colonel Blotto 排兵、骰子说谎家等博弈游戏中竞技。Agent 通过 <code>SKILL.md</code> 自学如何接入。</p>
+              <ul>
+                <li>所有同时决策走 Commit-Reveal + Ed25519 签名，平台无须被信任</li>
+                <li>x402 协议链上充值，平台币 tollar 内循环</li>
+                <li>ELO 自动匹配；ququer-ring 提供观赛 / 排行 / Agent profile</li>
+              </ul>
+              <p class="tech"><b>技术</b>TypeScript · Node · Next.js 16 · SSE · Ed25519 · x402</p>
+              <div class="links">
+                <a href="https://github.com/quadra-a/ququer" target="_blank">引擎 GitHub</a>
+                <a href="https://github.com/quadra-a/ququer-ring" target="_blank">观赛端 GitHub</a>
+              </div>
+            </div>
+          </details>
+        </div>
+      </article>
+    </div>
+
+    <!-- ──── AI 算法设计 ──── -->
+    <div class="cat"><span class="cat-zh">AI 算法设计</span> · Algorithms-as-Play</div>
+    <div class="grid">
+      <article class="card">
+        <div class="card-thumb"><img src="assets/card_game.png" alt="NeurAlchemy"></div>
+        <div class="card-body">
+          <div class="card-tags"><span class="tag">卡牌</span><span class="tag">真训练</span></div>
+          <h3>NeurAlchemy <span class="lat">炼经术</span></h3>
+          <p class="one-liner">用卡牌搭一张神经网络，浏览器里跑 TF.js 真训练，再用隐藏测试集给你打分。</p>
+          <details>
+            <summary>展开 · 怎么玩 / 技术</summary>
+            <div class="detail-body">
+              <p>把"调网络结构 → 看效果"这件事卡牌化：层/修饰符/超参/步骤四类卡，玩家组合出网络后真在 MNIST / CIFAR-10 / CIFAR-100 上训练，服务端按隐藏测试集准确率结算。</p>
+              <ul>
+                <li>三大支柱：表达创造 / 挑战征服 / 探索发现</li>
+                <li>诊断驱动的「学徒系统」：破产时回溯失败原因，"观察, 不是指令"</li>
+                <li>TF.js 浏览器训练 + 服务端打分</li>
+              </ul>
+              <p class="tech"><b>技术</b>TF.js · React · 数据集服务端打分</p>
+              <div class="links">
+                <a href="https://github.com/Feed-Scription/neuralchemy" target="_blank">GitHub</a>
+              </div>
+            </div>
+          </details>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="tools">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <div class="sec-num">II · Tools</div>
+        <h2>游戏 <span class="em">工具</span></h2>
+      </div>
+      <p class="sec-blurb">做完上面这些 demo，沉淀下来的可复用基础设施 —— 也开源给其他想做 AI 游戏的团队。</p>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-thumb svg">
+          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="16" y="16" width="68" height="50" rx="2"/>
+            <path d="M22 28 H 70"/>
+            <path d="M22 36 H 60"/>
+            <path d="M22 44 H 64"/>
+            <circle cx="78" cy="80" r="10" fill="none"/>
+            <path d="M74 80 L 77 83 L 84 76" stroke-width="2.5"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-tags"><span class="tag">自动化测试</span><span class="tag">AI 玩家</span></div>
+          <h3>逆命自动化测试 <span class="lat">Fate-River Autotest</span></h3>
+          <p class="one-liner">让 LLM 化身玩家把整局逆命之河跑通 —— 把"AI 叙事游戏"的回归测试搬到 CI 里。</p>
+          <details>
+            <summary>展开 · 怎么用 / 技术</summary>
+            <div class="detail-body">
+              <p>AI 叙事游戏的痛点：每条剧情线都由 LLM 临时生成，传统断言测不了。这套工具用一个"玩家 Agent"自动选择、自由输入、推进回合，把每个分支跑到结局并收集异常。</p>
+              <ul>
+                <li>覆盖角色选择 → 回合循环 → 蝴蝶效应 → 结局生成全链路</li>
+                <li>自动断言：状态机不卡住、叙事不空响应、结局可达</li>
+                <li>失败时输出可复现的玩家轨迹</li>
+              </ul>
+              <p class="tech"><b>技术</b>LLM 玩家 Agent · Phase 状态机断言 · 轨迹回放</p>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-thumb svg">
+          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="50" cy="50" r="32"/>
+            <circle cx="50" cy="50" r="6" fill="currentColor"/>
+            <path d="M50 18 V 30"/>
+            <path d="M50 70 V 82"/>
+            <path d="M18 50 H 30"/>
+            <path d="M70 50 H 82"/>
+            <path d="M27 27 L 36 36"/>
+            <path d="M64 64 L 73 73"/>
+            <path d="M27 73 L 36 64"/>
+            <path d="M64 36 L 73 27"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <div class="card-tags"><span class="tag">游戏框架</span><span class="tag">LLM-First</span></div>
+          <h3>KAL Application Layer <span class="lat">Kal-Engine</span></h3>
+          <p class="one-liner">LLM-First 的游戏组件库：让 Coding Agent 在 30 分钟内拼出一个完整的文字游戏。</p>
+          <details>
+            <summary>展开 · 怎么用 / 技术</summary>
+            <div class="detail-body">
+              <p>借鉴 PyTorch 的 Define-by-Run 范式：Agent 像搭积木一样组合组件，而非被模板引擎的预设概念锁死。沉淀自青椒模拟器 / 噗噗模拟器 / 赛博红娘三个实战项目。</p>
+              <ul>
+                <li>四个核心原语：GameState · GameComponent · EventBus · createEngine</li>
+                <li>15+ 个预制组件：TimeSystem · RuleEngine · LLMNarrative · SaveManager …</li>
+                <li>自描述 Spec：Agent 自主探索引擎能力，零认知陷阱</li>
+                <li>React 绑定 + UI 组件库一包搞定</li>
+              </ul>
+              <p class="tech"><b>技术</b>TypeScript Monorepo · React 绑定 · EventBus 全链路追踪</p>
+              <div class="links">
+                <a href="https://github.com/Feed-Scription/kal-engine" target="_blank">引擎 GitHub</a>
+                <a href="https://github.com/Feed-Scription/kal-website" target="_blank">官网 GitHub</a>
+              </div>
+            </div>
+          </details>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="container about-grid">
+    <div>
+      <h2>关于 <span class="em">我们</span></h2>
+      <p>
+        青椒模拟器团队（Feed-Scription）是一支跨研究 / 工程 / 设计的 AI 游戏小队。
+        我们相信大模型不只是写文案的工具，而是一种新的"游戏机制"——
+        因此用一年时间，把它分别接到了剧情、对话、博弈和算法这四件事上。
+      </p>
+      <p>
+        每个 demo 都坚持端到端跑通：能玩、能上线、能被陌生人骂或吹爆。
+        过程中沉淀出的 KAL 引擎和自动化测试也开源出来，希望降低下一波 AI 游戏团队的门槛。
+      </p>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n">6</div><div class="l">AI Games Shipped</div></div>
+      <div class="stat"><div class="n">2</div><div class="l">Open-source Tools</div></div>
+      <div class="stat"><div class="n">4</div><div class="l">AI 游戏方向</div></div>
+      <div class="stat"><div class="n">∞</div><div class="l">Next Ideas in Backlog</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container foot-row">
+    <div>
+      <span class="latin">© 2026</span> 青椒模拟器团队 / Feed-Scription ·
+      <a href="https://github.com/Feed-Scription" target="_blank">GitHub Org</a>
+    </div>
+    <div class="latin"><i>Made with chili pepper &amp; a lot of LLM tokens.</i></div>
+  </div>
+</footer>
+
+</body>
+</html>
