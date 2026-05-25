@@ -8,374 +8,682 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --paper: #f6f0e2;
-    --paper-soft: #ede5d2;
-    --paper-deep: #e3d8bd;
-    --ink: #1c1a16;
-    --ink-soft: #4a443a;
-    --moss: #3a7a55;
-    --moss-deep: #265c3e;
-    --clay: #b85c1c;
-    --clay-soft: #d68a4f;
-    --rule: #c9bda6;
-    --rule-soft: #ddd3bb;
-    --mute: #8a8170;
+    --bg: #FDFDFD;
+    --ink: #111827;        /* gray-900 */
+    --ink-2: #374151;      /* gray-700 */
+    --ink-3: #6b7280;      /* gray-500 */
+    --ink-4: #9ca3af;      /* gray-400 */
+    --line: #e5e7eb;       /* gray-200 */
+    --line-soft: #f3f4f6;  /* gray-100 */
 
-    --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
-    --sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", -apple-system, sans-serif;
-    --latin: "Fraunces", Georgia, "Noto Serif SC", serif;
+    --amber: #f59e0b;      /* amber-500 */
+    --amber-d: #d97706;    /* amber-600 */
+    --amber-tint: #fffbeb; /* amber-50 */
+    --orange: #f97316;     /* orange-500 */
 
-    --maxw: 1180px;
+    --indigo: #6366f1;     /* indigo-500 */
+    --indigo-d: #4f46e5;
+    --indigo-tint: #eef2ff;
+
+    --rose: #f43f5e;       /* rose-500 */
+    --rose-tint: #fff1f2;
+
+    --emerald: #10b981;    /* emerald-500 */
+    --emerald-tint: #ecfdf5;
+
+    --sans: "Inter", "Noto Sans SC", "Source Han Sans SC", "PingFang SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    --maxw: 1240px;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   html { scroll-behavior: smooth; }
+
   body {
-    background: var(--paper);
+    background: var(--bg);
     color: var(--ink);
     font-family: var(--sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-feature-settings: "kern", "liga";
+    font-feature-settings: "kern", "liga", "calt";
     line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
   }
 
-  ::selection { background: var(--moss); color: var(--paper); }
+  ::selection { background: #fef3c7; color: #92400e; }
 
-  a { color: var(--moss-deep); text-decoration: none; border-bottom: 1px solid var(--rule); transition: color .15s, border-color .15s; }
-  a:hover { color: var(--clay); border-bottom-color: var(--clay); }
+  /* ---- pepper watermark (matches feedscription) ---- */
+  .pepper-bg {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(12deg);
+    width: min(95vw, 1200px);
+    height: min(95vw, 1200px);
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.055;
+    mix-blend-mode: multiply;
+    background: url('assets/green_pepper.png') center/contain no-repeat;
+  }
 
-  .container { max-width: var(--maxw); margin: 0 auto; padding: 0 6vw; }
+  a {
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: color .2s ease;
+  }
+  a:hover { color: var(--amber-d); }
 
-  /* ---- masthead (top bar like a newspaper nameplate) ---- */
-  .masthead {
-    border-bottom: 1px solid var(--rule);
-    padding: 22px 0 18px;
-    background: var(--paper);
-  }
-  .masthead-inner {
-    display: flex; align-items: baseline; justify-content: space-between;
-    gap: 24px; flex-wrap: wrap;
-  }
-  .nameplate {
-    font-family: var(--latin);
-    font-weight: 600; font-style: italic;
-    font-size: 1.3rem;
-    color: var(--ink);
-    letter-spacing: 0.02em;
-  }
-  .nameplate .dot { color: var(--clay); font-style: normal; margin: 0 .4em; }
+  .container { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  @media (min-width: 768px) { .container { padding: 0 32px; } }
+
+  /* ---- navbar (glass) ---- */
   .nav {
-    display: flex; gap: 26px;
-    font-size: 0.85rem; letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--mute);
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(14px) saturate(180%);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    border-bottom: 1px solid rgba(229, 231, 235, 0.5);
   }
-  .nav a { color: var(--mute); border: none; }
-  .nav a:hover { color: var(--moss-deep); }
+  .nav-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  @media (min-width: 768px) { .nav-inner { padding: 16px 32px; } }
+  .brand {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #111827 0%, #374151 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .brand .dot {
+    background: linear-gradient(90deg, var(--amber), var(--orange));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 0 .3em;
+  }
+  .nav-links {
+    display: flex; gap: 28px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink-4);
+  }
+  .nav-links a { color: var(--ink-4); }
+  .nav-links a:hover { color: var(--ink); }
 
   /* ---- hero ---- */
   .hero {
-    padding: 9vh 0 7vh;
-    border-bottom: 1px solid var(--rule);
+    padding: 160px 0 120px;
     position: relative;
   }
-  .hero .eyebrow {
-    font-family: var(--latin); font-style: italic;
-    font-size: 1.05rem; color: var(--moss);
-    letter-spacing: 0.04em; margin-bottom: 1.2rem;
-  }
-  .hero h1 {
-    font-family: var(--serif);
-    font-weight: 900;
-    font-size: clamp(2.4rem, 5.4vw, 4.8rem);
-    line-height: 1.08;
-    letter-spacing: -0.005em;
-    margin-bottom: 1.4rem;
-  }
-  .hero h1 .em { color: var(--clay); }
-  .hero h1 .bracket { color: var(--moss); font-weight: 700; }
-  .hero .lede {
-    font-family: var(--serif);
-    font-size: clamp(1.05rem, 1.5vw, 1.3rem);
-    max-width: 38em;
-    color: var(--ink-soft);
-    line-height: 1.75;
-    margin-bottom: 2.4rem;
-  }
-  .hero .lede strong { color: var(--ink); font-weight: 700; }
-  .hero-meta {
-    display: flex; flex-wrap: wrap; gap: 14px 36px;
-    font-size: 0.92rem; color: var(--mute);
-    border-top: 1px dashed var(--rule);
-    padding-top: 1.6rem;
-  }
-  .hero-meta b { color: var(--ink); font-weight: 600; margin-right: .5em; }
+  .hero-inner { max-width: 920px; }
 
-  /* ---- section ---- */
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--amber-d);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    padding: 6px 14px;
+    background: var(--amber-tint);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    border-radius: 999px;
+    opacity: 0;
+    animation: fadeUp .8s ease-out forwards;
+  }
+  .eyebrow::before {
+    content: ""; width: 6px; height: 6px;
+    background: var(--amber); border-radius: 50%;
+    box-shadow: 0 0 12px var(--amber);
+  }
+
+  h1.hero-title {
+    font-size: clamp(2.6rem, 6.2vw, 5.4rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp .8s ease-out forwards;
+    animation-delay: .1s;
+  }
+  h1.hero-title .accent {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--amber) 0%, var(--orange) 50%, var(--amber-d) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding: 0 .05em;
+  }
+
+  .lede {
+    font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+    font-weight: 300;
+    color: var(--ink-3);
+    line-height: 1.7;
+    max-width: 640px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp .8s ease-out forwards;
+    animation-delay: .2s;
+  }
+  .lede strong { color: var(--ink); font-weight: 600; }
+
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    opacity: 0;
+    animation: fadeUp .8s ease-out forwards;
+    animation-delay: .3s;
+  }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink-2);
+  }
+  .pill .pill-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--amber);
+  }
+  .pill .pill-dot.indigo { background: var(--indigo); }
+  .pill .pill-dot.rose { background: var(--rose); }
+  .pill .pill-dot.emerald { background: var(--emerald); }
+
+  /* ---- sections ---- */
   section.work {
-    padding: 8vh 0 4vh;
-    border-bottom: 1px solid var(--rule);
+    padding: 80px 0;
+    position: relative;
   }
+
   .sec-head {
-    display: flex; align-items: baseline; justify-content: space-between;
-    flex-wrap: wrap; gap: 16px;
-    margin-bottom: 4.5vh;
-    padding-bottom: 1.2rem;
-    border-bottom: 1px solid var(--rule-soft);
+    display: flex; align-items: flex-end; justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 56px;
   }
+  .sec-head-l { max-width: 600px; }
   .sec-num {
-    font-family: var(--latin); font-style: italic;
-    font-size: 1.05rem; color: var(--moss);
-    letter-spacing: 0.08em;
-    margin-bottom: 0.6rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink-4);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .sec-num::before {
+    content: ""; width: 28px; height: 2px;
+    background: linear-gradient(90deg, var(--amber), var(--orange));
+    border-radius: 2px;
   }
   .sec-head h2 {
-    font-family: var(--serif);
-    font-weight: 900;
-    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
     line-height: 1.1;
+    color: var(--ink);
   }
-  .sec-head h2 .em { color: var(--clay); }
-  .sec-head .sec-blurb {
-    max-width: 26em;
-    color: var(--ink-soft);
-    font-family: var(--serif);
-    font-size: 1.02rem;
+  .sec-head h2 .accent {
+    background: linear-gradient(90deg, var(--amber), var(--orange));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .sec-blurb {
+    font-size: 1.05rem;
+    color: var(--ink-3);
     line-height: 1.7;
+    max-width: 360px;
   }
 
-  /* ---- category subhead ---- */
+  /* ---- category strip ---- */
   .cat {
-    display: flex; align-items: center;
-    gap: 14px; margin: 3.6vh 0 2vh;
-    color: var(--moss-deep);
-    font-family: var(--latin); font-style: italic;
-    font-size: 0.95rem; letter-spacing: 0.08em;
+    display: flex; align-items: center; gap: 14px;
+    margin: 56px 0 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed var(--line);
   }
-  .cat::before {
-    content: ""; width: 22px; height: 1px; background: var(--moss);
+  .cat:first-of-type { margin-top: 0; }
+  .cat-bar {
+    width: 4px; height: 22px;
+    border-radius: 4px;
+    background: var(--amber);
   }
   .cat-zh {
-    font-family: var(--sans); font-style: normal;
-    color: var(--ink); font-weight: 700;
-    letter-spacing: 0.02em; font-size: 0.98rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
   }
+  .cat-en {
+    font-size: 0.82rem;
+    color: var(--ink-4);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-left: auto;
+  }
+
+  .cat.indigo .cat-bar { background: var(--indigo); }
+  .cat.rose .cat-bar { background: var(--rose); }
+  .cat.emerald .cat-bar { background: var(--emerald); }
 
   /* ---- card grid ---- */
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-    gap: 28px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
   }
+  @media (min-width: 1024px) { .grid { gap: 32px; } }
+
   .card {
-    background: var(--paper-soft);
-    border: 1px solid var(--rule);
-    transition: border-color .2s, transform .2s;
+    position: relative;
+    background: white;
+    border: 1px solid var(--line-soft);
+    border-radius: 24px;
     overflow: hidden;
     display: flex; flex-direction: column;
+    transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s ease, border-color .3s ease;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
   }
-  .card:hover { border-color: var(--moss); }
-  .card-thumb {
-    width: 100%; aspect-ratio: 16/10;
-    background: var(--paper-deep);
-    overflow: hidden; position: relative;
-    border-bottom: 1px solid var(--rule);
+  .card::before {
+    content: "";
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, var(--amber-tint) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity .5s ease;
+    pointer-events: none;
+    z-index: 0;
   }
-  .card-thumb img {
-    width: 100%; height: 100%; object-fit: cover; object-position: center;
-    transition: transform .4s ease;
-    filter: saturate(0.92);
-  }
-  .card:hover .card-thumb img { transform: scale(1.03); filter: saturate(1.05); }
-  .card-thumb.svg {
-    display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, var(--paper-deep), var(--paper-soft));
-  }
-  .card-thumb.svg svg { width: 38%; height: auto; opacity: 0.55; color: var(--moss-deep); }
+  .card.indigo::before { background: radial-gradient(circle, var(--indigo-tint) 0%, transparent 70%); }
+  .card.rose::before   { background: radial-gradient(circle, var(--rose-tint)   0%, transparent 70%); }
+  .card.emerald::before{ background: radial-gradient(circle, var(--emerald-tint) 0%, transparent 70%); }
 
-  .card-body { padding: 22px 24px 8px; flex: 1; display: flex; flex-direction: column; }
-  .card-tags {
-    display: flex; flex-wrap: wrap; gap: 8px;
-    margin-bottom: .7rem;
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 48px -20px rgba(245, 158, 11, 0.18), 0 8px 16px -8px rgba(0,0,0,0.06);
+    border-color: rgba(245, 158, 11, 0.25);
+  }
+  .card.indigo:hover  { box-shadow: 0 24px 48px -20px rgba(99,102,241,0.18), 0 8px 16px -8px rgba(0,0,0,0.06); border-color: rgba(99,102,241,0.25); }
+  .card.rose:hover    { box-shadow: 0 24px 48px -20px rgba(244,63,94,0.18),  0 8px 16px -8px rgba(0,0,0,0.06); border-color: rgba(244,63,94,0.25); }
+  .card.emerald:hover { box-shadow: 0 24px 48px -20px rgba(16,185,129,0.18), 0 8px 16px -8px rgba(0,0,0,0.06); border-color: rgba(16,185,129,0.25); }
+  .card:hover::before { opacity: 1; }
+
+  .thumb {
+    width: 100%; aspect-ratio: 16/10;
+    overflow: hidden;
+    background: linear-gradient(135deg, #fafafa, #f3f4f6);
+    position: relative;
+    z-index: 1;
+  }
+  .thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    transition: transform .6s cubic-bezier(.2,.8,.2,1);
+  }
+  .card:hover .thumb img { transform: scale(1.04); }
+  .thumb.svg-thumb {
+    display: flex; align-items: center; justify-content: center;
+  }
+  .thumb.svg-thumb svg {
+    width: 38%; height: auto;
+    color: var(--ink-2);
+    opacity: 0.45;
+    transition: opacity .3s, color .3s;
+  }
+  .card:hover .thumb.svg-thumb svg { opacity: 0.7; }
+  .card.indigo:hover .thumb.svg-thumb svg  { color: var(--indigo-d); }
+  .card.rose:hover .thumb.svg-thumb svg    { color: var(--rose); }
+  .card.emerald:hover .thumb.svg-thumb svg { color: var(--emerald); }
+  .card:hover .thumb.svg-thumb svg         { color: var(--amber-d); }
+
+  .body {
+    padding: 28px 28px 8px;
+    flex: 1;
+    display: flex; flex-direction: column;
+    position: relative; z-index: 1;
+  }
+  .title-row {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 14px;
+  }
+  .vbar {
+    width: 4px; height: 28px;
+    border-radius: 4px;
+    background: linear-gradient(180deg, var(--amber), var(--orange));
+    flex-shrink: 0;
+  }
+  .card.indigo  .vbar { background: linear-gradient(180deg, var(--indigo), var(--indigo-d)); }
+  .card.rose    .vbar { background: linear-gradient(180deg, #fb7185, var(--rose)); }
+  .card.emerald .vbar { background: linear-gradient(180deg, #34d399, var(--emerald)); }
+
+  h3.card-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  h3.card-title .en {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--ink-4);
+    letter-spacing: 0.02em;
+    margin-top: 4px;
+  }
+
+  .tags {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-bottom: 14px;
   }
   .tag {
-    font-size: 0.72rem; letter-spacing: 0.12em;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: var(--moss-deep);
-    padding: 2px 8px;
-    border: 1px solid var(--rule);
-    background: var(--paper);
+    color: var(--amber-d);
+    background: var(--amber-tint);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(245,158,11,0.15);
   }
-  .tag.clay { color: var(--clay); }
-  .card h3 {
-    font-family: var(--serif);
-    font-weight: 700;
-    font-size: 1.45rem;
-    line-height: 1.25;
-    margin-bottom: .5rem;
-    color: var(--ink);
+  .tag.live {
+    color: var(--emerald);
+    background: var(--emerald-tint);
+    border-color: rgba(16,185,129,0.15);
   }
-  .card h3 .lat {
-    font-family: var(--latin); font-style: italic;
-    font-weight: 500; color: var(--mute);
-    font-size: 0.85em; margin-left: .35em;
-  }
-  .card .one-liner {
-    color: var(--ink-soft);
+  .tag.indigo  { color: var(--indigo-d); background: var(--indigo-tint); border-color: rgba(99,102,241,0.15); }
+  .tag.rose    { color: var(--rose);     background: var(--rose-tint);   border-color: rgba(244,63,94,0.15); }
+  .tag.gray    { color: var(--ink-3);    background: var(--line-soft);   border-color: var(--line); }
+
+  .one-liner {
+    color: var(--ink-2);
     font-size: 0.98rem;
     line-height: 1.65;
-    margin-bottom: 1.1rem;
+    margin-bottom: 20px;
   }
 
-  /* details/summary */
   details {
-    border-top: 1px dashed var(--rule);
-    padding: 12px 0 4px;
+    border-top: 1px solid var(--line-soft);
+    padding: 18px 0 4px;
     margin-top: auto;
   }
   details summary {
     list-style: none;
     cursor: pointer;
-    font-family: var(--latin); font-style: italic;
-    font-size: 0.92rem;
-    color: var(--moss-deep);
-    letter-spacing: 0.04em;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--amber-d);
     user-select: none;
     display: flex; align-items: center; justify-content: space-between;
+    transition: color .2s;
   }
+  .card.indigo  details summary { color: var(--indigo-d); }
+  .card.rose    details summary { color: var(--rose); }
+  .card.emerald details summary { color: var(--emerald); }
   details summary::-webkit-details-marker { display: none; }
   details summary::after {
-    content: "＋";
-    font-style: normal; font-family: var(--sans);
-    color: var(--moss); font-weight: 300;
-    font-size: 1.2rem; line-height: 1;
+    content: "+";
+    font-weight: 300;
+    font-size: 1.4rem;
+    line-height: 1;
+    transition: transform .25s;
+  }
+  details[open] summary::after { content: "−"; }
+  details summary:hover { opacity: 0.75; }
+
+  .detail-body {
+    padding-top: 16px;
+    font-size: 0.92rem;
+    color: var(--ink-2);
+    line-height: 1.75;
+  }
+  .detail-body p + p,
+  .detail-body p + ul { margin-top: 10px; }
+  .detail-body ul { list-style: none; padding: 0; margin: 12px 0; }
+  .detail-body li {
+    padding: 4px 0 4px 22px;
+    position: relative;
+  }
+  .detail-body li::before {
+    content: "";
+    position: absolute;
+    left: 4px; top: 14px;
+    width: 6px; height: 6px;
+    background: var(--amber);
+    border-radius: 50%;
+  }
+  .card.indigo  .detail-body li::before { background: var(--indigo); }
+  .card.rose    .detail-body li::before { background: var(--rose); }
+  .card.emerald .detail-body li::before { background: var(--emerald); }
+  .detail-body code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+    font-size: 0.85em;
+    background: var(--line-soft);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: var(--ink);
+  }
+  .tech {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+    font-size: 0.84rem;
+    color: var(--ink-3);
+  }
+  .tech b { color: var(--ink); font-weight: 600; margin-right: 6px; }
+
+  .links {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    margin-top: 16px;
+  }
+  .links a {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--amber-d);
+    padding: 6px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s, color .2s, transform .2s;
+  }
+  .card.indigo  .links a { color: var(--indigo-d); }
+  .card.rose    .links a { color: var(--rose); }
+  .card.emerald .links a { color: var(--emerald); }
+  .links a::after {
+    content: "→";
     transition: transform .2s;
   }
-  details[open] summary::after { content: "－"; }
-  details summary:hover { color: var(--clay); }
-  .card .detail-body {
-    padding-top: 14px;
-    font-size: 0.92rem;
-    color: var(--ink-soft);
-    line-height: 1.7;
-  }
-  .detail-body p + p { margin-top: .7rem; }
-  .detail-body ul { list-style: none; padding: 0; margin: .4rem 0 .8rem; }
-  .detail-body li { padding: 3px 0; position: relative; padding-left: 1.2em; }
-  .detail-body li::before {
-    content: "·"; color: var(--clay); font-weight: 700;
-    position: absolute; left: 0.3em; top: -2px;
-    font-size: 1.4em;
-  }
-  .detail-body .links {
-    display: flex; flex-wrap: wrap; gap: 18px;
-    margin-top: 1rem; padding-top: .8rem;
-    border-top: 1px dashed var(--rule);
-    font-size: 0.86rem; letter-spacing: 0.04em;
-  }
-  .detail-body .links a {
-    font-family: var(--latin); font-style: italic;
-    color: var(--moss-deep);
-    border-bottom: 1px solid var(--rule);
-  }
-  .detail-body .links a:hover { color: var(--clay); border-bottom-color: var(--clay); }
-  .detail-body .tech { color: var(--mute); font-size: 0.82rem; margin-top: .6rem; }
-  .detail-body .tech b { color: var(--ink-soft); font-weight: 600; }
+  .links a:hover { border-bottom-color: currentColor; }
+  .links a:hover::after { transform: translateX(3px); }
 
-  /* ---- about / footer ---- */
+  /* ---- about ---- */
   section.about {
-    padding: 8vh 0;
-    background: var(--paper-soft);
-    border-bottom: 1px solid var(--rule);
+    padding: 100px 0;
+    position: relative;
+  }
+  .about-card {
+    background: linear-gradient(135deg, #ffffff 0%, var(--amber-tint) 100%);
+    border: 1px solid rgba(245, 158, 11, 0.15);
+    border-radius: 32px;
+    padding: 56px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-card::before {
+    content: "";
+    position: absolute;
+    bottom: -200px; right: -200px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(249,115,22,0.08) 0%, transparent 70%);
+    pointer-events: none;
   }
   .about-grid {
     display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 6vw;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    position: relative;
+    z-index: 1;
+  }
+  @media (min-width: 900px) {
+    .about-grid { grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; }
   }
   .about h2 {
-    font-family: var(--serif); font-weight: 900;
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
-    line-height: 1.15; margin-bottom: 1rem;
+    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--ink);
   }
-  .about h2 .em { color: var(--clay); }
+  .about h2 .accent {
+    background: linear-gradient(90deg, var(--amber), var(--orange));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
   .about p {
-    font-family: var(--serif);
-    font-size: 1.05rem; color: var(--ink-soft);
-    line-height: 1.85; margin-bottom: 1rem;
+    font-size: 1.05rem;
+    color: var(--ink-2);
+    line-height: 1.8;
+    margin-bottom: 16px;
   }
-  .about .stats {
-    display: grid; grid-template-columns: repeat(2, 1fr);
-    gap: 2.4vh 2.4vw; margin-top: 2vh;
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
   .stat {
-    border-top: 1px solid var(--rule);
-    padding-top: 1.1rem;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px 20px;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .stat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -12px rgba(245, 158, 11, 0.2);
   }
   .stat .n {
-    font-family: var(--latin); font-style: italic;
-    font-size: 2.4rem; font-weight: 600;
-    color: var(--moss-deep); line-height: 1;
-    margin-bottom: .35rem;
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--amber), var(--orange));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
-  .stat .l { font-size: 0.85rem; color: var(--mute); letter-spacing: 0.06em; }
-
-  footer {
-    padding: 4vh 0 5vh;
+  .stat .l {
     font-size: 0.85rem;
-    color: var(--mute);
+    color: var(--ink-3);
+    font-weight: 500;
   }
-  .foot-row {
-    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+
+  /* ---- footer ---- */
+  footer {
+    padding: 48px 0 64px;
+    border-top: 1px solid var(--line);
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    position: relative; z-index: 1;
   }
-  .foot-row .latin { font-family: var(--latin); font-style: italic; }
+  .foot {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px;
+    font-size: 0.86rem;
+    color: var(--ink-4);
+  }
+  .foot .brand-small {
+    color: var(--ink-2);
+    font-weight: 600;
+  }
+  .foot a { color: var(--ink-3); }
+  .foot a:hover { color: var(--amber-d); }
+  .foot .sep {
+    display: inline-block;
+    width: 4px; height: 4px;
+    background: var(--ink-4);
+    border-radius: 50%;
+    margin: 0 12px;
+    vertical-align: middle;
+  }
+
+  /* ---- animations ---- */
+  @keyframes fadeUp {
+    0%   { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
 
   /* ---- responsive ---- */
   @media (max-width: 720px) {
-    .container { padding: 0 6vw; }
-    .nav { display: none; }
-    .hero { padding: 7vh 0 5vh; }
-    .about-grid { grid-template-columns: 1fr; gap: 4vh; }
-    .grid { grid-template-columns: 1fr; gap: 22px; }
+    .hero { padding: 130px 0 80px; }
+    .nav-links { display: none; }
+    .grid { grid-template-columns: 1fr; }
+    .about-card { padding: 36px 24px; border-radius: 24px; }
+    .body { padding: 22px 22px 6px; }
+    .sec-head { margin-bottom: 36px; }
   }
 </style>
 </head>
 <body>
 
-<header class="masthead">
-  <div class="container masthead-inner">
-    <div class="nameplate">青椒模拟器团队 <span class="dot">·</span> <i>Feed-Scription</i></div>
-    <nav class="nav">
+<div class="pepper-bg" aria-hidden="true"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand">青椒模拟器团队<span class="dot">·</span>Feed-Scription</div>
+    <div class="nav-links">
       <a href="#games">AI Games</a>
       <a href="#tools">Tools</a>
       <a href="#about">About</a>
-    </nav>
+    </div>
   </div>
-</header>
+</nav>
 
 <section class="hero">
   <div class="container">
-    <div class="eyebrow">Vol. I · 2026</div>
-    <h1>
-      让 <span class="em">AI</span> 拓展<br>
-      游戏的<span class="bracket">「</span>想象边界<span class="bracket">」</span>
-    </h1>
-    <p class="lede">
-      我们是一支用大模型重新想象游戏可能性的小队。
-      过去一年做了 <strong>6 款 AI 游戏</strong>和 <strong>2 套游戏工具</strong>：
-      让剧情随玩家走、让 NPC 真的能聊、让 Agent 互相博弈、让玩家亲手设计算法。
-      把"AI 能在游戏里做什么"这件事，一个 demo 一个 demo 地推前去。
-    </p>
-    <div class="hero-meta">
-      <span><b>主创</b>青椒模拟器</span>
-      <span><b>关键词</b>AI 剧情 · Agent 博弈 · 算法可玩化</span>
-      <span><b>状态</b>持续招新中</span>
+    <div class="hero-inner">
+      <div class="eyebrow">Vol. I · 2026 作品集</div>
+      <h1 class="hero-title">
+        用大模型，让游戏<br>
+        <span class="accent">长出想象的边界</span>
+      </h1>
+      <p class="lede">
+        我们是一支用 AI 重新想象游戏可能性的小队。
+        过去一年做了 <strong>5 款 AI 游戏</strong>和 <strong>2 套游戏工具</strong>——
+        让剧情随玩家走、让 NPC 真的能聊、让 Agent 互相博弈、让玩家亲手设计算法。
+        把"AI 能在游戏里做什么"这件事，一个 demo 一个 demo 地推前去。
+      </p>
+      <div class="hero-meta">
+        <span class="pill"><span class="pill-dot"></span>AI 剧情</span>
+        <span class="pill"><span class="pill-dot rose"></span>AI 对话</span>
+        <span class="pill"><span class="pill-dot indigo"></span>Agent 博弈</span>
+        <span class="pill"><span class="pill-dot emerald"></span>算法可玩化</span>
+      </div>
     </div>
   </div>
 </section>
@@ -383,101 +691,90 @@
 <section class="work" id="games">
   <div class="container">
     <div class="sec-head">
-      <div>
-        <div class="sec-num">I · Games</div>
-        <h2>AI <span class="em">游戏</span></h2>
+      <div class="sec-head-l">
+        <div class="sec-num">Chapter I · Games</div>
+        <h2>AI <span class="accent">游戏</span></h2>
       </div>
-      <p class="sec-blurb">从"AI 给剧情"到"玩家给 AI 设计算法"——我们沿着大模型能做事的四条路径，各做一个能玩的 demo。</p>
+      <p class="sec-blurb">从"AI 写剧情"到"玩家给 AI 设计算法"——沿着大模型能做事的四条路径，各做一个能玩的 demo。</p>
     </div>
 
-    <!-- ──── AI 剧情走向 ──── -->
-    <div class="cat"><span class="cat-zh">AI 剧情走向</span> · Plot-by-LLM</div>
+    <!-- ── AI 剧情走向 ── -->
+    <div class="cat">
+      <span class="cat-bar"></span>
+      <span class="cat-zh">AI 剧情走向</span>
+      <span class="cat-en">Plot-by-LLM</span>
+    </div>
     <div class="grid">
-
       <article class="card">
-        <div class="card-thumb"><img src="assets/gameplay_main.png" alt="青椒模拟器界面"></div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag">模拟经营</span><span class="tag clay">已上线</span></div>
-          <h3>青椒模拟器 <span class="lat">Tenure-Track Chili</span></h3>
-          <p class="one-liner">扮演高校青年教师，在科研、教学、人际中挣扎晋升 —— LLM 让每一季度都长出独一无二的故事。</p>
+        <div class="thumb"><img src="assets/gameplay_main.png" alt="青椒模拟器界面"></div>
+        <div class="body">
+          <div class="title-row">
+            <span class="vbar"></span>
+            <h3 class="card-title">青椒模拟器<span class="en">Tenure-Track Chili</span></h3>
+          </div>
+          <div class="tags"><span class="tag">模拟经营</span><span class="tag live">已上线</span></div>
+          <p class="one-liner">扮演高校青年教师，在科研、教学、人际中挣扎晋升——LLM 让每一季度都长出独一无二的故事。</p>
           <details>
-            <summary>展开 · 怎么玩 / 技术</summary>
+            <summary>怎么玩 / 技术</summary>
             <div class="detail-body">
               <p>季度回合制：分配精力鞭策/安慰学生、申请基金、应对随机事件（报销风波、论文被抢发、学生退学危机…），AI 实时生成结算叙事。</p>
               <ul>
                 <li>核心张力：产出 vs 学生心理 vs 自己理智，没有最优解</li>
-                <li>WeChili 即时通讯：用自然语言劝学生留校 / 读博</li>
-                <li>"学术造假"分支、Breaking Bad 化学系彩蛋</li>
+                <li>WeChili 即时通讯：自然语言劝学生留校 / 读博</li>
+                <li>「学术造假」分支、Breaking Bad 化学系彩蛋</li>
                 <li>小红书爆款："硕博生的尽头 game"</li>
               </ul>
-              <p class="tech"><b>技术</b>React · KAL Engine · LLM 叙事生成 · 多终点结算</p>
-              <div class="links">
-                <a href="https://github.com/Jacob-Zhou/Tenure-Track-Chili" target="_blank">GitHub</a>
-              </div>
-            </div>
-          </details>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="card-thumb"><img src="assets/pupu.png" alt="噗噗模拟器界面"></div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag">模拟经营</span><span class="tag">社媒互动</span></div>
-          <h3>噗噗模拟器 <span class="lat">Make Duckerican Quack Again</span></h3>
-          <p class="one-liner">扮演一只走上权力顶峰的特殊鸭子，通过决策与社媒发声体验荒诞领导人生。</p>
-          <details>
-            <summary>展开 · 怎么玩 / 技术</summary>
-            <div class="detail-body">
-              <p>避免数值优化陷阱：隐藏数值、开放结局、AI 动态生成事件文本，让每局都长出不同剧本而非套模板。</p>
-              <ul>
-                <li>核心循环：行政日程 + 推特发言 + 国际事件回应</li>
-                <li>无"胜利/失败"二元结局，只有多元叙事走向</li>
-                <li>i18n + PWA，可装到手机随时刷</li>
-              </ul>
-              <p class="tech"><b>技术</b>React 19 · Vite · Zustand · Wortou SDK · Vercel Serverless</p>
-              <div class="links">
-                <a href="https://github.com/zhliu0106/trump-simulator" target="_blank">GitHub</a>
-              </div>
+              <div class="tech"><b>技术</b>React · KAL Engine · LLM 叙事生成 · 多终点结算</div>
+              <div class="links"><a href="https://github.com/Jacob-Zhou/Tenure-Track-Chili" target="_blank">GitHub</a></div>
             </div>
           </details>
         </div>
       </article>
     </div>
 
-    <!-- ──── AI 对话 ──── -->
-    <div class="cat"><span class="cat-zh">AI 对话</span> · Dialogue & Persona</div>
+    <!-- ── AI 对话 ── -->
+    <div class="cat rose">
+      <span class="cat-bar"></span>
+      <span class="cat-zh">AI 对话</span>
+      <span class="cat-en">Dialogue & Persona</span>
+    </div>
     <div class="grid">
-      <article class="card">
-        <div class="card-thumb"><img src="assets/fate_river.png" alt="逆命之河"></div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag">叙事冒险</span><span class="tag clay">已上线</span></div>
-          <h3>逆命之河 <span class="lat">Fate River</span></h3>
+      <article class="card rose">
+        <div class="thumb"><img src="assets/fate_river.png" alt="逆命之河"></div>
+        <div class="body">
+          <div class="title-row">
+            <span class="vbar"></span>
+            <h3 class="card-title">逆命之河<span class="en">Fate River</span></h3>
+          </div>
+          <div class="tags"><span class="tag rose">叙事冒险</span><span class="tag live">已上线</span></div>
           <p class="one-liner">扮演历史人物改命试试：「武则天若让孩子活下来，会不会弥补遗憾？」</p>
           <details>
-            <summary>展开 · 怎么玩 / 技术</summary>
+            <summary>怎么玩 / 技术</summary>
             <div class="detail-body">
-              <p>玩家进入历史人物视角，每个回合在 LLM 生成的命运分支中做选择，或自由输入（被另一个 LLM 评估可行性）。蝴蝶效应引擎记录每一次偏离原历史的轨迹，结局根据偏移度生成。</p>
+              <p>玩家进入历史人物视角，每个回合在 LLM 生成的命运分支中做选择，或自由输入（另一个 LLM 评估可行性）。蝴蝶效应引擎记录每一次偏离原历史的轨迹，结局根据偏移度生成。</p>
               <ul>
                 <li>Phase Router 流程 + 蝴蝶效应引擎</li>
                 <li>所有 Prompt 在 API 端、前端不可见，防 prompt 泄露</li>
                 <li>OAuth 玩家计费，自带账号体系</li>
               </ul>
-              <p class="tech"><b>技术</b>React · Vercel Serverless · Wortou SDK · 历史人物数据集</p>
-              <div class="links">
-                <a href="https://github.com/Feed-Scription/fate-river" target="_blank">GitHub</a>
-              </div>
+              <div class="tech"><b>技术</b>React · Vercel Serverless · Wortou SDK · 历史人物数据集</div>
+              <div class="links"><a href="https://github.com/Feed-Scription/fate-river" target="_blank">GitHub</a></div>
             </div>
           </details>
         </div>
       </article>
     </div>
 
-    <!-- ──── Agent 博弈 ──── -->
-    <div class="cat"><span class="cat-zh">Agent 博弈</span> · Multi-Agent Arena</div>
+    <!-- ── Agent 博弈 ── -->
+    <div class="cat indigo">
+      <span class="cat-bar"></span>
+      <span class="cat-zh">Agent 博弈</span>
+      <span class="cat-en">Multi-Agent Arena</span>
+    </div>
     <div class="grid">
 
-      <article class="card">
-        <div class="card-thumb svg">
+      <article class="card indigo">
+        <div class="thumb svg-thumb">
           <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="14" y="18" width="22" height="32" rx="2"/>
             <rect x="42" y="34" width="22" height="32" rx="2"/>
@@ -486,15 +783,18 @@
             <circle cx="53" cy="50" r="2.5" fill="currentColor"/>
             <circle cx="75" cy="38" r="2.5" fill="currentColor"/>
             <path d="M22 70 H 88" stroke-dasharray="3 3"/>
-            <text x="50" y="88" font-family="serif" font-size="10" text-anchor="middle" fill="currentColor" stroke="none">All-in</text>
+            <text x="50" y="88" font-family="Inter, sans-serif" font-size="10" font-weight="600" text-anchor="middle" fill="currentColor" stroke="none">All-in</text>
           </svg>
         </div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag">Multi-Agent</span><span class="tag">实时复盘</span></div>
-          <h3>大模型德扑 <span class="lat">Cyber Cricket</span></h3>
-          <p class="one-liner">6 个大模型在浏览器里同桌打 No-Limit 德州 —— 谁更会 bluff？</p>
+        <div class="body">
+          <div class="title-row">
+            <span class="vbar"></span>
+            <h3 class="card-title">大模型德扑<span class="en">Cyber Cricket · Poker</span></h3>
+          </div>
+          <div class="tags"><span class="tag indigo">Multi-Agent</span><span class="tag gray">实时复盘</span></div>
+          <p class="one-liner">6 个大模型在浏览器里同桌打 No-Limit 德州——谁更会 bluff？</p>
           <details>
-            <summary>展开 · 怎么玩 / 技术</summary>
+            <summary>怎么玩 / 技术</summary>
             <div class="detail-body">
               <p>Gemini / Claude / ChatGPT / DeepSeek / Kimi / Qwen 在一张桌上对局。每个 Agent 只能看到公共信息和自己的手牌，自带长期记忆、策略与对手画像；每手结束自动复盘并更新画像。</p>
               <ul>
@@ -502,34 +802,35 @@
                 <li>实时展示思考流、思考 token 数</li>
                 <li>统计面板：筹码曲线、胜率、弃牌率、GTO 起手矩阵</li>
               </ul>
-              <p class="tech"><b>技术</b>React 19 · Vite · TypeScript · Zustand · OpenRouter</p>
-              <div class="links">
-                <a href="https://github.com/Feed-Scription/poker-quguer" target="_blank">GitHub</a>
-              </div>
+              <div class="tech"><b>技术</b>React 19 · Vite · TypeScript · Zustand · OpenRouter</div>
+              <div class="links"><a href="https://github.com/Feed-Scription/poker-quguer" target="_blank">GitHub</a></div>
             </div>
           </details>
         </div>
       </article>
 
-      <article class="card">
-        <div class="card-thumb"><img src="assets/platform.png" alt="赛博蛐蛐儿平台"></div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag">Trustless</span><span class="tag">Commit-Reveal</span></div>
-          <h3>赛博蛐蛐儿 <span class="lat">QuQuer</span></h3>
-          <p class="one-liner">一个让外部 Agent 公平博弈的可审计平台 —— 自己带模型来打，靠 Commit-Reveal 防作弊。</p>
+      <article class="card indigo">
+        <div class="thumb"><img src="assets/platform.png" alt="赛博蛐蛐儿平台"></div>
+        <div class="body">
+          <div class="title-row">
+            <span class="vbar"></span>
+            <h3 class="card-title">赛博蛐蛐儿<span class="en">QuQuer Platform</span></h3>
+          </div>
+          <div class="tags"><span class="tag indigo">Trustless</span><span class="tag gray">Commit-Reveal</span></div>
+          <p class="one-liner">让外部 Agent 公平博弈的可审计平台——自己带模型来打，靠 Commit-Reveal 防作弊。</p>
           <details>
-            <summary>展开 · 怎么玩 / 技术</summary>
+            <summary>怎么玩 / 技术</summary>
             <div class="detail-body">
-              <p>用户带自己的 Agent 通过 REST + SSE 接入平台，在石头剪刀布 (含 bluff 回合)、Colonel Blotto 排兵、骰子说谎家等博弈游戏中竞技。Agent 通过 <code>SKILL.md</code> 自学如何接入。</p>
+              <p>用户带自己的 Agent 通过 REST + SSE 接入平台，在石头剪刀布（含 bluff 回合）、Colonel Blotto 排兵、骰子说谎家等博弈游戏中竞技。Agent 通过 <code>SKILL.md</code> 自学如何接入。</p>
               <ul>
                 <li>所有同时决策走 Commit-Reveal + Ed25519 签名，平台无须被信任</li>
                 <li>x402 协议链上充值，平台币 tollar 内循环</li>
                 <li>ELO 自动匹配；ququer-ring 提供观赛 / 排行 / Agent profile</li>
               </ul>
-              <p class="tech"><b>技术</b>TypeScript · Node · Next.js 16 · SSE · Ed25519 · x402</p>
+              <div class="tech"><b>技术</b>TypeScript · Node · Next.js 16 · SSE · Ed25519 · x402</div>
               <div class="links">
-                <a href="https://github.com/quadra-a/ququer" target="_blank">引擎 GitHub</a>
-                <a href="https://github.com/quadra-a/ququer-ring" target="_blank">观赛端 GitHub</a>
+                <a href="https://github.com/quadra-a/ququer" target="_blank">引擎</a>
+                <a href="https://github.com/quadra-a/ququer-ring" target="_blank">观赛端</a>
               </div>
             </div>
           </details>
@@ -537,28 +838,33 @@
       </article>
     </div>
 
-    <!-- ──── AI 算法设计 ──── -->
-    <div class="cat"><span class="cat-zh">AI 算法设计</span> · Algorithms-as-Play</div>
+    <!-- ── AI 算法设计 ── -->
+    <div class="cat emerald">
+      <span class="cat-bar"></span>
+      <span class="cat-zh">AI 算法设计</span>
+      <span class="cat-en">Algorithms-as-Play</span>
+    </div>
     <div class="grid">
-      <article class="card">
-        <div class="card-thumb"><img src="assets/card_game.png" alt="NeurAlchemy"></div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag">卡牌</span><span class="tag">真训练</span></div>
-          <h3>NeurAlchemy <span class="lat">炼经术</span></h3>
+      <article class="card emerald">
+        <div class="thumb"><img src="assets/card_game.png" alt="NeurAlchemy"></div>
+        <div class="body">
+          <div class="title-row">
+            <span class="vbar"></span>
+            <h3 class="card-title">NeurAlchemy<span class="en">炼经术</span></h3>
+          </div>
+          <div class="tags"><span class="tag" style="color: var(--emerald); background: var(--emerald-tint); border-color: rgba(16,185,129,0.15);">卡牌</span><span class="tag gray">真训练</span></div>
           <p class="one-liner">用卡牌搭一张神经网络，浏览器里跑 TF.js 真训练，再用隐藏测试集给你打分。</p>
           <details>
-            <summary>展开 · 怎么玩 / 技术</summary>
+            <summary>怎么玩 / 技术</summary>
             <div class="detail-body">
-              <p>把"调网络结构 → 看效果"这件事卡牌化：层/修饰符/超参/步骤四类卡，玩家组合出网络后真在 MNIST / CIFAR-10 / CIFAR-100 上训练，服务端按隐藏测试集准确率结算。</p>
+              <p>把"调网络结构 → 看效果"卡牌化：层 / 修饰符 / 超参 / 步骤四类卡，玩家组合出网络后真在 MNIST / CIFAR-10 / CIFAR-100 上训练，服务端按隐藏测试集准确率结算。</p>
               <ul>
                 <li>三大支柱：表达创造 / 挑战征服 / 探索发现</li>
                 <li>诊断驱动的「学徒系统」：破产时回溯失败原因，"观察, 不是指令"</li>
                 <li>TF.js 浏览器训练 + 服务端打分</li>
               </ul>
-              <p class="tech"><b>技术</b>TF.js · React · 数据集服务端打分</p>
-              <div class="links">
-                <a href="https://github.com/Feed-Scription/neuralchemy" target="_blank">GitHub</a>
-              </div>
+              <div class="tech"><b>技术</b>TF.js · React · 数据集服务端打分</div>
+              <div class="links"><a href="https://github.com/Feed-Scription/neuralchemy" target="_blank">GitHub</a></div>
             </div>
           </details>
         </div>
@@ -570,19 +876,18 @@
 <section class="work" id="tools">
   <div class="container">
     <div class="sec-head">
-      <div>
-        <div class="sec-num">II · Tools</div>
-        <h2>游戏 <span class="em">工具</span></h2>
+      <div class="sec-head-l">
+        <div class="sec-num">Chapter II · Tools</div>
+        <h2>游戏 <span class="accent">工具</span></h2>
       </div>
-      <p class="sec-blurb">做完上面这些 demo，沉淀下来的可复用基础设施 —— 也开源给其他想做 AI 游戏的团队。</p>
+      <p class="sec-blurb">做完上面这些 demo，沉淀下来的可复用基础设施——开源给其他想做 AI 游戏的团队。</p>
     </div>
 
     <div class="grid">
-
       <article class="card">
-        <div class="card-thumb svg">
+        <div class="thumb svg-thumb">
           <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="16" y="16" width="68" height="50" rx="2"/>
+            <rect x="16" y="16" width="68" height="50" rx="4"/>
             <path d="M22 28 H 70"/>
             <path d="M22 36 H 60"/>
             <path d="M22 44 H 64"/>
@@ -590,12 +895,15 @@
             <path d="M74 80 L 77 83 L 84 76" stroke-width="2.5"/>
           </svg>
         </div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag">自动化测试</span><span class="tag">AI 玩家</span></div>
-          <h3>逆命自动化测试 <span class="lat">Fate-River Autotest</span></h3>
-          <p class="one-liner">让 LLM 化身玩家把整局逆命之河跑通 —— 把"AI 叙事游戏"的回归测试搬到 CI 里。</p>
+        <div class="body">
+          <div class="title-row">
+            <span class="vbar"></span>
+            <h3 class="card-title">逆命自动化测试<span class="en">Fate-River Autotest</span></h3>
+          </div>
+          <div class="tags"><span class="tag">自动化测试</span><span class="tag gray">AI 玩家</span></div>
+          <p class="one-liner">让 LLM 化身玩家把整局逆命之河跑通——把"AI 叙事游戏"的回归测试搬到 CI 里。</p>
           <details>
-            <summary>展开 · 怎么用 / 技术</summary>
+            <summary>怎么用 / 技术</summary>
             <div class="detail-body">
               <p>AI 叙事游戏的痛点：每条剧情线都由 LLM 临时生成，传统断言测不了。这套工具用一个"玩家 Agent"自动选择、自由输入、推进回合，把每个分支跑到结局并收集异常。</p>
               <ul>
@@ -603,14 +911,14 @@
                 <li>自动断言：状态机不卡住、叙事不空响应、结局可达</li>
                 <li>失败时输出可复现的玩家轨迹</li>
               </ul>
-              <p class="tech"><b>技术</b>LLM 玩家 Agent · Phase 状态机断言 · 轨迹回放</p>
+              <div class="tech"><b>技术</b>LLM 玩家 Agent · Phase 状态机断言 · 轨迹回放</div>
             </div>
           </details>
         </div>
       </article>
 
       <article class="card">
-        <div class="card-thumb svg">
+        <div class="thumb svg-thumb">
           <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="50" cy="50" r="32"/>
             <circle cx="50" cy="50" r="6" fill="currentColor"/>
@@ -624,24 +932,27 @@
             <path d="M64 36 L 73 27"/>
           </svg>
         </div>
-        <div class="card-body">
-          <div class="card-tags"><span class="tag">游戏框架</span><span class="tag">LLM-First</span></div>
-          <h3>KAL Application Layer <span class="lat">Kal-Engine</span></h3>
+        <div class="body">
+          <div class="title-row">
+            <span class="vbar"></span>
+            <h3 class="card-title">KAL Application Layer<span class="en">Kal-Engine</span></h3>
+          </div>
+          <div class="tags"><span class="tag">游戏框架</span><span class="tag gray">LLM-First</span></div>
           <p class="one-liner">LLM-First 的游戏组件库：让 Coding Agent 在 30 分钟内拼出一个完整的文字游戏。</p>
           <details>
-            <summary>展开 · 怎么用 / 技术</summary>
+            <summary>怎么用 / 技术</summary>
             <div class="detail-body">
-              <p>借鉴 PyTorch 的 Define-by-Run 范式：Agent 像搭积木一样组合组件，而非被模板引擎的预设概念锁死。沉淀自青椒模拟器 / 噗噗模拟器 / 赛博红娘三个实战项目。</p>
+              <p>借鉴 PyTorch 的 Define-by-Run 范式：Agent 像搭积木一样组合组件，而非被模板引擎的预设概念锁死。沉淀自团队实战项目的工程经验。</p>
               <ul>
                 <li>四个核心原语：GameState · GameComponent · EventBus · createEngine</li>
                 <li>15+ 个预制组件：TimeSystem · RuleEngine · LLMNarrative · SaveManager …</li>
                 <li>自描述 Spec：Agent 自主探索引擎能力，零认知陷阱</li>
                 <li>React 绑定 + UI 组件库一包搞定</li>
               </ul>
-              <p class="tech"><b>技术</b>TypeScript Monorepo · React 绑定 · EventBus 全链路追踪</p>
+              <div class="tech"><b>技术</b>TypeScript Monorepo · React 绑定 · EventBus 全链路追踪</div>
               <div class="links">
-                <a href="https://github.com/Feed-Scription/kal-engine" target="_blank">引擎 GitHub</a>
-                <a href="https://github.com/Feed-Scription/kal-website" target="_blank">官网 GitHub</a>
+                <a href="https://github.com/Feed-Scription/kal-engine" target="_blank">引擎</a>
+                <a href="https://github.com/Feed-Scription/kal-website" target="_blank">官网</a>
               </div>
             </div>
           </details>
@@ -652,35 +963,42 @@
 </section>
 
 <section class="about" id="about">
-  <div class="container about-grid">
-    <div>
-      <h2>关于 <span class="em">我们</span></h2>
-      <p>
-        青椒模拟器团队（Feed-Scription）是一支跨研究 / 工程 / 设计的 AI 游戏小队。
-        我们相信大模型不只是写文案的工具，而是一种新的"游戏机制"——
-        因此用一年时间，把它分别接到了剧情、对话、博弈和算法这四件事上。
-      </p>
-      <p>
-        每个 demo 都坚持端到端跑通：能玩、能上线、能被陌生人骂或吹爆。
-        过程中沉淀出的 KAL 引擎和自动化测试也开源出来，希望降低下一波 AI 游戏团队的门槛。
-      </p>
-    </div>
-    <div class="stats">
-      <div class="stat"><div class="n">6</div><div class="l">AI Games Shipped</div></div>
-      <div class="stat"><div class="n">2</div><div class="l">Open-source Tools</div></div>
-      <div class="stat"><div class="n">4</div><div class="l">AI 游戏方向</div></div>
-      <div class="stat"><div class="n">∞</div><div class="l">Next Ideas in Backlog</div></div>
+  <div class="container">
+    <div class="about-card">
+      <div class="about-grid">
+        <div>
+          <h2>关于 <span class="accent">我们</span></h2>
+          <p>
+            青椒模拟器团队（Feed-Scription）是一支跨研究 / 工程 / 设计的 AI 游戏小队。
+            我们相信大模型不只是写文案的工具，而是一种新的"游戏机制"——
+            因此用一年时间，把它分别接到了剧情、对话、博弈和算法这四件事上。
+          </p>
+          <p>
+            每个 demo 都坚持端到端跑通：能玩、能上线、能被陌生人骂或吹爆。
+            过程中沉淀出的 KAL 引擎和自动化测试也开源出来，希望降低下一波 AI 游戏团队的门槛。
+          </p>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="n">5</div><div class="l">AI Games Shipped</div></div>
+          <div class="stat"><div class="n">2</div><div class="l">Open-source Tools</div></div>
+          <div class="stat"><div class="n">4</div><div class="l">AI 游戏方向</div></div>
+          <div class="stat"><div class="n">∞</div><div class="l">Next Ideas Cooking</div></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="container foot-row">
+  <div class="container foot">
     <div>
-      <span class="latin">© 2026</span> 青椒模拟器团队 / Feed-Scription ·
+      <span class="brand-small">青椒模拟器团队 / Feed-Scription</span>
+      <span class="sep"></span>
       <a href="https://github.com/Feed-Scription" target="_blank">GitHub Org</a>
     </div>
-    <div class="latin"><i>Made with chili pepper &amp; a lot of LLM tokens.</i></div>
+    <div>
+      <span>© 2026 · Made with chili pepper &amp; a lot of LLM tokens</span>
+    </div>
   </div>
 </footer>
 
