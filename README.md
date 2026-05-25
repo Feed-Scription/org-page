@@ -1,85 +1,97 @@
 <p align="right"><a href="./README.en.md">English</a> · <b>中文</b></p>
 
-# org-page
+# 青椒模拟器团队 · Feed-Scription
 
-> 青椒模拟器团队（Feed-Scription）作品集站点 —— 一页讲完这一年做了什么。
+> 用大模型，让游戏长出想象的边界。
 
-纯静态单页：5 个章节、一份团队叙事。**没有构建步骤、没有依赖**，部署到任何静态托管都跑。
+AI 叙事 · Agent 博弈 · 算法可玩化
 
-## 页面结构
+---
 
-| Chapter | 内容 |
-|---|---|
-| I · Games | 5 款上线的 AI 原生游戏（青椒模拟器、逆命之河、大模型德扑、赛博蛐蛐儿、Neuralchemy）|
-| II · Platform | FeedScription —— 团队所有应用的 AI / 账号 / 埋点统一支撑层 |
-| III · Tools | KAL AI Layer、逆命自动化测试 |
-| IV · Events | 抖音 AI 创变者计划 · 苏州 AI 游戏专场（联合承办）|
-| V · Press | Nature · 科学网 · 游戏茶馆 · 405 游局 |
+## I · AI 游戏
 
-## 技术栈
+### AI 叙事
+*Plot-by-LLM — AI 进核心循环，回应玩家每次选择，让每一局都长出独一无二的故事。*
 
-- 一份 `index.html`（HTML + 内联 CSS）
-- `assets/` 全部 WebP（共 ~376 KB）
-- 字体走 Google Fonts CDN
-- 浏览器兼容：现代浏览器（WebP 全球覆盖 97%+）
+**青椒模拟器** · *Tenure-Track Chili*
+模拟经营 · 已上线
+扮演高校青椒求生升职。AI 不是跑剧情树，是在响应你每次决策——所以才有玩家把 11 亿身家全砸进食堂、开起了红烧肉窗口。
+<https://tenure-plus.feedscription.com/>
 
-## 本地预览
+**逆命之河** · *Fate River*
+叙事冒险 · 已上线
+扮演历史人物改命试试：「武则天若让孩子活下来，会不会弥补遗憾？」
+<https://fated.feedscription.com/>
 
-```bash
-python3 -m http.server 8000
-# 打开 http://localhost:8000
-```
+### Agent 博弈
+*Multi-Agent Arena — 人当观众，AI 之间互相勾心斗角，这是以前难做的体验。*
 
-## 部署
+**大模型德扑** · *Cyber Cricket · Poker*
+Multi-Agent · 实时复盘
+6 个大模型同桌打 No-Limit 德州，玩家全程旁观——看哪个 AI 更会 bluff。
+<https://holdem.ququer.ai/>
 
-任意静态托管都行：
+**赛博蛐蛐儿** · *QuQuer Platform*
+Trustless · Commit-Reveal
+让外部 Agent 公平博弈的可审计平台——自己带模型来打，靠 Commit-Reveal 防作弊。
+*（即将开放）*
 
-- **Vercel / Netlify / Cloudflare Pages**：导入仓库即生效
-- **GitHub Pages**：Settings → Pages → Source = `main` / root
-  > 当前 org 套餐不支持 Pages（HTTP 422），需升级或换其他静态托管
+### AI 算法设计
+*Algorithms-as-Play — 把"调网络结构"卡牌化，让懂 AI 和不懂 AI 的人都能上手，亲手训出一个真模型。*
 
-## 文件结构
+**Neuralchemy** · *炼经术*
+教育普惠 · 真训练
+在游戏里训练一个真实的视觉 AI 模型——卡牌就是网络组件。不懂 AI 也能上手，玩着玩着就明白每个组件到底做了什么。
+<https://neuralchemy.feedscription.com/>
 
-```
-.
-├── index.html          # 单页全部内容 + 样式
-└── assets/             # 8 张 WebP 截图 + 1 张品牌青椒水印
-```
+---
 
-## 加一张卡片
+## II · AI 应用平台
 
-每张卡片都是 `<article class="card">`，结构如下，复制粘贴即用：
+**FeedScription 平台** · *team's AI app hub*
+AI 能力 · 账号体系 · 用户注册 · 埋点分析
+团队所有 AI 应用的统一支撑层——把 AI 能力、账号、注册流和数据埋点收敛到一处，每个 demo 都接进来即用。
+<https://platform.feedscription.com/>
 
-```html
-<article class="card">
-  <div class="thumb"><img src="assets/xxx.webp" alt="..."></div>
-  <div class="body">
-    <div class="title-row">
-      <span class="vbar"></span>
-      <h3 class="card-title">标题<span class="en">英文副标题</span></h3>
-    </div>
-    <div class="tags"><span class="tag">标签</span></div>
-    <p class="one-liner">一句话简介</p>
-    <div class="cta-row">
-      <a class="cta" href="..." target="_blank" rel="noopener">CTA 文本</a>
-    </div>
-  </div>
-</article>
-```
+---
 
-卡片配色用 `.card.indigo` / `.card.rose` / `.card.emerald` 切换（默认 amber）。
+## III · 游戏工具
 
-## 加一张配图
+**逆命自动化测试** · *Fate-River Autotest*
+自动化测试 · AI 玩家
+让 LLM 化身玩家把整局逆命之河跑通——把"AI 叙事游戏"的回归测试搬到 CI 里。
+*（内部工具）*
 
-CDN 分发级压缩管线：
+**KAL AI Layer** · *Kal-Engine*
+游戏框架 · LLM-First
+LLM-First 的游戏组件库：让 Coding Agent 在 30 分钟内拼出一个完整的文字游戏。
+<https://github.com/Feed-Scription/kal>
 
-```bash
-sips -Z 1400 input.png --out resized.png      # 缩到合理 retina 尺寸
-cwebp -q 80 -m 6 resized.png -o assets/output.webp
-```
+---
 
-竖屏截图（如手机界面）用 `<div class="thumb contain">` 替代 `<div class="thumb">`，会放进带 tint 背景的"画框"里展示完整图。
+## IV · 活动策划
 
-## License
+**苏州 AI 游戏专场** · *抖音 AI 创变者计划*
+2026.04.18 · 联合承办
+[活动总结](https://mp.weixin.qq.com/s/qNTXhiwgrmrMJ01mK2xWpA)
 
-MIT
+---
+
+## V · 媒体报道
+
+| 日期 | 媒体 | 形式 | 标题 |
+|---|---|---|---|
+| 2026·01·06 | [游戏茶馆](https://youxichaguan.com/archives/184254) | 主创专访 | 专访：DAU 达 9 万、2000 人同时在线，两个博士生的 AI 游戏凭什么击中玩家？ |
+| 2026·01·08 | [科学网](https://news.sciencenet.cn/htmlnews/2026/1/558423.shtm) | 人物专题 | 三本院校出身，逆袭拿下诺奖？两位 95 后博士生写了部"神人游戏" |
+| 2026·01·28 | [405 游局](https://www.gcores.com/radios/210229) | 播客 | Ep.32 第一次用 AI 做游戏的实战经验分享 · 对话《青椒模拟器》主创 |
+| 2026·04·08 | [Nature](https://www.nature.com/articles/d41586-026-00224-5) | News Feature | When career anxiety becomes gameplay: lessons from China's "young-faculty simulator" |
+
+---
+
+## 关于我们
+
+青椒模拟器团队（Feed-Scription）是一支跨研究 / 工程 / 设计的 AI 游戏小队。我们相信大模型不只是写文案的工具，而是一种新的"游戏机制"。也相信一个 AI 游戏能不能立起来，最终还是要看玩法有不有趣、世界自不自洽。
+
+每个 demo 都坚持端到端跑通到能让陌生人玩到。过程里沉淀出的 KAL 引擎和自动化测试也开源出来——希望下一波做 AI 游戏的人，少踩几个我们已经踩过的坑。
+
+**5 款 AI 游戏 · 2 套开源工具 · 3 个探索方向**

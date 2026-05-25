@@ -1,85 +1,97 @@
 <p align="right"><b>English</b> · <a href="./README.md">中文</a></p>
 
-# org-page
+# Tenure-Track Chili Team · Feed-Scription
 
-> Showcase site for the **Feed-Scription** team (a.k.a. the *Tenure-Track Chili* crew) — one page covering everything we shipped this year.
+> Let LLMs stretch what a game can imagine.
 
-Single-page, pure static. Five chapters, one team narrative. **No build step, no dependencies** — deploy anywhere that serves files.
+AI Narrative · Multi-Agent Arena · Algorithms-as-Play
 
-## What's on the page
+---
 
-| Chapter | Content |
-|---|---|
-| I · Games | 5 shipped AI-native games (Tenure-Track Chili, Fate River, Cyber Cricket Poker, QuQuer, Neuralchemy) |
-| II · Platform | FeedScription — the unified AI / auth / analytics layer powering every team app |
-| III · Tools | KAL AI Layer, Fate-River Autotest |
-| IV · Events | Douyin AI Creators Program · Suzhou AI Game Hackathon (co-host) |
-| V · Press | Nature · Science Net · GameCha · 405 Podcast |
+## I · AI Games
 
-## Stack
+### AI Narrative
+*Plot-by-LLM — AI sits inside the core loop, reacting to every player choice so no two runs play the same.*
 
-- Single `index.html` (HTML + inline CSS)
-- `assets/` all WebP (~376 KB total)
-- Fonts via Google Fonts CDN
-- Modern browsers (WebP supported in 97%+ globally)
+**Tenure-Track Chili** · *青椒模拟器*
+Sim management · Live
+Survive and climb the Chinese academic tenure track. The AI doesn't run a scripted tree — it actually reacts to every decision you make. That's how one player dumped ¥1.1 B into the university cafeteria and opened a braised-pork window.
+<https://tenure-plus.feedscription.com/>
 
-## Local preview
+**Fate River** · *逆命之河*
+Narrative adventure · Live
+Play a historical figure and rewrite fate: "If Wu Zetian had let her children live, would it have mended her regret?"
+<https://fated.feedscription.com/>
 
-```bash
-python3 -m http.server 8000
-# open http://localhost:8000
-```
+### Multi-Agent Arena
+*Players become spectators while AI agents scheme against each other — an experience that was hard to deliver before LLMs.*
 
-## Deploy
+**Cyber Cricket · Poker** · *大模型德扑*
+Multi-agent · Live replay
+Six LLMs sit at one No-Limit Hold'em table. The player just watches — which AI bluffs best?
+<https://holdem.ququer.ai/>
 
-Anywhere that serves static files:
+**QuQuer Platform** · *赛博蛐蛐儿*
+Trustless · Commit-Reveal
+An auditable arena where external agents play fair — bring your own model, Commit-Reveal blocks cheating.
+*(coming soon)*
 
-- **Vercel / Netlify / Cloudflare Pages**: import the repo, done
-- **GitHub Pages**: Settings → Pages → Source = `main` / root
-  > Note: this org's current plan doesn't support Pages (HTTP 422). Upgrade or use another host.
+### Algorithms-as-Play
+*Turn "tuning the network" into a card game — anyone, AI background or not, gets to train a real model with their own hands.*
 
-## File layout
+**Neuralchemy** · *炼经术*
+Education · Real training
+Train a real vision AI inside the game — the cards *are* the network components. No AI background needed; you'll figure out what each piece does just by playing.
+<https://neuralchemy.feedscription.com/>
 
-```
-.
-├── index.html          # All markup + inline styles
-└── assets/             # 8 WebP screenshots + 1 brand pepper watermark
-```
+---
 
-## Adding a card
+## II · Platform
 
-Every card is an `<article class="card">`. Copy-paste and edit:
+**FeedScription Platform** · *team's AI app hub*
+AI capabilities · Auth · Sign-up · Analytics
+The unified plane every team app plugs into — AI capabilities, accounts, sign-up flow, telemetry, all in one place.
+<https://platform.feedscription.com/>
 
-```html
-<article class="card">
-  <div class="thumb"><img src="assets/xxx.webp" alt="..."></div>
-  <div class="body">
-    <div class="title-row">
-      <span class="vbar"></span>
-      <h3 class="card-title">Title<span class="en">English subtitle</span></h3>
-    </div>
-    <div class="tags"><span class="tag">Tag</span></div>
-    <p class="one-liner">One-line description</p>
-    <div class="cta-row">
-      <a class="cta" href="..." target="_blank" rel="noopener">CTA text</a>
-    </div>
-  </div>
-</article>
-```
+---
 
-Swap the accent color via `.card.indigo` / `.card.rose` / `.card.emerald` (amber is the default).
+## III · Tools
 
-## Adding an image
+**Fate-River Autotest** · *逆命自动化测试*
+Automated testing · AI player
+An LLM plays Fate River end-to-end — bringing regression testing to AI narrative games into CI.
+*(internal tool)*
 
-CDN-grade compression pipeline:
+**KAL AI Layer** · *Kal-Engine*
+Game framework · LLM-first
+LLM-first component library. A coding agent can wire up a full text game in 30 minutes.
+<https://github.com/Feed-Scription/kal>
 
-```bash
-sips -Z 1400 input.png --out resized.png      # downscale to retina-safe size
-cwebp -q 80 -m 6 resized.png -o assets/output.webp
-```
+---
 
-For portrait shots (e.g. phone UI), use `<div class="thumb contain">` instead of `<div class="thumb">` — the image will be centered on a tinted backdrop so the whole frame is visible.
+## IV · Events
 
-## License
+**Suzhou AI Game Hackathon** · *Douyin AI Creators Program*
+2026-04-18 · Co-host
+[Event recap](https://mp.weixin.qq.com/s/qNTXhiwgrmrMJ01mK2xWpA)
 
-MIT
+---
+
+## V · Press
+
+| Date | Outlet | Format | Title |
+|---|---|---|---|
+| 2026-01-06 | [游戏茶馆](https://youxichaguan.com/archives/184254) | Interview | 专访：DAU 达 9 万、2000 人同时在线，两个博士生的 AI 游戏凭什么击中玩家？ |
+| 2026-01-08 | [科学网](https://news.sciencenet.cn/htmlnews/2026/1/558423.shtm) | Profile | 三本院校出身，逆袭拿下诺奖？两位 95 后博士生写了部"神人游戏" |
+| 2026-01-28 | [405 游局](https://www.gcores.com/radios/210229) | Podcast | Ep.32 第一次用 AI 做游戏的实战经验分享 · 对话《青椒模拟器》主创 |
+| 2026-04-08 | [Nature](https://www.nature.com/articles/d41586-026-00224-5) | News Feature | When career anxiety becomes gameplay: lessons from China's "young-faculty simulator" |
+
+---
+
+## About
+
+The Tenure-Track Chili Team (Feed-Scription) is a small AI-game crew that cuts across research, engineering, and design. We think of LLMs as a new kind of *game mechanic*, not as a copywriting assistant. We also think whether an AI game holds up still comes down to the basics: is the gameplay fun, and is the world internally consistent?
+
+Every demo we ship runs end-to-end well enough for a stranger to play. The KAL engine and automated test rig we built along the way are open-sourced too — so the next people taking on AI games can skip a few of the holes we've already fallen into.
+
+**5 AI games · 2 open-source tools · 3 directions explored**
