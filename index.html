@@ -77,6 +77,13 @@
     background: url('assets/green_pepper.webp') center/contain no-repeat;
     filter: blur(6px);
   }
+  /* on small screens, blow it up so it crops past the viewport edges */
+  @media (max-width: 720px) {
+    .pepper-bg {
+      width: 160vw;
+      height: 160vw;
+    }
+  }
   /* frosted-glass veil over the pepper to soften its presence */
   .pepper-veil {
     position: fixed;
