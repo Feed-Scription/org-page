@@ -256,44 +256,76 @@
     max-width: 360px;
   }
 
-  /* ---- category strip ---- */
-  .cat {
-    display: flex; align-items: center; gap: 14px;
-    margin: 56px 0 24px;
-    padding-bottom: 14px;
-    border-bottom: 1px dashed var(--line);
+  /* ---- department: category sidebar + cards grid ---- */
+  .dept {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 56px;
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
   }
-  .cat:first-of-type { margin-top: 0; }
-  .cat-bar {
-    width: 4px; height: 22px;
-    border-radius: 4px;
-    background: var(--amber);
+  .dept + .dept { border-top: 1px dashed var(--line); }
+  .dept-meta { position: relative; padding-left: 14px; }
+  .dept-meta::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 6px; bottom: 12px;
+    width: 3px; border-radius: 3px;
+    background: linear-gradient(180deg, var(--amber), var(--orange));
   }
-  .cat-zh {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-  }
-  .cat-en {
-    font-size: 0.82rem;
-    color: var(--ink-4);
-    letter-spacing: 0.08em;
+  .dept.indigo  .dept-meta::before { background: linear-gradient(180deg, var(--indigo), var(--indigo-d)); }
+  .dept.rose    .dept-meta::before { background: linear-gradient(180deg, #fb7185, var(--rose)); }
+  .dept.emerald .dept-meta::before { background: linear-gradient(180deg, #34d399, var(--emerald)); }
+  .dept-num {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--amber-d);
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    margin-left: auto;
+    margin-bottom: 10px;
   }
-
-  .cat.indigo .cat-bar { background: var(--indigo); }
-  .cat.rose .cat-bar { background: var(--rose); }
-  .cat.emerald .cat-bar { background: var(--emerald); }
+  .dept.indigo  .dept-num { color: var(--indigo-d); }
+  .dept.rose    .dept-num { color: var(--rose); }
+  .dept.emerald .dept-num { color: var(--emerald); }
+  .dept-meta h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+  .dept-meta p {
+    font-size: 0.92rem;
+    color: var(--ink-3);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  .dept-en {
+    display: inline-block;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+  }
+  .dept-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+  @media (max-width: 900px) {
+    .dept { grid-template-columns: 1fr; gap: 20px; padding: 28px 0; }
+    .dept-cards { grid-template-columns: 1fr; }
+  }
 
   /* ---- card grid ---- */
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 24px;
   }
-  @media (min-width: 1024px) { .grid { gap: 32px; } }
+  @media (min-width: 1024px) { .grid { gap: 28px; } }
 
   .card {
     position: relative;
@@ -336,20 +368,41 @@
     background: linear-gradient(135deg, #fafafa, #f3f4f6);
     position: relative;
     z-index: 1;
+    border-bottom: 1px solid var(--line-soft);
   }
   .thumb img {
     width: 100%; height: 100%;
-    object-fit: cover; object-position: center;
+    object-fit: cover; object-position: center top;
     transition: transform .6s cubic-bezier(.2,.8,.2,1);
   }
   .card:hover .thumb img { transform: scale(1.04); }
+
+  /* portrait / mobile screenshots: show whole image on a tinted stage */
+  .thumb.contain {
+    background: linear-gradient(135deg, var(--amber-tint) 0%, #fff7ed 100%);
+    display: flex; align-items: center; justify-content: center;
+    padding: 14px 0;
+  }
+  .thumb.contain img {
+    width: auto; height: 100%;
+    max-width: 90%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 12px 28px -10px rgba(120, 53, 15, 0.25),
+                0 4px 8px -4px rgba(120, 53, 15, 0.12);
+  }
+  .card.rose    .thumb.contain { background: linear-gradient(135deg, var(--rose-tint) 0%, #fff1f2 100%); }
+  .card.rose    .thumb.contain img { box-shadow: 0 12px 28px -10px rgba(159, 18, 57, 0.22), 0 4px 8px -4px rgba(159, 18, 57, 0.1); }
+  .card.indigo  .thumb.contain { background: linear-gradient(135deg, var(--indigo-tint) 0%, #f5f3ff 100%); }
+  .card.emerald .thumb.contain { background: linear-gradient(135deg, var(--emerald-tint) 0%, #f0fdf4 100%); }
+
   .thumb.svg-thumb {
     display: flex; align-items: center; justify-content: center;
   }
   .thumb.svg-thumb svg {
-    width: 38%; height: auto;
+    width: 52%; height: auto;
     color: var(--ink-2);
-    opacity: 0.45;
+    opacity: 0.5;
     transition: opacity .3s, color .3s;
   }
   .card:hover .thumb.svg-thumb svg { opacity: 0.7; }
@@ -698,13 +751,14 @@
       <p class="sec-blurb">从"AI 写剧情"到"玩家给 AI 设计算法"——沿着大模型能做事的四条路径，各做一个能玩的 demo。</p>
     </div>
 
-    <!-- ── AI 剧情走向 ── -->
-    <div class="cat">
-      <span class="cat-bar"></span>
-      <span class="cat-zh">AI 剧情走向</span>
-      <span class="cat-en">Plot-by-LLM</span>
-    </div>
-    <div class="grid">
+    <div class="dept">
+      <aside class="dept-meta">
+        <div class="dept-num">No. 01</div>
+        <h3>AI 剧情走向</h3>
+        <p>大模型当编剧——让每一局都长出和上一局不一样的故事。</p>
+        <span class="dept-en">Plot-by-LLM</span>
+      </aside>
+      <div class="dept-cards">
       <article class="card">
         <div class="thumb"><img src="assets/gameplay_main.png" alt="青椒模拟器界面"></div>
         <div class="body">
@@ -730,17 +784,19 @@
           </details>
         </div>
       </article>
+      </div>
     </div>
 
-    <!-- ── AI 对话 ── -->
-    <div class="cat rose">
-      <span class="cat-bar"></span>
-      <span class="cat-zh">AI 对话</span>
-      <span class="cat-en">Dialogue & Persona</span>
-    </div>
-    <div class="grid">
+    <div class="dept rose">
+      <aside class="dept-meta">
+        <div class="dept-num">No. 02</div>
+        <h3>AI 对话</h3>
+        <p>不写选项，直接和角色聊——还能扮演历史人物，回头改写自己的命运。</p>
+        <span class="dept-en">Dialogue &amp; Persona</span>
+      </aside>
+      <div class="dept-cards">
       <article class="card rose">
-        <div class="thumb"><img src="assets/fate_river.png" alt="逆命之河"></div>
+        <div class="thumb contain"><img src="assets/fate_river.png" alt="逆命之河"></div>
         <div class="body">
           <div class="title-row">
             <span class="vbar"></span>
@@ -763,16 +819,17 @@
           </details>
         </div>
       </article>
+      </div>
     </div>
 
-    <!-- ── Agent 博弈 ── -->
-    <div class="cat indigo">
-      <span class="cat-bar"></span>
-      <span class="cat-zh">Agent 博弈</span>
-      <span class="cat-en">Multi-Agent Arena</span>
-    </div>
-    <div class="grid">
-
+    <div class="dept indigo">
+      <aside class="dept-meta">
+        <div class="dept-num">No. 03</div>
+        <h3>Agent 博弈</h3>
+        <p>让多个大模型同台竞技——德州扑克、骰子说谎家，谁更会 bluff？</p>
+        <span class="dept-en">Multi-Agent Arena</span>
+      </aside>
+      <div class="dept-cards">
       <article class="card indigo">
         <div class="thumb svg-thumb">
           <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
@@ -810,7 +867,25 @@
       </article>
 
       <article class="card indigo">
-        <div class="thumb"><img src="assets/platform.png" alt="赛博蛐蛐儿平台"></div>
+        <div class="thumb svg-thumb">
+          <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="22" cy="28" r="8"/>
+            <circle cx="78" cy="28" r="8"/>
+            <circle cx="22" cy="72" r="8"/>
+            <circle cx="78" cy="72" r="8"/>
+            <circle cx="50" cy="50" r="11" fill="currentColor" opacity="0.18"/>
+            <circle cx="50" cy="50" r="11"/>
+            <path d="M30 28 L 70 28" stroke-dasharray="4 3"/>
+            <path d="M30 72 L 70 72" stroke-dasharray="4 3"/>
+            <path d="M22 36 L 22 64" stroke-dasharray="4 3"/>
+            <path d="M78 36 L 78 64" stroke-dasharray="4 3"/>
+            <path d="M30 33 L 42 47"/>
+            <path d="M70 33 L 58 47"/>
+            <path d="M30 67 L 42 53"/>
+            <path d="M70 67 L 58 53"/>
+            <text x="50" y="92" font-family="Inter, sans-serif" font-size="9" font-weight="600" text-anchor="middle" fill="currentColor" stroke="none">Commit · Reveal</text>
+          </svg>
+        </div>
         <div class="body">
           <div class="title-row">
             <span class="vbar"></span>
@@ -836,15 +911,17 @@
           </details>
         </div>
       </article>
+      </div>
     </div>
 
-    <!-- ── AI 算法设计 ── -->
-    <div class="cat emerald">
-      <span class="cat-bar"></span>
-      <span class="cat-zh">AI 算法设计</span>
-      <span class="cat-en">Algorithms-as-Play</span>
-    </div>
-    <div class="grid">
+    <div class="dept emerald">
+      <aside class="dept-meta">
+        <div class="dept-num">No. 04</div>
+        <h3>AI 算法设计</h3>
+        <p>把"调网络结构"这件事卡牌化——让玩家亲手设计算法，再用真实数据集打分。</p>
+        <span class="dept-en">Algorithms-as-Play</span>
+      </aside>
+      <div class="dept-cards">
       <article class="card emerald">
         <div class="thumb"><img src="assets/card_game.png" alt="NeurAlchemy"></div>
         <div class="body">
@@ -869,6 +946,7 @@
           </details>
         </div>
       </article>
+      </div>
     </div>
   </div>
 </section>
