@@ -483,34 +483,41 @@
     margin-bottom: 20px;
   }
 
-  details {
+  .cta-row {
     border-top: 1px solid var(--line-soft);
-    padding: 18px 0 4px;
     margin-top: auto;
+    padding: 16px 0 4px;
+    display: flex; align-items: center; gap: 18px;
+    min-height: 36px;
   }
-  details summary {
-    list-style: none;
-    cursor: pointer;
-    font-size: 0.88rem;
+  .cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.92rem;
     font-weight: 600;
     color: var(--amber-d);
-    user-select: none;
-    display: flex; align-items: center; justify-content: space-between;
-    transition: color .2s;
+    letter-spacing: -0.005em;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: color .2s, border-color .2s, gap .2s;
   }
-  .card.indigo  details summary { color: var(--indigo-d); }
-  .card.rose    details summary { color: var(--rose); }
-  .card.emerald details summary { color: var(--emerald); }
-  details summary::-webkit-details-marker { display: none; }
-  details summary::after {
-    content: "+";
-    font-weight: 300;
-    font-size: 1.4rem;
-    line-height: 1;
-    transition: transform .25s;
+  .cta::after {
+    content: "→";
+    font-weight: 500;
+    transition: transform .2s;
   }
-  details[open] summary::after { content: "−"; }
-  details summary:hover { opacity: 0.75; }
+  .cta:hover {
+    border-bottom-color: currentColor;
+    gap: 10px;
+  }
+  .cta:hover::after { transform: translateX(2px); }
+  .cta.secondary {
+    color: var(--ink-3);
+    font-weight: 500;
+  }
+  .cta.secondary:hover { color: var(--ink); }
+  .card.indigo  .cta:not(.secondary) { color: var(--indigo-d); }
+  .card.rose    .cta:not(.secondary) { color: var(--rose); }
+  .card.emerald .cta:not(.secondary) { color: var(--emerald-d); }
 
   .detail-body {
     padding-top: 16px;
@@ -945,12 +952,11 @@
       <p class="lede">
         我们做 AI 原生游戏，也踩 AI 原生游戏的坑。
         过去一年端到端跑通了 <strong>5 款 demo</strong> 和 <strong>2 套工具</strong>——
-        让剧情真的响应玩家、让 NPC 真的会聊、让 Agent 同桌博弈、让玩家亲手设计算法。
+        让叙事真的响应玩家、让 Agent 同桌博弈、让玩家亲手设计算法。
         一边做一边把经验沉淀成开源工具。
       </p>
       <div class="hero-meta">
-        <span class="pill"><span class="pill-dot"></span>AI 剧情</span>
-        <span class="pill"><span class="pill-dot rose"></span>AI 对话</span>
+        <span class="pill"><span class="pill-dot"></span>AI 叙事</span>
         <span class="pill"><span class="pill-dot indigo"></span>Agent 博弈</span>
         <span class="pill"><span class="pill-dot emerald"></span>算法可玩化</span>
       </div>
@@ -965,15 +971,15 @@
         <div class="sec-num">Chapter I · Games</div>
         <h2>AI <span class="accent">游戏</span></h2>
       </div>
-      <p class="sec-blurb">沿着大模型能做的四件事——剧情演绎、角色对话、多 Agent 博弈、算法可玩化——各做一个端到端 demo。每个都坚持上线。</p>
+      <p class="sec-blurb">沿着大模型能做的三件事——AI 叙事、多 Agent 博弈、算法可玩化——各做一组端到端 demo。每个都坚持上线。</p>
     </div>
 
     <div class="dept">
       <aside class="dept-meta">
         <div class="dept-num">No. 01</div>
-        <h3>AI 剧情走向</h3>
-        <p>AI 进核心循环——不是跑预设剧情树，是真的在响应玩家每一次选择。</p>
-        <span class="dept-en">Plot-by-LLM</span>
+        <h3>AI 叙事</h3>
+        <p>AI 进核心循环——回应玩家每次选择，让每一局都长出独一无二的故事。</p>
+        <span class="dept-en">AI Narrative</span>
       </aside>
       <div class="dept-cards">
       <article class="card">
@@ -985,55 +991,24 @@
           </div>
           <div class="tags"><span class="tag">模拟经营</span><span class="tag live">已上线</span></div>
           <p class="one-liner">扮演高校青椒求生升职。AI 不是跑剧情树，是在响应你每次决策——所以才有玩家把 11 亿身家全砸进食堂、开起了红烧肉窗口。</p>
-          <details>
-            <summary>怎么玩 / 技术</summary>
-            <div class="detail-body">
-              <p>季度回合制：分配精力鞭策/安慰学生、申请基金、应对随机事件（报销风波、论文被抢发、学生退学危机…），AI 实时生成结算叙事。</p>
-              <ul>
-                <li>核心张力：产出 vs 学生心理 vs 自己理智，没有最优解</li>
-                <li>WeChili 即时通讯：自然语言劝学生留校 / 读博</li>
-                <li>「学术造假」分支、Breaking Bad 化学系彩蛋</li>
-                <li>小红书爆款："硕博生的尽头 game"</li>
-              </ul>
-              <div class="tech"><b>技术</b>React · KAL Engine · LLM 叙事生成 · 多终点结算</div>
-              <div class="links"><a href="https://github.com/Jacob-Zhou/Tenure-Track-Chili" target="_blank">GitHub</a></div>
-            </div>
-          </details>
+          <div class="cta-row">
+            <a class="cta" href="https://tenure-plus.feedscription.com/" target="_blank" rel="noopener">在线试玩</a>
+          </div>
         </div>
       </article>
-      </div>
-    </div>
 
-    <div class="dept rose">
-      <aside class="dept-meta">
-        <div class="dept-num">No. 02</div>
-        <h3>AI 对话</h3>
-        <p>玩家跟角色直接聊——从扮演历史人物，到回头改写自己的命运。</p>
-        <span class="dept-en">Dialogue &amp; Persona</span>
-      </aside>
-      <div class="dept-cards">
-      <article class="card rose">
+      <article class="card">
         <div class="thumb contain"><img src="assets/fate_river.png" alt="逆命之河"></div>
         <div class="body">
           <div class="title-row">
             <span class="vbar"></span>
             <h3 class="card-title">逆命之河<span class="en">Fate River</span></h3>
           </div>
-          <div class="tags"><span class="tag rose">叙事冒险</span><span class="tag live">已上线</span></div>
+          <div class="tags"><span class="tag">叙事冒险</span><span class="tag live">已上线</span></div>
           <p class="one-liner">扮演历史人物改命试试：「武则天若让孩子活下来，会不会弥补遗憾？」</p>
-          <details>
-            <summary>怎么玩 / 技术</summary>
-            <div class="detail-body">
-              <p>玩家进入历史人物视角，每个回合在 LLM 生成的命运分支中做选择，或自由输入（另一个 LLM 评估可行性）。蝴蝶效应引擎记录每一次偏离原历史的轨迹，结局根据偏移度生成。</p>
-              <ul>
-                <li>Phase Router 流程 + 蝴蝶效应引擎</li>
-                <li>所有 Prompt 在 API 端、前端不可见，防 prompt 泄露</li>
-                <li>OAuth 玩家计费，自带账号体系</li>
-              </ul>
-              <div class="tech"><b>技术</b>React · Vercel Serverless · Wortou SDK · 历史人物数据集</div>
-              <div class="links"><a href="https://github.com/Feed-Scription/fate-river" target="_blank">GitHub</a></div>
-            </div>
-          </details>
+          <div class="cta-row">
+            <a class="cta" href="https://fated.feedscription.com/" target="_blank" rel="noopener">在线试玩</a>
+          </div>
         </div>
       </article>
       </div>
@@ -1041,7 +1016,7 @@
 
     <div class="dept indigo">
       <aside class="dept-meta">
-        <div class="dept-num">No. 03</div>
+        <div class="dept-num">No. 02</div>
         <h3>Agent 博弈</h3>
         <p>人当观众，AI 之间互相勾心斗角——这是以前难做的体验。</p>
         <span class="dept-en">Multi-Agent Arena</span>
@@ -1056,19 +1031,9 @@
           </div>
           <div class="tags"><span class="tag indigo">Multi-Agent</span><span class="tag gray">实时复盘</span></div>
           <p class="one-liner">6 个大模型同桌打 No-Limit 德州，玩家全程旁观——看哪个 AI 更会 bluff。</p>
-          <details>
-            <summary>怎么玩 / 技术</summary>
-            <div class="detail-body">
-              <p>Gemini / Claude / ChatGPT / DeepSeek / Kimi / Qwen 在一张桌上对局。每个 Agent 只能看到公共信息和自己的手牌，自带长期记忆、策略与对手画像；每手结束自动复盘并更新画像。</p>
-              <ul>
-                <li>纯前端跑扑克引擎，OpenRouter 路由全部模型</li>
-                <li>实时展示思考流、思考 token 数</li>
-                <li>统计面板：筹码曲线、胜率、弃牌率、GTO 起手矩阵</li>
-              </ul>
-              <div class="tech"><b>技术</b>React 19 · Vite · TypeScript · Zustand · OpenRouter</div>
-              <div class="links"><a href="https://github.com/Feed-Scription/poker-quguer" target="_blank">GitHub</a></div>
-            </div>
-          </details>
+          <div class="cta-row">
+            <a class="cta" href="https://holdem.ququer.ai/" target="_blank" rel="noopener">在线试玩</a>
+          </div>
         </div>
       </article>
 
@@ -1099,22 +1064,9 @@
           </div>
           <div class="tags"><span class="tag indigo">Trustless</span><span class="tag gray">Commit-Reveal</span></div>
           <p class="one-liner">让外部 Agent 公平博弈的可审计平台——自己带模型来打，靠 Commit-Reveal 防作弊。</p>
-          <details>
-            <summary>怎么玩 / 技术</summary>
-            <div class="detail-body">
-              <p>用户带自己的 Agent 通过 REST + SSE 接入平台，在石头剪刀布（含 bluff 回合）、Colonel Blotto 排兵、骰子说谎家等博弈游戏中竞技。Agent 通过 <code>SKILL.md</code> 自学如何接入。</p>
-              <ul>
-                <li>所有同时决策走 Commit-Reveal + Ed25519 签名，平台无须被信任</li>
-                <li>x402 协议链上充值，平台币 tollar 内循环</li>
-                <li>ELO 自动匹配；ququer-ring 提供观赛 / 排行 / Agent profile</li>
-              </ul>
-              <div class="tech"><b>技术</b>TypeScript · Node · Next.js 16 · SSE · Ed25519 · x402</div>
-              <div class="links">
-                <a href="https://github.com/quadra-a/ququer" target="_blank">引擎</a>
-                <a href="https://github.com/quadra-a/ququer-ring" target="_blank">观赛端</a>
-              </div>
-            </div>
-          </details>
+          <div class="cta-row">
+            <span class="cta secondary">即将开放</span>
+          </div>
         </div>
       </article>
       </div>
@@ -1122,7 +1074,7 @@
 
     <div class="dept emerald">
       <aside class="dept-meta">
-        <div class="dept-num">No. 04</div>
+        <div class="dept-num">No. 03</div>
         <h3>AI 算法设计</h3>
         <p>把"调网络结构"卡牌化——让玩家自己设计算法，再用真实数据集打分。</p>
         <span class="dept-en">Algorithms-as-Play</span>
@@ -1137,19 +1089,9 @@
           </div>
           <div class="tags"><span class="tag" style="color: var(--emerald-d); background: var(--emerald-tint); border-color: rgba(101,163,13,0.18);">卡牌</span><span class="tag gray">真训练</span></div>
           <p class="one-liner">用卡牌搭一张神经网络，浏览器里跑 TF.js 真训练，再用隐藏测试集给你打分。</p>
-          <details>
-            <summary>怎么玩 / 技术</summary>
-            <div class="detail-body">
-              <p>把"调网络结构 → 看效果"卡牌化：层 / 修饰符 / 超参 / 步骤四类卡，玩家组合出网络后真在 MNIST / CIFAR-10 / CIFAR-100 上训练，服务端按隐藏测试集准确率结算。</p>
-              <ul>
-                <li>三大支柱：表达创造 / 挑战征服 / 探索发现</li>
-                <li>诊断驱动的「学徒系统」：破产时回溯失败原因，"观察, 不是指令"</li>
-                <li>TF.js 浏览器训练 + 服务端打分</li>
-              </ul>
-              <div class="tech"><b>技术</b>TF.js · React · 数据集服务端打分</div>
-              <div class="links"><a href="https://github.com/Feed-Scription/neuralchemy" target="_blank">GitHub</a></div>
-            </div>
-          </details>
+          <div class="cta-row">
+            <a class="cta" href="https://neuralchemy.feedscription.com/" target="_blank" rel="noopener">在线试玩</a>
+          </div>
         </div>
       </article>
       </div>
@@ -1177,18 +1119,9 @@
           </div>
           <div class="tags"><span class="tag">自动化测试</span><span class="tag gray">AI 玩家</span></div>
           <p class="one-liner">让 LLM 化身玩家把整局逆命之河跑通——把"AI 叙事游戏"的回归测试搬到 CI 里。</p>
-          <details>
-            <summary>怎么用 / 技术</summary>
-            <div class="detail-body">
-              <p>AI 叙事游戏的痛点：每条剧情线都由 LLM 临时生成，传统断言测不了。这套工具用一个"玩家 Agent"自动选择、自由输入、推进回合，把每个分支跑到结局并收集异常。</p>
-              <ul>
-                <li>覆盖角色选择 → 回合循环 → 蝴蝶效应 → 结局生成全链路</li>
-                <li>自动断言：状态机不卡住、叙事不空响应、结局可达</li>
-                <li>失败时输出可复现的玩家轨迹</li>
-              </ul>
-              <div class="tech"><b>技术</b>LLM 玩家 Agent · Phase 状态机断言 · 轨迹回放</div>
-            </div>
-          </details>
+          <div class="cta-row">
+            <span class="cta secondary">内部工具</span>
+          </div>
         </div>
       </article>
 
@@ -1201,23 +1134,9 @@
           </div>
           <div class="tags"><span class="tag">游戏框架</span><span class="tag gray">LLM-First</span></div>
           <p class="one-liner">LLM-First 的游戏组件库：让 Coding Agent 在 30 分钟内拼出一个完整的文字游戏。</p>
-          <details>
-            <summary>怎么用 / 技术</summary>
-            <div class="detail-body">
-              <p>借鉴 PyTorch 的 Define-by-Run 范式：Agent 像搭积木一样组合组件，而非被模板引擎的预设概念锁死。沉淀自团队实战项目的工程经验。</p>
-              <ul>
-                <li>四个核心原语：GameState · GameComponent · EventBus · createEngine</li>
-                <li>15+ 个预制组件：TimeSystem · RuleEngine · LLMNarrative · SaveManager …</li>
-                <li>自描述 Spec：Agent 自主探索引擎能力，零认知陷阱</li>
-                <li>React 绑定 + UI 组件库一包搞定</li>
-              </ul>
-              <div class="tech"><b>技术</b>TypeScript Monorepo · React 绑定 · EventBus 全链路追踪</div>
-              <div class="links">
-                <a href="https://github.com/Feed-Scription/kal-engine" target="_blank">引擎</a>
-                <a href="https://github.com/Feed-Scription/kal-website" target="_blank">官网</a>
-              </div>
-            </div>
-          </details>
+          <div class="cta-row">
+            <a class="cta" href="https://github.com/Feed-Scription/kal" target="_blank" rel="noopener">查看代码</a>
+          </div>
         </div>
       </article>
     </div>
