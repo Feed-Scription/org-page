@@ -20,20 +20,25 @@
     --line: #e5e7eb;       /* gray-200 */
     --line-soft: #f3f4f6;  /* gray-100 */
 
-    --amber: #f59e0b;      /* amber-500 */
+    --amber: #f59e0b;      /* amber-500 — paprika */
     --amber-d: #d97706;    /* amber-600 */
     --amber-tint: #fffbeb; /* amber-50 */
     --orange: #f97316;     /* orange-500 */
 
-    --indigo: #6366f1;     /* indigo-500 */
-    --indigo-d: #4f46e5;
-    --indigo-tint: #eef2ff;
+    /* Agent 博弈 — slate / graphite (中性灰，对竞技/工程的语义) */
+    --indigo: #64748b;     /* slate-500 */
+    --indigo-d: #475569;   /* slate-600 */
+    --indigo-tint: #f1f5f9;/* slate-100 */
 
-    --rose: #f43f5e;       /* rose-500 */
-    --rose-tint: #fff1f2;
+    /* AI 对话 — wine rose (陈酒玫瑰，比 #f43f5e 沉稳) */
+    --rose: #be185d;       /* pink-700 */
+    --rose-d: #9d174d;     /* pink-800 */
+    --rose-tint: #fdf2f8;  /* pink-50 */
 
-    --emerald: #10b981;    /* emerald-500 */
-    --emerald-tint: #ecfdf5;
+    /* AI 算法 — olive lime (土性绿，更靠近暖色家族) */
+    --emerald: #65a30d;    /* lime-600 */
+    --emerald-d: #4d7c0f;  /* lime-700 */
+    --emerald-tint: #f7fee7;/* lime-50 */
 
     --sans: "Inter", "Noto Sans SC", "Source Han Sans SC", "PingFang SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
@@ -274,8 +279,8 @@
     background: linear-gradient(180deg, var(--amber), var(--orange));
   }
   .dept.indigo  .dept-meta::before { background: linear-gradient(180deg, var(--indigo), var(--indigo-d)); }
-  .dept.rose    .dept-meta::before { background: linear-gradient(180deg, #fb7185, var(--rose)); }
-  .dept.emerald .dept-meta::before { background: linear-gradient(180deg, #34d399, var(--emerald)); }
+  .dept.rose    .dept-meta::before { background: linear-gradient(180deg, var(--rose), var(--rose-d)); }
+  .dept.emerald .dept-meta::before { background: linear-gradient(180deg, var(--emerald), var(--emerald-d)); }
   .dept-num {
     font-size: 0.78rem;
     font-weight: 600;
@@ -357,9 +362,9 @@
     box-shadow: 0 24px 48px -20px rgba(245, 158, 11, 0.18), 0 8px 16px -8px rgba(0,0,0,0.06);
     border-color: rgba(245, 158, 11, 0.25);
   }
-  .card.indigo:hover  { box-shadow: 0 24px 48px -20px rgba(99,102,241,0.18), 0 8px 16px -8px rgba(0,0,0,0.06); border-color: rgba(99,102,241,0.25); }
-  .card.rose:hover    { box-shadow: 0 24px 48px -20px rgba(244,63,94,0.18),  0 8px 16px -8px rgba(0,0,0,0.06); border-color: rgba(244,63,94,0.25); }
-  .card.emerald:hover { box-shadow: 0 24px 48px -20px rgba(16,185,129,0.18), 0 8px 16px -8px rgba(0,0,0,0.06); border-color: rgba(16,185,129,0.25); }
+  .card.indigo:hover  { box-shadow: 0 24px 48px -20px rgba(71,85,105,0.18),  0 8px 16px -8px rgba(0,0,0,0.06); border-color: rgba(71,85,105,0.25); }
+  .card.rose:hover    { box-shadow: 0 24px 48px -20px rgba(190,24,93,0.18),  0 8px 16px -8px rgba(0,0,0,0.06); border-color: rgba(190,24,93,0.25); }
+  .card.emerald:hover { box-shadow: 0 24px 48px -20px rgba(101,163,13,0.20), 0 8px 16px -8px rgba(0,0,0,0.06); border-color: rgba(101,163,13,0.25); }
   .card:hover::before { opacity: 1; }
 
   .thumb {
@@ -391,10 +396,10 @@
     box-shadow: 0 12px 28px -10px rgba(120, 53, 15, 0.25),
                 0 4px 8px -4px rgba(120, 53, 15, 0.12);
   }
-  .card.rose    .thumb.contain { background: linear-gradient(135deg, var(--rose-tint) 0%, #fff1f2 100%); }
-  .card.rose    .thumb.contain img { box-shadow: 0 12px 28px -10px rgba(159, 18, 57, 0.22), 0 4px 8px -4px rgba(159, 18, 57, 0.1); }
-  .card.indigo  .thumb.contain { background: linear-gradient(135deg, var(--indigo-tint) 0%, #f5f3ff 100%); }
-  .card.emerald .thumb.contain { background: linear-gradient(135deg, var(--emerald-tint) 0%, #f0fdf4 100%); }
+  .card.rose    .thumb.contain { background: linear-gradient(135deg, var(--rose-tint) 0%, #fce7f3 100%); }
+  .card.rose    .thumb.contain img { box-shadow: 0 12px 28px -10px rgba(157, 23, 77, 0.25), 0 4px 8px -4px rgba(157, 23, 77, 0.12); }
+  .card.indigo  .thumb.contain { background: linear-gradient(135deg, var(--indigo-tint) 0%, #e2e8f0 100%); }
+  .card.emerald .thumb.contain { background: linear-gradient(135deg, var(--emerald-tint) 0%, #ecfccb 100%); }
 
   .thumb.svg-thumb {
     display: flex; align-items: center; justify-content: center;
@@ -428,8 +433,8 @@
     flex-shrink: 0;
   }
   .card.indigo  .vbar { background: linear-gradient(180deg, var(--indigo), var(--indigo-d)); }
-  .card.rose    .vbar { background: linear-gradient(180deg, #fb7185, var(--rose)); }
-  .card.emerald .vbar { background: linear-gradient(180deg, #34d399, var(--emerald)); }
+  .card.rose    .vbar { background: linear-gradient(180deg, var(--rose), var(--rose-d)); }
+  .card.emerald .vbar { background: linear-gradient(180deg, var(--emerald), var(--emerald-d)); }
 
   h3.card-title {
     font-size: 1.4rem;
@@ -465,10 +470,10 @@
   .tag.live {
     color: var(--emerald);
     background: var(--emerald-tint);
-    border-color: rgba(16,185,129,0.15);
+    border-color: rgba(101,163,13,0.18);
   }
-  .tag.indigo  { color: var(--indigo-d); background: var(--indigo-tint); border-color: rgba(99,102,241,0.15); }
-  .tag.rose    { color: var(--rose);     background: var(--rose-tint);   border-color: rgba(244,63,94,0.15); }
+  .tag.indigo  { color: var(--indigo-d); background: var(--indigo-tint); border-color: rgba(71,85,105,0.18); }
+  .tag.rose    { color: var(--rose);     background: var(--rose-tint);   border-color: rgba(190,24,93,0.18); }
   .tag.gray    { color: var(--ink-3);    background: var(--line-soft);   border-color: var(--line); }
 
   .one-liner {
@@ -929,7 +934,7 @@
             <span class="vbar"></span>
             <h3 class="card-title">NeurAlchemy<span class="en">炼经术</span></h3>
           </div>
-          <div class="tags"><span class="tag" style="color: var(--emerald); background: var(--emerald-tint); border-color: rgba(16,185,129,0.15);">卡牌</span><span class="tag gray">真训练</span></div>
+          <div class="tags"><span class="tag" style="color: var(--emerald-d); background: var(--emerald-tint); border-color: rgba(101,163,13,0.18);">卡牌</span><span class="tag gray">真训练</span></div>
           <p class="one-liner">用卡牌搭一张神经网络，浏览器里跑 TF.js 真训练，再用隐藏测试集给你打分。</p>
           <details>
             <summary>怎么玩 / 技术</summary>
