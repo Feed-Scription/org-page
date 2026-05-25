@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>青椒模拟器团队 · 让 AI 拓展游戏想象</title>
-<meta name="description" content="青椒模拟器团队 / Feed-Scription —— 用大模型重新想象游戏可能性。AI 剧情、AI 对话、Agent 博弈、AI 算法设计与 KAL 引擎。">
+<title data-i18n="meta.title">青椒模拟器团队 · 让 AI 拓展游戏想象</title>
+<meta name="description" data-i18n-attr="content" data-i18n="meta.desc" content="青椒模拟器团队 / Feed-Scription —— 用大模型重新想象游戏可能性。AI 剧情、AI 对话、Agent 博弈、AI 算法设计与 KAL 引擎。">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -146,6 +146,25 @@
   }
   .nav-links a { color: var(--ink-4); }
   .nav-links a:hover { color: var(--ink); }
+  .lang-toggle {
+    margin-left: 4px;
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: white;
+    color: var(--ink-2);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: border-color .2s, color .2s, background .2s;
+    font-family: inherit;
+  }
+  .lang-toggle:hover {
+    border-color: var(--amber);
+    color: var(--amber-d);
+    background: var(--amber-tint);
+  }
 
   /* ---- hero ---- */
   .hero {
@@ -820,14 +839,15 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <div class="brand">青椒模拟器团队<span class="dot">·</span>Feed-Scription</div>
+    <div class="brand"><span data-i18n="brand.team">青椒模拟器团队</span><span class="dot">·</span>Feed-Scription</div>
     <div class="nav-links">
-      <a href="#games">AI Games</a>
-      <a href="#platform">Platform</a>
-      <a href="#tools">Tools</a>
-      <a href="#events">Events</a>
-      <a href="#press">Press</a>
-      <a href="#about">About</a>
+      <a href="#games" data-i18n="nav.games">AI Games</a>
+      <a href="#platform" data-i18n="nav.platform">Platform</a>
+      <a href="#tools" data-i18n="nav.tools">Tools</a>
+      <a href="#events" data-i18n="nav.events">Events</a>
+      <a href="#press" data-i18n="nav.press">Press</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <button class="lang-toggle" type="button" aria-label="Switch language" data-i18n="nav.lang_toggle">EN</button>
     </div>
   </div>
 </nav>
@@ -835,14 +855,14 @@
 <section class="hero">
   <div class="container">
     <div class="hero-inner">
-      <h1 class="hero-title">
+      <h1 class="hero-title" data-i18n-html="hero.title">
         用大模型，让游戏<br>
         <span class="accent">长出想象的边界</span>
       </h1>
       <div class="hero-meta">
-        <span class="pill"><span class="pill-dot"></span>AI 叙事</span>
-        <span class="pill"><span class="pill-dot indigo"></span>Agent 博弈</span>
-        <span class="pill"><span class="pill-dot emerald"></span>算法可玩化</span>
+        <span class="pill"><span class="pill-dot"></span><span data-i18n="pill.narrative">AI 叙事</span></span>
+        <span class="pill"><span class="pill-dot indigo"></span><span data-i18n="pill.agent">Agent 博弈</span></span>
+        <span class="pill"><span class="pill-dot emerald"></span><span data-i18n="pill.algo">算法可玩化</span></span>
       </div>
     </div>
   </div>
@@ -853,44 +873,44 @@
     <div class="sec-head">
       <div class="sec-head-l">
         <div class="sec-num">Chapter I · Games</div>
-        <h2>AI <span class="accent">游戏</span></h2>
+        <h2 data-i18n-html="sec.games.title">AI <span class="accent">游戏</span></h2>
       </div>
     </div>
 
     <div class="dept">
       <aside class="dept-meta">
         <div class="dept-num">No. 01</div>
-        <h3>AI 叙事</h3>
-        <p>AI 进核心循环——回应玩家每次选择，让每一局都长出独一无二的故事。</p>
-        <span class="dept-en">AI Narrative</span>
+        <h3 data-i18n="dept.narrative.title">AI 叙事</h3>
+        <p data-i18n="dept.narrative.desc">AI 进核心循环——回应玩家每次选择，让每一局都长出独一无二的故事。</p>
+        <span class="dept-en" data-i18n="dept.narrative.en">AI Narrative</span>
       </aside>
       <div class="dept-cards">
       <article class="card">
-        <div class="thumb"><img src="assets/gameplay_main.webp" alt="青椒模拟器界面"></div>
+        <div class="thumb"><img src="assets/gameplay_main.webp" data-i18n-alt="card.chili.alt" alt="青椒模拟器界面"></div>
         <div class="body">
           <div class="title-row">
             <span class="vbar"></span>
-            <h3 class="card-title">青椒模拟器<span class="en">Tenure-Track Chili</span></h3>
+            <h3 class="card-title" data-i18n-html="card.chili.title">青椒模拟器<span class="en">Tenure-Track Chili</span></h3>
           </div>
-          <div class="tags"><span class="tag">模拟经营</span><span class="tag live">已上线</span></div>
-          <p class="one-liner">扮演高校青椒求生升职。AI 不是跑剧情树，是在响应你每次决策——所以才有玩家把 11 亿身家全砸进食堂、开起了红烧肉窗口。</p>
+          <div class="tags"><span class="tag" data-i18n="card.chili.tag1">模拟经营</span><span class="tag live" data-i18n="tag.live">已上线</span></div>
+          <p class="one-liner" data-i18n="card.chili.desc">扮演高校青椒求生升职。AI 不是跑剧情树，是在响应你每次决策——所以才有玩家把 11 亿身家全砸进食堂、开起了红烧肉窗口。</p>
           <div class="cta-row">
-            <a class="cta" href="https://tenure-plus.feedscription.com/" target="_blank" rel="noopener">在线试玩</a>
+            <a class="cta" href="https://tenure-plus.feedscription.com/" target="_blank" rel="noopener" data-i18n="cta.play">在线试玩</a>
           </div>
         </div>
       </article>
 
       <article class="card">
-        <div class="thumb contain"><img src="assets/fate_river.webp" alt="逆命之河"></div>
+        <div class="thumb contain"><img src="assets/fate_river.webp" data-i18n-alt="card.fate.alt" alt="逆命之河"></div>
         <div class="body">
           <div class="title-row">
             <span class="vbar"></span>
-            <h3 class="card-title">逆命之河<span class="en">Fate River</span></h3>
+            <h3 class="card-title" data-i18n-html="card.fate.title">逆命之河<span class="en">Fate River</span></h3>
           </div>
-          <div class="tags"><span class="tag">叙事冒险</span><span class="tag live">已上线</span></div>
-          <p class="one-liner">扮演历史人物改命试试：「武则天若让孩子活下来，会不会弥补遗憾？」</p>
+          <div class="tags"><span class="tag" data-i18n="card.fate.tag1">叙事冒险</span><span class="tag live" data-i18n="tag.live">已上线</span></div>
+          <p class="one-liner" data-i18n="card.fate.desc">扮演历史人物改命试试：「武则天若让孩子活下来，会不会弥补遗憾？」</p>
           <div class="cta-row">
-            <a class="cta" href="https://fated.feedscription.com/" target="_blank" rel="noopener">在线试玩</a>
+            <a class="cta" href="https://fated.feedscription.com/" target="_blank" rel="noopener" data-i18n="cta.play">在线试玩</a>
           </div>
         </div>
       </article>
@@ -900,37 +920,37 @@
     <div class="dept indigo">
       <aside class="dept-meta">
         <div class="dept-num">No. 02</div>
-        <h3>Agent 博弈</h3>
-        <p>人当观众，AI 之间互相勾心斗角——这是以前难做的体验。</p>
-        <span class="dept-en">Multi-Agent Arena</span>
+        <h3 data-i18n="dept.agent.title">Agent 博弈</h3>
+        <p data-i18n="dept.agent.desc">人当观众，AI 之间互相勾心斗角——这是以前难做的体验。</p>
+        <span class="dept-en" data-i18n="dept.agent.en">Multi-Agent Arena</span>
       </aside>
       <div class="dept-cards">
       <article class="card indigo">
-        <div class="thumb"><img src="assets/cyber_cricket.webp" alt="大模型德扑：6 个 AI 同桌对局"></div>
+        <div class="thumb"><img src="assets/cyber_cricket.webp" data-i18n-alt="card.poker.alt" alt="大模型德扑：6 个 AI 同桌对局"></div>
         <div class="body">
           <div class="title-row">
             <span class="vbar"></span>
-            <h3 class="card-title">大模型德扑<span class="en">Cyber Cricket · Poker</span></h3>
+            <h3 class="card-title" data-i18n-html="card.poker.title">大模型德扑<span class="en">Cyber Cricket · Poker</span></h3>
           </div>
-          <div class="tags"><span class="tag indigo">Multi-Agent</span><span class="tag gray">实时复盘</span></div>
-          <p class="one-liner">6 个大模型同桌打 No-Limit 德州，玩家全程旁观——看哪个 AI 更会 bluff。</p>
+          <div class="tags"><span class="tag indigo">Multi-Agent</span><span class="tag gray" data-i18n="card.poker.tag2">实时复盘</span></div>
+          <p class="one-liner" data-i18n="card.poker.desc">6 个大模型同桌打 No-Limit 德州，玩家全程旁观——看哪个 AI 更会 bluff。</p>
           <div class="cta-row">
-            <a class="cta" href="https://holdem.ququer.ai/" target="_blank" rel="noopener">在线试玩</a>
+            <a class="cta" href="https://holdem.ququer.ai/" target="_blank" rel="noopener" data-i18n="cta.play">在线试玩</a>
           </div>
         </div>
       </article>
 
       <article class="card indigo">
-        <div class="thumb"><img src="assets/ququer.webp" alt="QuQuer 平台：Liar's Dice featured match"></div>
+        <div class="thumb"><img src="assets/ququer.webp" data-i18n-alt="card.ququer.alt" alt="QuQuer 平台：Liar's Dice featured match"></div>
         <div class="body">
           <div class="title-row">
             <span class="vbar"></span>
-            <h3 class="card-title">赛博蛐蛐儿<span class="en">QuQuer Platform</span></h3>
+            <h3 class="card-title" data-i18n-html="card.ququer.title">赛博蛐蛐儿<span class="en">QuQuer Platform</span></h3>
           </div>
           <div class="tags"><span class="tag indigo">Trustless</span><span class="tag gray">Commit-Reveal</span></div>
-          <p class="one-liner">让外部 Agent 公平博弈的可审计平台——自己带模型来打，靠 Commit-Reveal 防作弊。</p>
+          <p class="one-liner" data-i18n="card.ququer.desc">让外部 Agent 公平博弈的可审计平台——自己带模型来打，靠 Commit-Reveal 防作弊。</p>
           <div class="cta-row">
-            <span class="cta secondary">即将开放</span>
+            <span class="cta secondary" data-i18n="cta.coming_soon">即将开放</span>
           </div>
         </div>
       </article>
@@ -940,9 +960,9 @@
     <div class="dept emerald">
       <aside class="dept-meta">
         <div class="dept-num">No. 03</div>
-        <h3>AI 算法设计</h3>
-        <p>把"调网络结构"卡牌化——让懂 AI 和不懂 AI 的人都能上手，亲手训出一个真模型。</p>
-        <span class="dept-en">Algorithms-as-Play</span>
+        <h3 data-i18n="dept.algo.title">AI 算法设计</h3>
+        <p data-i18n="dept.algo.desc">把"调网络结构"卡牌化——让懂 AI 和不懂 AI 的人都能上手，亲手训出一个真模型。</p>
+        <span class="dept-en" data-i18n="dept.algo.en">Algorithms-as-Play</span>
       </aside>
       <div class="dept-cards">
       <article class="card emerald">
@@ -950,12 +970,12 @@
         <div class="body">
           <div class="title-row">
             <span class="vbar"></span>
-            <h3 class="card-title">Neuralchemy<span class="en">炼经术</span></h3>
+            <h3 class="card-title" data-i18n-html="card.neura.title">Neuralchemy<span class="en">炼经术</span></h3>
           </div>
-          <div class="tags"><span class="tag" style="color: var(--emerald-d); background: var(--emerald-tint); border-color: rgba(101,163,13,0.18);">教育普惠</span><span class="tag gray">真训练</span></div>
-          <p class="one-liner">在游戏里训练一个真实的视觉 AI 模型——卡牌就是网络组件。不懂 AI 也能上手，玩着玩着就明白每个组件到底做了什么。</p>
+          <div class="tags"><span class="tag" style="color: var(--emerald-d); background: var(--emerald-tint); border-color: rgba(101,163,13,0.18);" data-i18n="card.neura.tag1">教育普惠</span><span class="tag gray" data-i18n="card.neura.tag2">真训练</span></div>
+          <p class="one-liner" data-i18n="card.neura.desc">在游戏里训练一个真实的视觉 AI 模型——卡牌就是网络组件。不懂 AI 也能上手，玩着玩着就明白每个组件到底做了什么。</p>
           <div class="cta-row">
-            <a class="cta" href="https://neuralchemy.feedscription.com/" target="_blank" rel="noopener">在线试玩</a>
+            <a class="cta" href="https://neuralchemy.feedscription.com/" target="_blank" rel="noopener" data-i18n="cta.play">在线试玩</a>
           </div>
         </div>
       </article>
@@ -969,27 +989,27 @@
     <div class="sec-head">
       <div class="sec-head-l">
         <div class="sec-num">Chapter II · Platform</div>
-        <h2>AI 应用 <span class="accent">平台</span></h2>
+        <h2 data-i18n-html="sec.platform.title">AI 应用 <span class="accent">平台</span></h2>
       </div>
     </div>
 
     <div class="grid">
       <article class="card">
-        <div class="thumb"><img src="assets/feedscription_platform.webp" alt="FeedScription 平台首页"></div>
+        <div class="thumb"><img src="assets/feedscription_platform.webp" data-i18n-alt="card.platform.alt" alt="FeedScription 平台首页"></div>
         <div class="body">
           <div class="title-row">
             <span class="vbar"></span>
-            <h3 class="card-title">FeedScription 平台<span class="en">team's AI app hub</span></h3>
+            <h3 class="card-title" data-i18n-html="card.platform.title">FeedScription 平台<span class="en">team's AI app hub</span></h3>
           </div>
           <div class="tags">
-            <span class="tag">AI 能力</span>
-            <span class="tag">账号体系</span>
-            <span class="tag">用户注册</span>
-            <span class="tag">埋点分析</span>
+            <span class="tag" data-i18n="card.platform.tag1">AI 能力</span>
+            <span class="tag" data-i18n="card.platform.tag2">账号体系</span>
+            <span class="tag" data-i18n="card.platform.tag3">用户注册</span>
+            <span class="tag" data-i18n="card.platform.tag4">埋点分析</span>
           </div>
-          <p class="one-liner">团队所有 AI 应用的统一支撑层——把 AI 能力、账号、注册流和数据埋点收敛到一处，每个 demo 都接进来即用。</p>
+          <p class="one-liner" data-i18n="card.platform.desc">团队所有 AI 应用的统一支撑层——把 AI 能力、账号、注册流和数据埋点收敛到一处，每个 demo 都接进来即用。</p>
           <div class="cta-row">
-            <a class="cta" href="https://platform.feedscription.com/" target="_blank" rel="noopener">访问平台</a>
+            <a class="cta" href="https://platform.feedscription.com/" target="_blank" rel="noopener" data-i18n="cta.visit_platform">访问平台</a>
           </div>
         </div>
       </article>
@@ -1002,37 +1022,37 @@
     <div class="sec-head">
       <div class="sec-head-l">
         <div class="sec-num">Chapter III · Tools</div>
-        <h2>游戏 <span class="accent">工具</span></h2>
+        <h2 data-i18n-html="sec.tools.title">游戏 <span class="accent">工具</span></h2>
       </div>
     </div>
 
     <div class="grid">
       <article class="card">
-        <div class="thumb"><img src="assets/fate_river_autotest.webp" alt="逆命自动化测试：AI 玩家 + 记忆/策略追踪"></div>
+        <div class="thumb"><img src="assets/fate_river_autotest.webp" data-i18n-alt="card.autotest.alt" alt="逆命自动化测试：AI 玩家 + 记忆/策略追踪"></div>
         <div class="body">
           <div class="title-row">
             <span class="vbar"></span>
-            <h3 class="card-title">逆命自动化测试<span class="en">Fate-River Autotest</span></h3>
+            <h3 class="card-title" data-i18n-html="card.autotest.title">逆命自动化测试<span class="en">Fate-River Autotest</span></h3>
           </div>
-          <div class="tags"><span class="tag">自动化测试</span><span class="tag gray">AI 玩家</span></div>
-          <p class="one-liner">让 LLM 化身玩家把整局逆命之河跑通——把"AI 叙事游戏"的回归测试搬到 CI 里。</p>
+          <div class="tags"><span class="tag" data-i18n="card.autotest.tag1">自动化测试</span><span class="tag gray" data-i18n="card.autotest.tag2">AI 玩家</span></div>
+          <p class="one-liner" data-i18n="card.autotest.desc">让 LLM 化身玩家把整局逆命之河跑通——把"AI 叙事游戏"的回归测试搬到 CI 里。</p>
           <div class="cta-row">
-            <span class="cta secondary">内部工具</span>
+            <span class="cta secondary" data-i18n="cta.internal">内部工具</span>
           </div>
         </div>
       </article>
 
       <article class="card">
-        <div class="thumb"><img src="assets/kal_editor.webp" alt="KAL Editor：Flow 节点编辑器界面"></div>
+        <div class="thumb"><img src="assets/kal_editor.webp" data-i18n-alt="card.kal.alt" alt="KAL Editor：Flow 节点编辑器界面"></div>
         <div class="body">
           <div class="title-row">
             <span class="vbar"></span>
-            <h3 class="card-title">KAL AI Layer<span class="en">Kal-Engine</span></h3>
+            <h3 class="card-title" data-i18n-html="card.kal.title">KAL AI Layer<span class="en">Kal-Engine</span></h3>
           </div>
-          <div class="tags"><span class="tag">游戏框架</span><span class="tag gray">LLM-First</span></div>
-          <p class="one-liner">LLM-First 的游戏组件库：让 Coding Agent 在 30 分钟内拼出一个完整的文字游戏。</p>
+          <div class="tags"><span class="tag" data-i18n="card.kal.tag1">游戏框架</span><span class="tag gray">LLM-First</span></div>
+          <p class="one-liner" data-i18n="card.kal.desc">LLM-First 的游戏组件库：让 Coding Agent 在 30 分钟内拼出一个完整的文字游戏。</p>
           <div class="cta-row">
-            <a class="cta" href="https://github.com/Feed-Scription/kal" target="_blank" rel="noopener">查看代码</a>
+            <a class="cta" href="https://github.com/Feed-Scription/kal" target="_blank" rel="noopener" data-i18n="cta.view_code">查看代码</a>
           </div>
         </div>
       </article>
@@ -1045,21 +1065,21 @@
     <div class="sec-head">
       <div class="sec-head-l">
         <div class="sec-num">Chapter IV · Events</div>
-        <h2>活动 <span class="accent">策划</span></h2>
+        <h2 data-i18n-html="sec.events.title">活动 <span class="accent">策划</span></h2>
       </div>
     </div>
 
     <div class="grid">
       <article class="card">
-        <div class="thumb"><img src="assets/event_suzhou_2026.webp" alt="抖音 AI 创变者计划 · 苏州 AI 游戏专场"></div>
+        <div class="thumb"><img src="assets/event_suzhou_2026.webp" data-i18n-alt="card.event.alt" alt="抖音 AI 创变者计划 · 苏州 AI 游戏专场"></div>
         <div class="body">
           <div class="title-row">
             <span class="vbar"></span>
-            <h3 class="card-title">苏州 AI 游戏专场<span class="en">抖音 AI 创变者计划 · 2026.04.18</span></h3>
+            <h3 class="card-title" data-i18n-html="card.event.title">苏州 AI 游戏专场<span class="en">抖音 AI 创变者计划 · 2026.04.18</span></h3>
           </div>
-          <div class="tags"><span class="tag">联合承办</span></div>
+          <div class="tags"><span class="tag" data-i18n="card.event.tag">联合承办</span></div>
           <div class="cta-row">
-            <a class="cta" href="https://mp.weixin.qq.com/s/qNTXhiwgrmrMJ01mK2xWpA" target="_blank" rel="noopener">活动总结</a>
+            <a class="cta" href="https://mp.weixin.qq.com/s/qNTXhiwgrmrMJ01mK2xWpA" target="_blank" rel="noopener" data-i18n="cta.event_recap">活动总结</a>
           </div>
         </div>
       </article>
@@ -1072,39 +1092,39 @@
     <div class="sec-head">
       <div class="sec-head-l">
         <div class="sec-num">Chapter V · Press</div>
-        <h2>媒体 <span class="accent">报道</span></h2>
+        <h2 data-i18n-html="sec.press.title">媒体 <span class="accent">报道</span></h2>
       </div>
     </div>
 
     <div class="press-grid">
       <a class="press-card" href="https://youxichaguan.com/archives/184254" target="_blank" rel="noopener">
         <div class="press-meta">
-          <span class="press-outlet">游戏茶馆</span>
+          <span class="press-outlet" data-i18n="press.gamecha.outlet">游戏茶馆</span>
           <span class="press-dot"></span>
           <span>2026 · 01 · 06</span>
         </div>
-        <p class="press-headline">专访：DAU 达 9 万、2000 人同时在线，两个博士生的 AI 游戏凭什么击中玩家？</p>
-        <span class="press-tag">主创专访</span>
+        <p class="press-headline" data-i18n="press.gamecha.headline">专访：DAU 达 9 万、2000 人同时在线，两个博士生的 AI 游戏凭什么击中玩家？</p>
+        <span class="press-tag" data-i18n="press.tag.interview">主创专访</span>
       </a>
 
       <a class="press-card" href="https://news.sciencenet.cn/htmlnews/2026/1/558423.shtm" target="_blank" rel="noopener">
         <div class="press-meta">
-          <span class="press-outlet">科学网</span>
+          <span class="press-outlet" data-i18n="press.sciencenet.outlet">科学网</span>
           <span class="press-dot"></span>
           <span>2026 · 01 · 08</span>
         </div>
-        <p class="press-headline">三本院校出身，逆袭拿下诺奖？两位 95 后博士生写了部"神人游戏"</p>
-        <span class="press-tag">人物专题</span>
+        <p class="press-headline" data-i18n="press.sciencenet.headline">三本院校出身，逆袭拿下诺奖？两位 95 后博士生写了部"神人游戏"</p>
+        <span class="press-tag" data-i18n="press.tag.profile">人物专题</span>
       </a>
 
       <a class="press-card" href="https://www.gcores.com/radios/210229" target="_blank" rel="noopener">
         <div class="press-meta">
-          <span class="press-outlet">405 游局</span>
+          <span class="press-outlet" data-i18n="press.gcores.outlet">405 游局</span>
           <span class="press-dot"></span>
           <span>2026 · 01 · 28</span>
         </div>
-        <p class="press-headline">Ep.32 第一次用 AI 做游戏的实战经验分享 · 对话《青椒模拟器》主创</p>
-        <span class="press-tag">播客</span>
+        <p class="press-headline" data-i18n="press.gcores.headline">Ep.32 第一次用 AI 做游戏的实战经验分享 · 对话《青椒模拟器》主创</p>
+        <span class="press-tag" data-i18n="press.tag.podcast">播客</span>
       </a>
 
       <a class="press-card" href="https://www.nature.com/articles/d41586-026-00224-5" target="_blank" rel="noopener">
@@ -1125,20 +1145,20 @@
     <div class="about-card">
       <div class="about-grid">
         <div>
-          <h2>关于 <span class="accent">我们</span></h2>
-          <p>
+          <h2 data-i18n-html="about.title">关于 <span class="accent">我们</span></h2>
+          <p data-i18n="about.p1">
             青椒模拟器团队（Feed-Scription）是一支跨研究 / 工程 / 设计的 AI 游戏小队。
             我们相信大模型不只是写文案的工具，而是一种新的"游戏机制"。
             也相信一个 AI 游戏能不能立起来，最终还是要看玩法有不有趣、世界自不自洽。
           </p>
-          <p>
+          <p data-i18n="about.p2">
             每个 demo 都坚持端到端跑通到能让陌生人玩到。过程里沉淀出的 KAL 引擎和自动化测试也开源出来——希望下一波做 AI 游戏的人，少踩几个我们已经踩过的坑。
           </p>
         </div>
         <div class="stats">
-          <div class="stat"><div class="n">5</div><div class="l">AI 游戏</div></div>
-          <div class="stat"><div class="n">2</div><div class="l">开源工具</div></div>
-          <div class="stat"><div class="n">3</div><div class="l">探索方向</div></div>
+          <div class="stat"><div class="n">5</div><div class="l" data-i18n="stats.games">AI 游戏</div></div>
+          <div class="stat"><div class="n">2</div><div class="l" data-i18n="stats.tools">开源工具</div></div>
+          <div class="stat"><div class="n">3</div><div class="l" data-i18n="stats.dirs">探索方向</div></div>
         </div>
       </div>
     </div>
@@ -1148,15 +1168,287 @@
 <footer>
   <div class="container foot">
     <div>
-      <span class="brand-small">青椒模拟器团队 / Feed-Scription</span>
+      <span class="brand-small" data-i18n="foot.brand">青椒模拟器团队 / Feed-Scription</span>
       <span class="sep"></span>
-      <a href="https://github.com/Feed-Scription" target="_blank">GitHub Org</a>
+      <a href="https://github.com/Feed-Scription" target="_blank" data-i18n="foot.gh">GitHub Org</a>
     </div>
     <div>
-      <span>© 2026 · Made with chili pepper &amp; a lot of LLM tokens</span>
+      <span data-i18n="foot.tagline">© 2026 · Made with chili pepper &amp; a lot of LLM tokens</span>
     </div>
   </div>
 </footer>
+
+<script>
+(function () {
+  const I18N = {
+    zh: {
+      'meta.title': '青椒模拟器团队 · 让 AI 拓展游戏想象',
+      'meta.desc': '青椒模拟器团队 / Feed-Scription —— 用大模型重新想象游戏可能性。AI 叙事、Agent 博弈、AI 算法设计、平台与工具。',
+
+      'brand.team': '青椒模拟器团队',
+      'nav.games': 'AI 游戏', 'nav.platform': '平台', 'nav.tools': '工具',
+      'nav.events': '活动', 'nav.press': '报道', 'nav.about': '关于',
+      'nav.lang_toggle': 'EN',
+
+      'hero.title': '用大模型，让游戏<br><span class="accent">长出想象的边界</span>',
+      'pill.narrative': 'AI 叙事',
+      'pill.agent': 'Agent 博弈',
+      'pill.algo': '算法可玩化',
+
+      'sec.games.title': 'AI <span class="accent">游戏</span>',
+      'sec.platform.title': 'AI 应用 <span class="accent">平台</span>',
+      'sec.tools.title': '游戏 <span class="accent">工具</span>',
+      'sec.events.title': '活动 <span class="accent">策划</span>',
+      'sec.press.title': '媒体 <span class="accent">报道</span>',
+
+      'dept.narrative.title': 'AI 叙事',
+      'dept.narrative.desc': 'AI 进核心循环——回应玩家每次选择，让每一局都长出独一无二的故事。',
+      'dept.narrative.en': 'AI Narrative',
+      'dept.agent.title': 'Agent 博弈',
+      'dept.agent.desc': '人当观众，AI 之间互相勾心斗角——这是以前难做的体验。',
+      'dept.agent.en': 'Multi-Agent Arena',
+      'dept.algo.title': 'AI 算法设计',
+      'dept.algo.desc': '把"调网络结构"卡牌化——让懂 AI 和不懂 AI 的人都能上手，亲手训出一个真模型。',
+      'dept.algo.en': 'Algorithms-as-Play',
+
+      'tag.live': '已上线',
+      'cta.play': '在线试玩',
+      'cta.visit_platform': '访问平台',
+      'cta.view_code': '查看代码',
+      'cta.event_recap': '活动总结',
+      'cta.coming_soon': '即将开放',
+      'cta.internal': '内部工具',
+
+      'card.chili.alt': '青椒模拟器界面',
+      'card.chili.title': '青椒模拟器<span class="en">Tenure-Track Chili</span>',
+      'card.chili.tag1': '模拟经营',
+      'card.chili.desc': '扮演高校青椒求生升职。AI 不是跑剧情树，是在响应你每次决策——所以才有玩家把 11 亿身家全砸进食堂、开起了红烧肉窗口。',
+
+      'card.fate.alt': '逆命之河',
+      'card.fate.title': '逆命之河<span class="en">Fate River</span>',
+      'card.fate.tag1': '叙事冒险',
+      'card.fate.desc': '扮演历史人物改命试试：「武则天若让孩子活下来，会不会弥补遗憾？」',
+
+      'card.poker.alt': '大模型德扑：6 个 AI 同桌对局',
+      'card.poker.title': '大模型德扑<span class="en">Cyber Cricket · Poker</span>',
+      'card.poker.tag2': '实时复盘',
+      'card.poker.desc': '6 个大模型同桌打 No-Limit 德州，玩家全程旁观——看哪个 AI 更会 bluff。',
+
+      'card.ququer.alt': 'QuQuer 平台：Liar\'s Dice featured match',
+      'card.ququer.title': '赛博蛐蛐儿<span class="en">QuQuer Platform</span>',
+      'card.ququer.desc': '让外部 Agent 公平博弈的可审计平台——自己带模型来打，靠 Commit-Reveal 防作弊。',
+
+      'card.neura.title': 'Neuralchemy<span class="en">炼经术</span>',
+      'card.neura.tag1': '教育普惠',
+      'card.neura.tag2': '真训练',
+      'card.neura.desc': '在游戏里训练一个真实的视觉 AI 模型——卡牌就是网络组件。不懂 AI 也能上手，玩着玩着就明白每个组件到底做了什么。',
+
+      'card.platform.alt': 'FeedScription 平台首页',
+      'card.platform.title': 'FeedScription 平台<span class="en">team\'s AI app hub</span>',
+      'card.platform.tag1': 'AI 能力',
+      'card.platform.tag2': '账号体系',
+      'card.platform.tag3': '用户注册',
+      'card.platform.tag4': '埋点分析',
+      'card.platform.desc': '团队所有 AI 应用的统一支撑层——把 AI 能力、账号、注册流和数据埋点收敛到一处，每个 demo 都接进来即用。',
+
+      'card.autotest.alt': '逆命自动化测试：AI 玩家 + 记忆/策略追踪',
+      'card.autotest.title': '逆命自动化测试<span class="en">Fate-River Autotest</span>',
+      'card.autotest.tag1': '自动化测试',
+      'card.autotest.tag2': 'AI 玩家',
+      'card.autotest.desc': '让 LLM 化身玩家把整局逆命之河跑通——把"AI 叙事游戏"的回归测试搬到 CI 里。',
+
+      'card.kal.alt': 'KAL Editor：Flow 节点编辑器界面',
+      'card.kal.title': 'KAL AI Layer<span class="en">Kal-Engine</span>',
+      'card.kal.tag1': '游戏框架',
+      'card.kal.desc': 'LLM-First 的游戏组件库：让 Coding Agent 在 30 分钟内拼出一个完整的文字游戏。',
+
+      'card.event.alt': '抖音 AI 创变者计划 · 苏州 AI 游戏专场',
+      'card.event.title': '苏州 AI 游戏专场<span class="en">抖音 AI 创变者计划 · 2026.04.18</span>',
+      'card.event.tag': '联合承办',
+
+      'press.gamecha.outlet': '游戏茶馆',
+      'press.gamecha.headline': '专访：DAU 达 9 万、2000 人同时在线，两个博士生的 AI 游戏凭什么击中玩家？',
+      'press.sciencenet.outlet': '科学网',
+      'press.sciencenet.headline': '三本院校出身，逆袭拿下诺奖？两位 95 后博士生写了部"神人游戏"',
+      'press.gcores.outlet': '405 游局',
+      'press.gcores.headline': 'Ep.32 第一次用 AI 做游戏的实战经验分享 · 对话《青椒模拟器》主创',
+      'press.tag.interview': '主创专访',
+      'press.tag.profile': '人物专题',
+      'press.tag.podcast': '播客',
+
+      'about.title': '关于 <span class="accent">我们</span>',
+      'about.p1': '青椒模拟器团队（Feed-Scription）是一支跨研究 / 工程 / 设计的 AI 游戏小队。我们相信大模型不只是写文案的工具，而是一种新的"游戏机制"。也相信一个 AI 游戏能不能立起来，最终还是要看玩法有不有趣、世界自不自洽。',
+      'about.p2': '每个 demo 都坚持端到端跑通到能让陌生人玩到。过程里沉淀出的 KAL 引擎和自动化测试也开源出来——希望下一波做 AI 游戏的人，少踩几个我们已经踩过的坑。',
+      'stats.games': 'AI 游戏',
+      'stats.tools': '开源工具',
+      'stats.dirs': '探索方向',
+
+      'foot.brand': '青椒模拟器团队 / Feed-Scription',
+      'foot.gh': 'GitHub Org',
+      'foot.tagline': '© 2026 · Made with chili pepper & a lot of LLM tokens'
+    },
+
+    en: {
+      'meta.title': "Tenure-Track Chili Team · Let LLMs stretch what a game can imagine",
+      'meta.desc': "Feed-Scription team — reimagining games with LLMs. AI narrative, multi-agent arenas, algorithms-as-play, platform & tools.",
+
+      'brand.team': 'Tenure-Track Chili Team',
+      'nav.games': 'Games', 'nav.platform': 'Platform', 'nav.tools': 'Tools',
+      'nav.events': 'Events', 'nav.press': 'Press', 'nav.about': 'About',
+      'nav.lang_toggle': '中',
+
+      'hero.title': 'Let LLMs stretch<br><span class="accent">what a game can imagine</span>',
+      'pill.narrative': 'AI Narrative',
+      'pill.agent': 'Multi-Agent',
+      'pill.algo': 'Algorithms-as-Play',
+
+      'sec.games.title': 'AI <span class="accent">Games</span>',
+      'sec.platform.title': 'AI App <span class="accent">Platform</span>',
+      'sec.tools.title': 'Game <span class="accent">Tooling</span>',
+      'sec.events.title': 'Event <span class="accent">Programs</span>',
+      'sec.press.title': 'Press <span class="accent">Coverage</span>',
+
+      'dept.narrative.title': 'AI Narrative',
+      'dept.narrative.desc': "The AI sits inside the core loop — reacting to every player choice so no two runs play the same.",
+      'dept.narrative.en': 'Plot-by-LLM',
+      'dept.agent.title': 'Multi-Agent Arena',
+      'dept.agent.desc': "Players become spectators while AI agents scheme against each other — a kind of experience that was hard to deliver before LLMs.",
+      'dept.agent.en': 'Agent vs Agent',
+      'dept.algo.title': 'Algorithms-as-Play',
+      'dept.algo.desc': "Turn “tuning the network” into a card game — anyone, AI background or not, gets to train a real model with their own hands.",
+      'dept.algo.en': 'ML by Hand',
+
+      'tag.live': 'Live',
+      'cta.play': 'Play now',
+      'cta.visit_platform': 'Visit platform',
+      'cta.view_code': 'View code',
+      'cta.event_recap': 'Event recap',
+      'cta.coming_soon': 'Coming soon',
+      'cta.internal': 'Internal tool',
+
+      'card.chili.alt': 'Tenure-Track Chili UI',
+      'card.chili.title': 'Tenure-Track Chili<span class="en">青椒模拟器</span>',
+      'card.chili.tag1': 'Management sim',
+      'card.chili.desc': "Survive and climb the Chinese academic tenure track. The AI isn't running a scripted tree — it reacts to every decision you make. That's how one player dumped ¥1.1 B into the cafeteria and opened a braised-pork window.",
+
+      'card.fate.alt': 'Fate River',
+      'card.fate.title': 'Fate River<span class="en">逆命之河</span>',
+      'card.fate.tag1': 'Narrative adventure',
+      'card.fate.desc': "Play a historical figure and rewrite fate: \"If Wu Zetian had let her children live, would it have mended her regret?\"",
+
+      'card.poker.alt': 'Cyber Cricket: 6 AIs at one poker table',
+      'card.poker.title': 'Cyber Cricket · Poker<span class="en">大模型德扑</span>',
+      'card.poker.tag2': 'Live replay',
+      'card.poker.desc': "Six LLMs share one No-Limit Hold'em table. You just watch — which AI bluffs best?",
+
+      'card.ququer.alt': "QuQuer platform: Liar's Dice featured match",
+      'card.ququer.title': 'QuQuer Platform<span class="en">赛博蛐蛐儿</span>',
+      'card.ququer.desc': "An auditable arena where external agents play fair — bring your own model, Commit-Reveal blocks cheating.",
+
+      'card.neura.title': 'Neuralchemy<span class="en">炼经术</span>',
+      'card.neura.tag1': 'Education',
+      'card.neura.tag2': 'Real training',
+      'card.neura.desc': "Train a real vision AI inside the game — the cards are the network components. No AI background needed; play long enough and you'll grok what each piece does.",
+
+      'card.platform.alt': 'FeedScription platform homepage',
+      'card.platform.title': "FeedScription Platform<span class=\"en\">team's AI app hub</span>",
+      'card.platform.tag1': 'AI capabilities',
+      'card.platform.tag2': 'Accounts',
+      'card.platform.tag3': 'Sign-up',
+      'card.platform.tag4': 'Analytics',
+      'card.platform.desc': "The unified plane every team app plugs into — AI capabilities, accounts, sign-up, telemetry, all in one place.",
+
+      'card.autotest.alt': 'Fate-River Autotest: AI player + memory/strategy trace',
+      'card.autotest.title': 'Fate-River Autotest<span class="en">逆命自动化测试</span>',
+      'card.autotest.tag1': 'Automated testing',
+      'card.autotest.tag2': 'AI player',
+      'card.autotest.desc': "An LLM plays Fate River end-to-end — regression testing for AI narrative games, in CI.",
+
+      'card.kal.alt': 'KAL Editor: Flow node editor',
+      'card.kal.title': 'KAL AI Layer<span class="en">Kal-Engine</span>',
+      'card.kal.tag1': 'Game framework',
+      'card.kal.desc': "LLM-first component library. A coding agent can wire up a full text game in 30 minutes.",
+
+      'card.event.alt': 'Douyin AI Creators Program · Suzhou AI Game Hackathon',
+      'card.event.title': 'Suzhou AI Game Hackathon<span class="en">Douyin AI Creators · 2026.04.18</span>',
+      'card.event.tag': 'Co-host',
+
+      'press.gamecha.outlet': 'GameCha',
+      'press.gamecha.headline': "Interview: 90K DAU, 2K concurrent — how a tiny AI game from two PhDs hit a nerve",
+      'press.sciencenet.outlet': 'Science Net',
+      'press.sciencenet.headline': 'From a third-tier college to a Nobel: two 95-born PhD students wrote a "godly game"',
+      'press.gcores.outlet': '405 Podcast',
+      'press.gcores.headline': "Ep.32 — Hands-on lessons from a first AI game · with the Tenure-Track Chili team",
+      'press.tag.interview': 'Interview',
+      'press.tag.profile': 'Profile',
+      'press.tag.podcast': 'Podcast',
+
+      'about.title': 'About <span class="accent">us</span>',
+      'about.p1': "The Tenure-Track Chili Team (Feed-Scription) is a small AI-game crew across research, engineering, and design. We treat LLMs as a new kind of game mechanic, not a copywriting assistant — and we still believe whether an AI game holds up comes down to the basics: is the gameplay fun, is the world internally consistent.",
+      'about.p2': "Every demo we ship runs end-to-end well enough for a stranger to play. The KAL engine and the autotest harness we built along the way are open-sourced — so the next people taking on AI games can skip a few of the holes we've already fallen into.",
+      'stats.games': 'AI games',
+      'stats.tools': 'Open-source tools',
+      'stats.dirs': 'Directions explored',
+
+      'foot.brand': 'Tenure-Track Chili Team / Feed-Scription',
+      'foot.gh': 'GitHub Org',
+      'foot.tagline': '© 2026 · Made with chili pepper & a lot of LLM tokens'
+    }
+  };
+
+  const STORAGE_KEY = 'org-page-lang';
+
+  function detectInitial() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved === 'zh' || saved === 'en') return saved;
+    const browser = (navigator.language || '').toLowerCase();
+    return browser.startsWith('zh') ? 'zh' : 'en';
+  }
+
+  function applyLang(lang) {
+    const dict = I18N[lang] || I18N.zh;
+    document.documentElement.lang = (lang === 'en') ? 'en' : 'zh-CN';
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (!(key in dict)) return;
+      const attr = el.getAttribute('data-i18n-attr');
+      if (attr) {
+        el.setAttribute(attr, dict[key]);
+      } else if (el.tagName === 'TITLE') {
+        document.title = dict[key];
+      } else {
+        el.textContent = dict[key];
+      }
+    });
+
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const key = el.getAttribute('data-i18n-html');
+      if (key in dict) el.innerHTML = dict[key];
+    });
+
+    document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+      const key = el.getAttribute('data-i18n-alt');
+      if (key in dict) el.setAttribute('alt', dict[key]);
+    });
+  }
+
+  function setLang(lang) {
+    localStorage.setItem(STORAGE_KEY, lang);
+    applyLang(lang);
+  }
+
+  const initial = detectInitial();
+  applyLang(initial);
+
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.lang-toggle');
+    if (!btn) return;
+    const current = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+    setLang(current === 'zh' ? 'en' : 'zh');
+  });
+})();
+</script>
 
 </body>
 </html>
