@@ -4,14 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-i18n="meta.title">青椒模拟器团队 · 让 AI 拓展游戏想象</title>
-<meta name="description" data-i18n-attr="content" data-i18n="meta.desc" content="青椒模拟器团队 / Feed-Scription —— 用大模型重新想象游戏可能性。AI 剧情、AI 对话、Agent 博弈、AI 算法设计与 KAL 引擎。">
+<meta name="description" data-i18n-attr="content" data-i18n="meta.desc" content="青椒模拟器团队 / Wortou.AI —— 用大模型重新想象游戏可能性。AI 剧情、AI 对话、Agent 博弈、AI 算法设计与 KAL 引擎。">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
+<script>
+  (function () {
+    try {
+      const saved = localStorage.getItem('org-page-theme');
+      const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = (saved === 'light' || saved === 'dark') ? saved : system;
+    } catch (_) {}
+  })();
+</script>
+
 <style>
   :root {
+    color-scheme: light;
+
     --bg: #FDFDFD;
     --ink: #111827;        /* gray-900 */
     --ink-2: #374151;      /* gray-700 */
@@ -19,6 +31,15 @@
     --ink-4: #9ca3af;      /* gray-400 */
     --line: #e5e7eb;       /* gray-200 */
     --line-soft: #f3f4f6;  /* gray-100 */
+    --surface: #ffffff;
+    --surface-soft: #fafafa;
+    --surface-elevated: #ffffff;
+    --nav-bg: rgba(255, 255, 255, 0.72);
+    --nav-line: rgba(229, 231, 235, 0.5);
+    --footer-bg: rgba(255, 255, 255, 0.5);
+    --veil-bg: rgba(253, 253, 253, 0.25);
+    --selection-bg: #fef3c7;
+    --selection-ink: #92400e;
 
     --amber: #f59e0b;      /* amber-500 — paprika */
     --amber-d: #d97706;    /* amber-600 */
@@ -45,6 +66,41 @@
     --maxw: 1240px;
   }
 
+  html[data-theme="dark"] {
+    color-scheme: dark;
+
+    --bg: #0e1117;
+    --ink: #f8fafc;
+    --ink-2: #d7dde8;
+    --ink-3: #a1aabb;
+    --ink-4: #737f94;
+    --line: #2b3443;
+    --line-soft: #1b222d;
+    --surface: #151a22;
+    --surface-soft: #111720;
+    --surface-elevated: #1a202b;
+    --nav-bg: rgba(14, 17, 23, 0.78);
+    --nav-line: rgba(75, 85, 99, 0.35);
+    --footer-bg: rgba(14, 17, 23, 0.6);
+    --veil-bg: rgba(14, 17, 23, 0.45);
+    --selection-bg: rgba(245, 158, 11, 0.32);
+    --selection-ink: #fff7ed;
+
+    --amber: #fbbf24;
+    --amber-d: #f59e0b;
+    --amber-tint: rgba(245, 158, 11, 0.14);
+    --orange: #fb923c;
+    --indigo: #94a3b8;
+    --indigo-d: #cbd5e1;
+    --indigo-tint: rgba(148, 163, 184, 0.16);
+    --rose: #f472b6;
+    --rose-d: #f9a8d4;
+    --rose-tint: rgba(244, 114, 182, 0.15);
+    --emerald: #a3e635;
+    --emerald-d: #bef264;
+    --emerald-tint: rgba(163, 230, 53, 0.13);
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   html { scroll-behavior: smooth; }
@@ -61,7 +117,7 @@
     position: relative;
   }
 
-  ::selection { background: #fef3c7; color: #92400e; }
+  ::selection { background: var(--selection-bg); color: var(--selection-ink); }
 
   /* ---- pepper watermark (matches feedscription) ---- */
   .pepper-bg {
@@ -77,6 +133,10 @@
     background: url('assets/green_pepper.webp') center/contain no-repeat;
     filter: blur(6px);
   }
+  html[data-theme="dark"] .pepper-bg {
+    opacity: 0.08;
+    mix-blend-mode: screen;
+  }
   /* on small screens, blow it up so it crops past the viewport edges */
   @media (max-width: 720px) {
     .pepper-bg {
@@ -90,7 +150,7 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background: rgba(253, 253, 253, 0.25);
+    background: var(--veil-bg);
     backdrop-filter: blur(4px) saturate(105%);
     -webkit-backdrop-filter: blur(4px) saturate(105%);
   }
@@ -110,10 +170,10 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 50;
-    background: rgba(255, 255, 255, 0.72);
+    background: var(--nav-bg);
     backdrop-filter: blur(14px) saturate(180%);
     -webkit-backdrop-filter: blur(14px) saturate(180%);
-    border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+    border-bottom: 1px solid var(--nav-line);
   }
   .nav-inner {
     max-width: var(--maxw);
@@ -126,7 +186,7 @@
     font-size: 1.1rem;
     font-weight: 700;
     letter-spacing: -0.02em;
-    background: linear-gradient(135deg, #111827 0%, #374151 100%);
+    background: linear-gradient(135deg, var(--ink) 0%, var(--ink-2) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -146,12 +206,21 @@
   }
   .nav-links a { color: var(--ink-4); }
   .nav-links a:hover { color: var(--ink); }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
   .lang-toggle {
-    margin-left: 4px;
     padding: 4px 10px;
     border: 1px solid var(--line);
     border-radius: 999px;
-    background: white;
+    background: var(--surface);
     color: var(--ink-2);
     font-size: 0.78rem;
     font-weight: 600;
@@ -164,6 +233,44 @@
     border-color: var(--amber);
     color: var(--amber-d);
     background: var(--amber-tint);
+  }
+  .theme-toggle {
+    width: 42px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--ink-2);
+    cursor: pointer;
+    padding: 3px;
+    transition: border-color .2s, color .2s, background .2s;
+    font-family: inherit;
+  }
+  .theme-toggle:hover {
+    border-color: var(--amber);
+    color: var(--amber-d);
+    background: var(--amber-tint);
+  }
+  .theme-toggle-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--amber), var(--orange));
+    color: #111827;
+    font-size: 0.78rem;
+    line-height: 1;
+    transform: translateX(0);
+    transition: transform .25s ease, background .25s ease, color .25s ease;
+  }
+  html[data-theme="dark"] .theme-toggle-icon {
+    transform: translateX(14px);
+    color: #fff7ed;
+    background: linear-gradient(135deg, #475569, #111827);
   }
 
   /* ---- hero ---- */
@@ -211,7 +318,8 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    padding: 0 .05em;
+    padding: 0 .05em .08em;
+    margin-bottom: -.08em;
   }
 
   .lede {
@@ -236,7 +344,7 @@
   .pill {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 8px 16px;
-    background: white;
+    background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 999px;
     font-size: 0.85rem;
@@ -371,7 +479,7 @@
 
   .card {
     position: relative;
-    background: white;
+    background: var(--surface-elevated);
     border: 1px solid var(--line-soft);
     border-radius: 24px;
     overflow: hidden;
@@ -407,7 +515,7 @@
   .thumb {
     width: 100%; aspect-ratio: 16/10;
     overflow: hidden;
-    background: linear-gradient(135deg, #fafafa, #f3f4f6);
+    background: linear-gradient(135deg, var(--surface-soft), var(--line-soft));
     position: relative;
     z-index: 1;
     border-bottom: 1px solid var(--line-soft);
@@ -421,7 +529,7 @@
 
   /* portrait / mobile screenshots: show whole image on a tinted stage */
   .thumb.contain {
-    background: linear-gradient(135deg, var(--amber-tint) 0%, #fff7ed 100%);
+    background: linear-gradient(135deg, var(--amber-tint) 0%, var(--surface-soft) 100%);
     display: flex; align-items: center; justify-content: center;
     padding: 14px 0;
   }
@@ -433,10 +541,10 @@
     box-shadow: 0 12px 28px -10px rgba(120, 53, 15, 0.25),
                 0 4px 8px -4px rgba(120, 53, 15, 0.12);
   }
-  .card.rose    .thumb.contain { background: linear-gradient(135deg, var(--rose-tint) 0%, #fce7f3 100%); }
+  .card.rose    .thumb.contain { background: linear-gradient(135deg, var(--rose-tint) 0%, var(--surface-soft) 100%); }
   .card.rose    .thumb.contain img { box-shadow: 0 12px 28px -10px rgba(157, 23, 77, 0.25), 0 4px 8px -4px rgba(157, 23, 77, 0.12); }
-  .card.indigo  .thumb.contain { background: linear-gradient(135deg, var(--indigo-tint) 0%, #e2e8f0 100%); }
-  .card.emerald .thumb.contain { background: linear-gradient(135deg, var(--emerald-tint) 0%, #ecfccb 100%); }
+  .card.indigo  .thumb.contain { background: linear-gradient(135deg, var(--indigo-tint) 0%, var(--surface-soft) 100%); }
+  .card.emerald .thumb.contain { background: linear-gradient(135deg, var(--emerald-tint) 0%, var(--surface-soft) 100%); }
 
   .thumb.svg-thumb {
     display: flex; align-items: center; justify-content: center;
@@ -630,7 +738,7 @@
   .press-card {
     position: relative;
     display: flex; flex-direction: column;
-    background: white;
+    background: var(--surface-elevated);
     border: 1px solid var(--line-soft);
     border-radius: 18px;
     padding: 22px 22px 18px;
@@ -706,7 +814,7 @@
     position: relative;
   }
   .about-card {
-    background: linear-gradient(135deg, #ffffff 0%, var(--amber-tint) 100%);
+    background: linear-gradient(135deg, var(--surface-elevated) 0%, var(--amber-tint) 100%);
     border: 1px solid rgba(245, 158, 11, 0.15);
     border-radius: 32px;
     padding: 56px 48px;
@@ -757,7 +865,7 @@
     gap: 16px;
   }
   .stat {
-    background: white;
+    background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 16px;
     padding: 24px 16px;
@@ -789,7 +897,7 @@
   footer {
     padding: 48px 0 64px;
     border-top: 1px solid var(--line);
-    background: rgba(255,255,255,0.5);
+    background: var(--footer-bg);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     position: relative; z-index: 1;
@@ -825,6 +933,7 @@
   @media (max-width: 720px) {
     .hero { padding: 130px 0 80px; }
     .nav-links { display: none; }
+    .nav-right { gap: 0; }
     .grid { grid-template-columns: 1fr; }
     .about-card { padding: 36px 24px; border-radius: 24px; }
     .body { padding: 22px 22px 6px; }
@@ -839,15 +948,22 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <div class="brand"><span data-i18n="brand.team">青椒模拟器团队</span><span class="dot">·</span>Feed-Scription</div>
-    <div class="nav-links">
-      <a href="#games" data-i18n="nav.games">AI Games</a>
-      <a href="#platform" data-i18n="nav.platform">Platform</a>
-      <a href="#tools" data-i18n="nav.tools">Tools</a>
-      <a href="#events" data-i18n="nav.events">Events</a>
-      <a href="#press" data-i18n="nav.press">Press</a>
-      <a href="#about" data-i18n="nav.about">About</a>
-      <button class="lang-toggle" type="button" aria-label="Switch language" data-i18n="nav.lang_toggle">EN</button>
+    <div class="brand"><span data-i18n="brand.team">青椒模拟器团队</span><span class="dot">·</span>Wortou.AI</div>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#games" data-i18n="nav.games">AI Games</a>
+        <a href="#platform" data-i18n="nav.platform">Platform</a>
+        <a href="#tools" data-i18n="nav.tools">Tools</a>
+        <a href="#events" data-i18n="nav.events">Events</a>
+        <a href="#press" data-i18n="nav.press">Press</a>
+        <a href="#about" data-i18n="nav.about">About</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" type="button" aria-label="Switch theme" aria-pressed="false">
+          <span class="theme-toggle-icon" aria-hidden="true">☀</span>
+        </button>
+        <button class="lang-toggle" type="button" aria-label="Switch language" data-i18n="nav.lang_toggle">EN</button>
+      </div>
     </div>
   </div>
 </nav>
@@ -856,7 +972,7 @@
   <div class="container">
     <div class="hero-inner">
       <h1 class="hero-title" data-i18n-html="hero.title">
-        用大模型，让游戏<br>
+        用AI，让游戏<br>
         <span class="accent">长出想象的边界</span>
       </h1>
       <div class="hero-meta">
@@ -890,7 +1006,7 @@
         <div class="body">
           <div class="title-row">
             <span class="vbar"></span>
-            <h3 class="card-title" data-i18n-html="card.chili.title">青椒模拟器<span class="en">Tenure-Track Chili</span></h3>
+            <h3 class="card-title" data-i18n-html="card.chili.title">青椒模拟器<span class="en">Tenure-Track Simulator</span></h3>
           </div>
           <div class="tags"><span class="tag" data-i18n="card.chili.tag1">模拟经营</span><span class="tag live" data-i18n="tag.live">已上线</span></div>
           <p class="one-liner" data-i18n="card.chili.desc">扮演高校青椒求生升职。AI 不是跑剧情树，是在响应你每次决策——所以才有玩家把 11 亿身家全砸进食堂、开起了红烧肉窗口。</p>
@@ -1097,6 +1213,17 @@
     </div>
 
     <div class="press-grid">
+
+      <a class="press-card" href="https://mp.weixin.qq.com/s/OyY2oX--Bb7TXS9uZkZrTw" target="_blank" rel="noopener">
+        <div class="press-meta">
+          <span class="press-outlet" data-i18n="press.jixin.outlet">机器之心</span>
+          <span class="press-dot"></span>
+          <span>2025 · 12 · 20</span>
+        </div>
+        <p class="press-headline" data-i18n="press.jixin.headline">玩到崩溃，《青椒模拟器》游戏爆火，我在AI世界一路升级做院士</p>
+        <span class="press-tag" data-i18n="press.tag.review">产品体验</span>
+      </a>
+
       <a class="press-card" href="https://youxichaguan.com/archives/184254" target="_blank" rel="noopener">
         <div class="press-meta">
           <span class="press-outlet" data-i18n="press.gamecha.outlet">游戏茶馆</span>
@@ -1114,6 +1241,16 @@
           <span>2026 · 01 · 08</span>
         </div>
         <p class="press-headline" data-i18n="press.sciencenet.headline">三本院校出身，逆袭拿下诺奖？两位 95 后博士生写了部"神人游戏"</p>
+        <span class="press-tag" data-i18n="press.tag.profile">人物专题</span>
+      </a>
+
+      <a class="press-card" href="https://mp.weixin.qq.com/s/YG70lGn-gT1QeUD02tqV-w" target="_blank" rel="noopener">
+        <div class="press-meta">
+          <span class="press-outlet" data-i18n="press.jizhou.outlet">极昼工作室</span>
+          <span class="press-dot"></span>
+          <span>2026 · 01 · 20</span>
+        </div>
+        <p class="press-headline" data-i18n="press.jizhou.headline">重生之我在「青椒模拟器」做导师，一路飞升到院士</p>
         <span class="press-tag" data-i18n="press.tag.profile">人物专题</span>
       </a>
 
@@ -1147,7 +1284,7 @@
         <div>
           <h2 data-i18n-html="about.title">关于 <span class="accent">我们</span></h2>
           <p data-i18n="about.p1">
-            青椒模拟器团队（Feed-Scription）是一支跨研究 / 工程 / 设计的 AI 游戏小队。
+            青椒模拟器团队（Wortou.AI）是一支跨研究 / 工程 / 设计的 AI 游戏小队。
             我们相信大模型不只是写文案的工具，而是一种新的"游戏机制"。
             也相信一个 AI 游戏能不能立起来，最终还是要看玩法有不有趣、世界自不自洽。
           </p>
@@ -1168,7 +1305,7 @@
 <footer>
   <div class="container foot">
     <div>
-      <span class="brand-small" data-i18n="foot.brand">青椒模拟器团队 / Feed-Scription</span>
+      <span class="brand-small" data-i18n="foot.brand">青椒模拟器团队 / Wortou.AI</span>
       <span class="sep"></span>
       <a href="https://github.com/Feed-Scription" target="_blank" data-i18n="foot.gh">GitHub Org</a>
     </div>
@@ -1183,12 +1320,14 @@
   const I18N = {
     zh: {
       'meta.title': '青椒模拟器团队 · 让 AI 拓展游戏想象',
-      'meta.desc': '青椒模拟器团队 / Feed-Scription —— 用大模型重新想象游戏可能性。AI 叙事、Agent 博弈、AI 算法设计、平台与工具。',
+      'meta.desc': '青椒模拟器团队 / Wortou.AI —— 用大模型重新想象游戏可能性。AI 叙事、Agent 博弈、AI 算法设计、平台与工具。',
 
       'brand.team': '青椒模拟器团队',
       'nav.games': 'AI 游戏', 'nav.platform': '平台', 'nav.tools': '工具',
       'nav.events': '活动', 'nav.press': '报道', 'nav.about': '关于',
       'nav.lang_toggle': 'EN',
+      'nav.theme_dark': '切换深色模式',
+      'nav.theme_light': '切换浅色模式',
 
       'hero.title': '用大模型，让游戏<br><span class="accent">长出想象的边界</span>',
       'pill.narrative': 'AI 叙事',
@@ -1220,7 +1359,7 @@
       'cta.internal': '内部工具',
 
       'card.chili.alt': '青椒模拟器界面',
-      'card.chili.title': '青椒模拟器<span class="en">Tenure-Track Chili</span>',
+      'card.chili.title': '青椒模拟器<span class="en">Tenure-Track Simulator</span>',
       'card.chili.tag1': '模拟经营',
       'card.chili.desc': '扮演高校青椒求生升职。AI 不是跑剧情树，是在响应你每次决策——所以才有玩家把 11 亿身家全砸进食堂、开起了红烧肉窗口。',
 
@@ -1272,32 +1411,39 @@
       'press.sciencenet.headline': '三本院校出身，逆袭拿下诺奖？两位 95 后博士生写了部"神人游戏"',
       'press.gcores.outlet': '405 游局',
       'press.gcores.headline': 'Ep.32 第一次用 AI 做游戏的实战经验分享 · 对话《青椒模拟器》主创',
+      'press.jixin.outlet': '机器之心',
+      'press.jixin.headline': '玩到崩溃，《青椒模拟器》游戏爆火，我在AI世界一路升级做院士',
+      'press.jizhou.outlet': '极昼工作室',
+      'press.jizhou.headline': '重生之我在「青椒模拟器」做导师，一路飞升到院士',
       'press.tag.interview': '主创专访',
       'press.tag.profile': '人物专题',
       'press.tag.podcast': '播客',
+      'press.tag.review': '产品体验',
 
       'about.title': '关于 <span class="accent">我们</span>',
-      'about.p1': '青椒模拟器团队（Feed-Scription）是一支跨研究 / 工程 / 设计的 AI 游戏小队。我们相信大模型不只是写文案的工具，而是一种新的"游戏机制"。也相信一个 AI 游戏能不能立起来，最终还是要看玩法有不有趣、世界自不自洽。',
+      'about.p1': '青椒模拟器团队（Wortou.AI）是一支跨研究 / 工程 / 设计的 AI 游戏小队。我们相信大模型不只是写文案的工具，而是一种新的"游戏机制"。也相信一个 AI 游戏能不能立起来，最终还是要看玩法有不有趣、世界自不自洽。',
       'about.p2': '每个 demo 都坚持端到端跑通到能让陌生人玩到。过程里沉淀出的 KAL 引擎和自动化测试也开源出来——希望下一波做 AI 游戏的人，少踩几个我们已经踩过的坑。',
       'stats.games': 'AI 游戏',
       'stats.tools': '开源工具',
       'stats.dirs': '探索方向',
 
-      'foot.brand': '青椒模拟器团队 / Feed-Scription',
+      'foot.brand': '青椒模拟器团队 / Wortou.AI',
       'foot.gh': 'GitHub Org',
       'foot.tagline': '© 2026 · Made with chili pepper & a lot of LLM tokens'
     },
 
     en: {
-      'meta.title': "Tenure-Track Chili Team · Let LLMs stretch what a game can imagine",
-      'meta.desc': "Feed-Scription team — reimagining games with LLMs. AI narrative, multi-agent arenas, algorithms-as-play, platform & tools.",
+      'meta.title': "Wortou.AI · Let AI expand the imagination of games.",
+      'meta.desc': "Wortou.AI team — reimagining games with LLMs. AI narrative, multi-agent arenas, algorithms-as-play, platform & tools.",
 
-      'brand.team': 'Tenure-Track Chili Team',
+      'brand.team': 'Chili-Game Team',
       'nav.games': 'Games', 'nav.platform': 'Platform', 'nav.tools': 'Tools',
       'nav.events': 'Events', 'nav.press': 'Press', 'nav.about': 'About',
       'nav.lang_toggle': '中',
+      'nav.theme_dark': 'Switch to dark mode',
+      'nav.theme_light': 'Switch to light mode',
 
-      'hero.title': 'Let LLMs stretch<br><span class="accent">what a game can imagine</span>',
+      'hero.title': 'Let AI expand <br><span class="accent">the imagination of games</span>',
       'pill.narrative': 'AI Narrative',
       'pill.agent': 'Multi-Agent',
       'pill.algo': 'Algorithms-as-Play',
@@ -1326,8 +1472,8 @@
       'cta.coming_soon': 'Coming soon',
       'cta.internal': 'Internal tool',
 
-      'card.chili.alt': 'Tenure-Track Chili UI',
-      'card.chili.title': 'Tenure-Track Chili<span class="en">青椒模拟器</span>',
+      'card.chili.alt': 'Tenure-Track Simulator UI',
+      'card.chili.title': 'Tenure-Track Simulator<span class="en">青椒模拟器</span>',
       'card.chili.tag1': 'Management sim',
       'card.chili.desc': "Survive and climb the Chinese academic tenure track. The AI isn't running a scripted tree — it reacts to every decision you make. That's how one player dumped ¥1.1 B into the cafeteria and opened a braised-pork window.",
 
@@ -1378,25 +1524,32 @@
       'press.sciencenet.outlet': 'Science Net',
       'press.sciencenet.headline': 'From a third-tier college to a Nobel: two 95-born PhD students wrote a "godly game"',
       'press.gcores.outlet': '405 Podcast',
-      'press.gcores.headline': "Ep.32 — Hands-on lessons from a first AI game · with the Tenure-Track Chili team",
+      'press.gcores.headline': "Ep.32 — Hands-on lessons from a first AI game · with the Tenure-Track Simulator team",
+      'press.jixin.outlet': 'Synced',
+      'press.jixin.headline': "Played till it crashed: Tenure-Track Simulator went viral — I ranked up to academician in an AI world",
+      'press.jizhou.outlet': 'Jizhou Studio',
+      'press.jizhou.headline': 'Reborn as a mentor in Tenure-Track Simulator — flying all the way to academician',
       'press.tag.interview': 'Interview',
       'press.tag.profile': 'Profile',
       'press.tag.podcast': 'Podcast',
+      'press.tag.review': 'Hands-on',
 
       'about.title': 'About <span class="accent">us</span>',
-      'about.p1': "The Tenure-Track Chili Team (Feed-Scription) is a small AI-game crew across research, engineering, and design. We treat LLMs as a new kind of game mechanic, not a copywriting assistant — and we still believe whether an AI game holds up comes down to the basics: is the gameplay fun, is the world internally consistent.",
+      'about.p1': "The Chili-Game Team (Wortou.AI) is a small AI-game crew across research, engineering, and design. We treat LLMs as a new kind of game mechanic, not a copywriting assistant — and we still believe whether an AI game holds up comes down to the basics: is the gameplay fun, is the world internally consistent.",
       'about.p2': "Every demo we ship runs end-to-end well enough for a stranger to play. The KAL engine and the autotest harness we built along the way are open-sourced — so the next people taking on AI games can skip a few of the holes we've already fallen into.",
       'stats.games': 'AI games',
       'stats.tools': 'Open-source tools',
       'stats.dirs': 'Directions explored',
 
-      'foot.brand': 'Tenure-Track Chili Team / Feed-Scription',
+      'foot.brand': 'Chili-Game Team / Wortou.AI',
       'foot.gh': 'GitHub Org',
       'foot.tagline': '© 2026 · Made with chili pepper & a lot of LLM tokens'
     }
   };
 
   const STORAGE_KEY = 'org-page-lang';
+  const THEME_STORAGE_KEY = 'org-page-theme';
+  const themeQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
   function detectInitial() {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -1431,6 +1584,8 @@
       const key = el.getAttribute('data-i18n-alt');
       if (key in dict) el.setAttribute('alt', dict[key]);
     });
+
+    updateThemeButton();
   }
 
   function setLang(lang) {
@@ -1438,14 +1593,59 @@
     applyLang(lang);
   }
 
+  function getSavedTheme() {
+    const saved = localStorage.getItem(THEME_STORAGE_KEY);
+    return (saved === 'light' || saved === 'dark') ? saved : null;
+  }
+
+  function systemTheme() {
+    return themeQuery.matches ? 'dark' : 'light';
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    updateThemeButton();
+  }
+
+  function setTheme(theme) {
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
+    applyTheme(theme);
+  }
+
+  function updateThemeButton() {
+    const btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    const lang = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+    const dict = I18N[lang] || I18N.zh;
+    const isDark = document.documentElement.dataset.theme === 'dark';
+    const label = isDark ? dict['nav.theme_light'] : dict['nav.theme_dark'];
+    btn.setAttribute('aria-label', label);
+    btn.setAttribute('title', label);
+    btn.setAttribute('aria-pressed', String(isDark));
+    const icon = btn.querySelector('.theme-toggle-icon');
+    if (icon) icon.textContent = isDark ? '☾' : '☀';
+  }
+
   const initial = detectInitial();
+  applyTheme(getSavedTheme() || document.documentElement.dataset.theme || systemTheme());
   applyLang(initial);
 
   document.addEventListener('click', e => {
+    const themeBtn = e.target.closest('.theme-toggle');
+    if (themeBtn) {
+      const current = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+      return;
+    }
+
     const btn = e.target.closest('.lang-toggle');
     if (!btn) return;
     const current = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
     setLang(current === 'zh' ? 'en' : 'zh');
+  });
+
+  themeQuery.addEventListener('change', () => {
+    if (!getSavedTheme()) applyTheme(systemTheme());
   });
 })();
 </script>
