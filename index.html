@@ -302,7 +302,7 @@
   }
 
   h1.hero-title {
-    font-size: clamp(2.6rem, 6.2vw, 5.4rem);
+    font-size: clamp(2.5rem, 5.2vw, 4.9rem);
     font-weight: 800;
     line-height: 1.05;
     letter-spacing: -0.03em;
@@ -313,7 +313,7 @@
     animation-delay: .1s;
   }
   h1.hero-title .accent {
-    display: inline-block;
+    display: inline;
     background: linear-gradient(90deg, var(--amber) 0%, var(--orange) 50%, var(--amber-d) 100%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -972,8 +972,8 @@
   <div class="container">
     <div class="hero-inner">
       <h1 class="hero-title" data-i18n-html="hero.title">
-        用AI，让游戏<br>
-        <span class="accent">长出想象的边界</span>
+        让AI拓展<br>
+        <span class="accent">游戏想象的边界</span>
       </h1>
       <div class="hero-meta">
         <span class="pill"><span class="pill-dot"></span><span data-i18n="pill.narrative">AI 叙事</span></span>
@@ -1027,6 +1027,21 @@
           <p class="one-liner" data-i18n="card.fate.desc">扮演历史人物改命试试：「武则天若让孩子活下来，会不会弥补遗憾？」</p>
           <div class="cta-row">
             <a class="cta" href="https://fated.feedscription.com/" target="_blank" rel="noopener" data-i18n="cta.play">在线试玩</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="thumb"><img src="assets/presiduck.png" data-i18n-alt="card.presiduck.alt" alt="噗噗模拟器"></div>
+        <div class="body">
+          <div class="title-row">
+            <span class="vbar"></span>
+            <h3 class="card-title" data-i18n-html="card.presiduck.title">噗噗模拟器<span class="en">Presiduck Simulator</span></h3>
+          </div>
+          <div class="tags"><span class="tag" data-i18n="card.presiduck.tag1">政治模拟</span><span class="tag live" data-i18n="tag.live">已上线</span></div>
+          <p class="one-liner" data-i18n="card.presiduck.desc">一只鸭子的总统路：在 AI 驱动的政治模拟里做选择、应对舆论和突发事件。</p>
+          <div class="cta-row">
+            <a class="cta" href="https://presiduck.feedscription.com/" target="_blank" rel="noopener" data-i18n="cta.play">在线试玩</a>
           </div>
         </div>
       </article>
@@ -1172,6 +1187,21 @@
           </div>
         </div>
       </article>
+
+      <article class="card">
+        <div class="thumb"><img src="assets/openovel.webp" data-i18n-alt="card.openovel.alt" alt="Openovel interactive fiction engine"></div>
+        <div class="body">
+          <div class="title-row">
+            <span class="vbar"></span>
+            <h3 class="card-title" data-i18n-html="card.openovel.title">Openovel<span class="en">AI Interactive Fiction</span></h3>
+          </div>
+          <div class="tags"><span class="tag" data-i18n="card.openovel.tag1">开源工具</span><span class="tag gray" data-i18n="card.openovel.tag2">双循环叙事</span></div>
+          <p class="one-liner" data-i18n="card.openovel.desc">Local-first 的 AI 互动小说应用：前台快速叙事，后台 Agent 维护故事状态、记忆和文件。</p>
+          <div class="cta-row">
+            <a class="cta" href="https://github.com/Feed-Scription/openovel" target="_blank" rel="noopener" data-i18n="cta.view_code">查看代码</a>
+          </div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -1293,8 +1323,8 @@
           </p>
         </div>
         <div class="stats">
-          <div class="stat"><div class="n">5</div><div class="l" data-i18n="stats.games">AI 游戏</div></div>
-          <div class="stat"><div class="n">2</div><div class="l" data-i18n="stats.tools">开源工具</div></div>
+          <div class="stat"><div class="n">6</div><div class="l" data-i18n="stats.games">AI 游戏</div></div>
+          <div class="stat"><div class="n">3</div><div class="l" data-i18n="stats.tools">开源工具</div></div>
           <div class="stat"><div class="n">3</div><div class="l" data-i18n="stats.dirs">探索方向</div></div>
         </div>
       </div>
@@ -1319,7 +1349,7 @@
 (function () {
   const I18N = {
     zh: {
-      'meta.title': '青椒模拟器团队 · 让 AI 拓展游戏想象',
+      'meta.title': '青椒模拟器团队 · 让 AI 拓展游戏想象的边界',
       'meta.desc': '青椒模拟器团队 / Wortou.AI —— 用大模型重新想象游戏可能性。AI 叙事、Agent 博弈、AI 算法设计、平台与工具。',
 
       'brand.team': '青椒模拟器团队',
@@ -1329,7 +1359,7 @@
       'nav.theme_dark': '切换深色模式',
       'nav.theme_light': '切换浅色模式',
 
-      'hero.title': '用大模型，让游戏<br><span class="accent">长出想象的边界</span>',
+      'hero.title': '让AI拓展<br><span class="accent">游戏想象的边界</span>',
       'pill.narrative': 'AI 叙事',
       'pill.agent': 'Agent 博弈',
       'pill.algo': '算法可玩化',
@@ -1368,6 +1398,11 @@
       'card.fate.tag1': '叙事冒险',
       'card.fate.desc': '扮演历史人物改命试试：「武则天若让孩子活下来，会不会弥补遗憾？」',
 
+      'card.presiduck.alt': '噗噗模拟器',
+      'card.presiduck.title': '噗噗模拟器<span class="en">Presiduck Simulator</span>',
+      'card.presiduck.tag1': '政治模拟',
+      'card.presiduck.desc': '一只鸭子的总统路：在 AI 驱动的政治模拟里做选择、应对舆论和突发事件。',
+
       'card.poker.alt': '大模型德扑：6 个 AI 同桌对局',
       'card.poker.title': '大模型德扑<span class="en">Cyber Cricket · Poker</span>',
       'card.poker.tag2': '实时复盘',
@@ -1401,6 +1436,12 @@
       'card.kal.tag1': '游戏框架',
       'card.kal.desc': 'LLM-First 的游戏组件库：让 Coding Agent 在 30 分钟内拼出一个完整的文字游戏。',
 
+      'card.openovel.alt': 'Openovel AI 互动小说引擎',
+      'card.openovel.title': 'Openovel<span class="en">AI Interactive Fiction</span>',
+      'card.openovel.tag1': '开源工具',
+      'card.openovel.tag2': '双循环叙事',
+      'card.openovel.desc': 'Local-first 的 AI 互动小说应用：前台快速叙事，后台 Agent 维护故事状态、记忆和文件。',
+
       'card.event.alt': '抖音 AI 创变者计划 · 苏州 AI 游戏专场',
       'card.event.title': '苏州 AI 游戏专场<span class="en">抖音 AI 创变者计划 · 2026.04.18</span>',
       'card.event.tag': '联合承办',
@@ -1433,7 +1474,7 @@
     },
 
     en: {
-      'meta.title': "Wortou.AI · Let AI expand the imagination boundaries of games.",
+      'meta.title': "Wortou.AI · Let AI expand the boundaries of game imagination",
       'meta.desc': "Wortou.AI team — reimagining games with LLMs. AI narrative, multi-agent arenas, algorithms-as-play, platform & tools.",
 
       'brand.team': 'Chili-Game Team',
@@ -1443,7 +1484,7 @@
       'nav.theme_dark': 'Switch to dark mode',
       'nav.theme_light': 'Switch to light mode',
 
-      'hero.title': 'Let AI expand <br><span class="accent">the imagination boundaries of games</span>',
+      'hero.title': 'Let AI expand<br><span class="accent">the boundaries of game imagination</span>',
       'pill.narrative': 'AI Narrative',
       'pill.agent': 'Multi-Agent',
       'pill.algo': 'Algorithms-as-Play',
@@ -1482,6 +1523,11 @@
       'card.fate.tag1': 'Narrative adventure',
       'card.fate.desc': "Play a historical figure and rewrite fate: \"If Wu Zetian had let her children live, would it have mended her regret?\"",
 
+      'card.presiduck.alt': 'Presiduck Simulator',
+      'card.presiduck.title': 'Presiduck Simulator<span class="en">噗噗模拟器</span>',
+      'card.presiduck.tag1': 'Political sim',
+      'card.presiduck.desc': "A duck's road to the presidency: make choices, handle public opinion, and react to surprises in an AI-driven political sim.",
+
       'card.poker.alt': 'Cyber Cricket: 6 AIs at one poker table',
       'card.poker.title': 'Cyber Cricket · Poker<span class="en">大模型德扑</span>',
       'card.poker.tag2': 'Live replay',
@@ -1514,6 +1560,12 @@
       'card.kal.title': 'KAL AI Layer<span class="en">Kal-Engine</span>',
       'card.kal.tag1': 'Game framework',
       'card.kal.desc': "LLM-first component library. A coding agent can wire up a full text game in 30 minutes.",
+
+      'card.openovel.alt': 'Openovel AI interactive fiction engine',
+      'card.openovel.title': 'Openovel<span class="en">AI Interactive Fiction</span>',
+      'card.openovel.tag1': 'Open source',
+      'card.openovel.tag2': 'Dual-loop narrative',
+      'card.openovel.desc': "A local-first AI interactive fiction app: fast foreground storytelling, with background agents maintaining story state, memory, and files.",
 
       'card.event.alt': 'Douyin AI Creators Program · Suzhou AI Game Hackathon',
       'card.event.title': 'Suzhou AI Game Hackathon<span class="en">Douyin AI Creators · 2026.04.18</span>',
