@@ -4,7 +4,7 @@
 
 > 用大模型，让游戏长出想象的边界。
 
-AI 叙事 · Agent 博弈 · 算法可玩化
+AI 叙事 · AI 对话 · Agent 博弈 · 算法可玩化
 
 ---
 
@@ -22,6 +22,19 @@ AI 叙事 · Agent 博弈 · 算法可玩化
 叙事冒险 · 已上线
 扮演历史人物改命试试：「武则天若让孩子活下来，会不会弥补遗憾？」
 <https://fated.feedscription.com/>
+
+**噗噗模拟器** · *Presiduck Simulator*
+模拟经营 · 已上线
+一只鸭子的总统路：在 AI 驱动的世界模拟里做选择、应对舆论和突发事件。
+<https://presiduck.feedscription.com/>
+
+### AI 对话
+*Real-time AI Dialogue — 让 AI 成为真正可交谈的游戏角色：听懂语音、记住上下文，也会被玩家彼此“带偏”。*
+
+**就“宠”他吧** · *Just “Pamper” Him*
+多人语音 · AI NPC · ChinaJoy 试玩
+和好友实时开麦，轮流向同一个 AI NPC 对话，诱导 AI NPC 说出各自的关键词。可以脑洞大开地引导 AI，也能故意“污染上下文”给对手挖坑。多样任务，不可预测的回应，让每一局都不重样，“笑”果满满。
+[观看 PV（高清）](./assets/jiu_chong_ta_ba_pv.mp4) · [流畅版](./assets/jiu_chong_ta_ba_pv_smooth.mp4) · [ChinaJoy 现场](./assets/jiu_chong_ta_ba_chinajoy.webp) · *敬请期待*
 
 ### Agent 博弈
 *Multi-Agent Arena — 人当观众，AI 之间互相勾心斗角，这是以前难做的体验。*
@@ -67,6 +80,11 @@ AI 能力 · 账号体系 · 用户注册 · 埋点分析
 LLM-First 的游戏组件库：让 Coding Agent 在 30 分钟内拼出一个完整的文字游戏。
 <https://github.com/Feed-Scription/kal>
 
+**Openovel** · *AI Interactive Fiction*
+开源工具 · 双循环叙事
+Local-first 的 AI 互动小说应用：前台快速叙事，后台 Agent 维护故事状态、记忆和文件。
+<https://github.com/Feed-Scription/openovel>
+
 ---
 
 ## IV · 活动策划
@@ -94,4 +112,4 @@ LLM-First 的游戏组件库：让 Coding Agent 在 30 分钟内拼出一个完�
 
 每个 demo 都坚持端到端跑通到能让陌生人玩到。过程里沉淀出的 KAL 引擎和自动化测试也开源出来——希望下一波做 AI 游戏的人，少踩几个我们已经踩过的坑。
 
-**5 款 AI 游戏 · 2 套开源工具 · 3 个探索方向**
+**7 款 AI 游戏 · 3 套开源工具 · 4 个探索方向**
