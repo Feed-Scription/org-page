@@ -1,0 +1,90 @@
+---
+import '../styles/global.css';
+import type { Locale } from '../data/types';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  ogImageAlt: string;
+  canonicalPath: '/' | '/en/';
+}
+
+const { locale, title, description, ogImageAlt, canonicalPath } = Astro.props;
+const site = Astro.site ?? new URL('https://wortou.ai');
+const canonicalUrl = new URL(canonicalPath, site);
+const zhUrl = new URL('/', site);
+const enUrl = new URL('/en/', site);
+const ogImageUrl = new URL('/og.png', site);
+const htmlLang = locale === 'zh' ? 'zh-CN' : 'en';
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Wortou.AI',
+  alternateName: '青椒模拟器团队',
+  url: site.href,
+  logo: new URL('/assets/green_pepper.webp', site).href,
+  sameAs: ['https://github.com/Feed-Scription'],
+};
+---
+
+<!doctype html>
+<html lang={htmlLang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#FBFAF6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#161513" media="(prefers-color-scheme: dark)" />
+
+    <title>{title}</title>
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="zh-CN" href={zhUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={zhUrl} />
+    <link rel="icon" type="image/webp" href="/assets/green_pepper.webp" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Wortou.AI" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta property="og:locale" content={locale === 'zh' ? 'zh_CN' : 'en_US'} />
+    <meta property="og:locale:alternate" content={locale === 'zh' ? 'en_US' : 'zh_CN'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Noto+Sans+SC:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <script is:inline>
+      (() => {
+        try {
+          const saved = localStorage.getItem('org-page-theme');
+          const system = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          document.documentElement.dataset.theme = saved === 'light' || saved === 'dark' ? saved : system;
+        } catch {
+          document.documentElement.dataset.theme = 'light';
+        }
+      })();
+    </script>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(organizationSchema)}></script>
+  </head>
+  <body>
+    <slot />
+    <script>
+      import '../scripts/site';
+    </script>
+  </body>
+</html>

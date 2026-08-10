@@ -1,0 +1,40 @@
+---
+import type { Locale } from '../data/types';
+import { siteCopy } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = siteCopy[locale];
+const homeHref = locale === 'zh' ? '/' : '/en/';
+---
+
+<header class="nav">
+  <nav class="nav-inner" aria-label={copy.navLabel}>
+    <a class="brand" href={homeHref}>
+      <span>{copy.brand}</span><span class="dot">·</span>Wortou.AI
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        {copy.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      </div>
+      <div class="nav-actions">
+        <button
+          class="theme-toggle"
+          type="button"
+          role="switch"
+          aria-checked="false"
+          aria-label={copy.themeLabel}
+          data-theme-toggle
+        >
+          <span class="theme-toggle-icon" aria-hidden="true">☀</span>
+        </button>
+        <a class="lang-toggle" href={copy.language.href} aria-label={copy.language.ariaLabel}>
+          {copy.language.shortLabel}
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -34,7 +34,7 @@ A duck's road to the presidency: make choices, handle public opinion, and react 
 **Just “Pamper” Him** · *就“宠”他吧*
 Live voice · AI NPC · ChinaJoy playtest
 Jump into live voice with friends and take turns talking to the same AI NPC, each trying to coax it into saying their keyword. Get creative in how you steer it — or deliberately “poison the context” to set traps for your opponents. Varied challenges and unpredictable replies make every round different, with plenty of laughs along the way.
-[Watch PV (HD)](./assets/jiu_chong_ta_ba_pv.mp4) · [Data-saver version](./assets/jiu_chong_ta_ba_pv_smooth.mp4) · [ChinaJoy playtest](./assets/jiu_chong_ta_ba_chinajoy.webp) · *Stay tuned*
+[Watch PV (HD)](./public/assets/jiu_chong_ta_ba_pv.mp4) · [Data-saver version](./public/assets/jiu_chong_ta_ba_pv_smooth.mp4) · [ChinaJoy playtest](./public/assets/jiu_chong_ta_ba_chinajoy.webp) · *Stay tuned*
 
 ### Multi-Agent Arena
 *Players become spectators while AI agents scheme against each other — an experience that was hard to deliver before LLMs.*
@@ -113,3 +113,14 @@ The Tenure-Track Chili Team (Feed-Scription) is a small AI-game crew that cuts a
 Every demo we ship runs end-to-end well enough for a stranger to play. The KAL engine and automated test rig we built along the way are open-sourced too — so the next people taking on AI games can skip a few of the holes we've already fallen into.
 
 **7 AI games · 3 open-source tools · 4 directions explored**
+
+---
+
+## Local development
+
+```bash
+npm install
+npm run dev
+```
+
+Run `npm run check` and `npm run build` before committing. Astro emits a static site that is deployed by the GitHub Pages workflow.

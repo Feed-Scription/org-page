@@ -1,0 +1,32 @@
+---
+interface Props {
+  line: string;
+  accent: string;
+  pills: string[];
+  topicsLabel: string;
+}
+
+const { line, accent, pills, topicsLabel } = Astro.props;
+const pillTones = ['', 'rose', 'indigo', 'emerald'];
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container">
+    <div class="hero-inner">
+      <h1 class="hero-title" id="hero-title">
+        {line}<br />
+        <span class="accent">{accent}</span>
+      </h1>
+      <div class="hero-meta" aria-label={topicsLabel}>
+        {
+          pills.map((pill, index) => (
+            <span class="pill">
+              <span class:list={['pill-dot', pillTones[index]]} aria-hidden="true"></span>
+              <span>{pill}</span>
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

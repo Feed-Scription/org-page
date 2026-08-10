@@ -1,0 +1,93 @@
+---
+import { textFor, type Locale, type Project } from '../data/types';
+
+interface Props {
+  project: Project;
+  locale: Locale;
+  headingLevel?: 'h3' | 'h4';
+}
+
+const { project, locale, headingLevel = 'h3' } = Astro.props;
+const title = textFor(project.title, locale);
+const subtitle = textFor(project.subtitle, locale);
+const description = project.description ? textFor(project.description, locale) : undefined;
+const action = project.action;
+const imageClass = project.image.fit === 'contain' ? 'thumb contain' : 'thumb';
+const mediaLabel = action.kind === 'dialog' ? `${textFor(action.label, locale)} · ${title}` : '';
+const Heading = headingLevel;
+---
+
+<article class:list={['card', project.variant]}>
+  {
+    action.kind === 'dialog' ? (
+      <button
+        class:list={[imageClass, 'thumb-button']}
+        type="button"
+        data-dialog-open={action.dialogId}
+        aria-label={mediaLabel}
+      >
+        <img
+          src={project.image.src}
+          alt={textFor(project.image.alt, locale)}
+          loading="lazy"
+          decoding="async"
+          width={project.image.width}
+          height={project.image.height}
+        />
+        <span class="thumb-play" aria-hidden="true">
+          <span class="thumb-play-icon">▶</span>
+          <span>{textFor(action.label, locale)}</span>
+        </span>
+      </button>
+    ) : (
+      <div class={imageClass}>
+        <img
+          src={project.image.src}
+          alt={textFor(project.image.alt, locale)}
+          loading="lazy"
+          decoding="async"
+          width={project.image.width}
+          height={project.image.height}
+        />
+      </div>
+    )
+  }
+
+  <div class="body">
+    <div class="title-row">
+      <Heading class="card-title">
+        {title}
+        <span class="en">{subtitle}</span>
+      </Heading>
+    </div>
+
+    <div class="tags">
+      {
+        project.tags.map((tag) => (
+          <span class:list={['tag', tag.tone]}>{textFor(tag.label, locale)}</span>
+        ))
+      }
+    </div>
+
+    {description && <p class="one-liner">{description}</p>}
+
+    <div class="cta-row">
+      {
+        action.kind === 'link' ? (
+          <a class="cta" href={action.href} target="_blank" rel="noopener noreferrer">
+            {textFor(action.label, locale)}
+          </a>
+        ) : action.kind === 'dialog' ? (
+          <>
+            <button class="cta" type="button" data-dialog-open={action.dialogId}>
+              {textFor(action.label, locale)}
+            </button>
+            {action.note && <span class="status-note">{textFor(action.note, locale)}</span>}
+          </>
+        ) : (
+          <span class="cta secondary">{textFor(action.label, locale)}</span>
+        )
+      }
+    </div>
+  </div>
+</article>

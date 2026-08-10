@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Department from './Department.astro';
+import Hero from './Hero.astro';
+import MediaDialog from './MediaDialog.astro';
+import PressCard from './PressCard.astro';
+import ProjectCard from './ProjectCard.astro';
+import SectionHeader from './SectionHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import SiteHeader from './SiteHeader.astro';
+import { projects } from '../data/projects';
+import { pressItems } from '../data/press';
+import { siteCopy } from '../data/site';
+import type { Locale, SectionId } from '../data/types';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = siteCopy[locale];
+const canonicalPath = locale === 'zh' ? '/' : '/en/';
+const games = projects.filter((project) => project.section === 'games');
+const projectsFor = (section: SectionId) => projects.filter((project) => project.section === section);
+---
+
+<BaseLayout
+  locale={locale}
+  title={copy.meta.title}
+  description={copy.meta.description}
+  ogImageAlt={copy.meta.ogImageAlt}
+  canonicalPath={canonicalPath}
+>
+  <a class="skip-link" href="#main-content">{copy.skipLink}</a>
+  <div class="pepper-bg" aria-hidden="true"></div>
+  <div class="pepper-veil" aria-hidden="true"></div>
+
+  <SiteHeader locale={locale} />
+
+  <main id="main-content">
+    <Hero
+      line={copy.hero.line}
+      accent={copy.hero.accent}
+      pills={copy.hero.pills}
+      topicsLabel={copy.hero.topicsLabel}
+    />
+
+    <section class="work" id="games">
+      <div class="container">
+        <SectionHeader {...copy.sections.games} />
+        {
+          copy.departments.map((department) => (
+            <Department
+              locale={locale}
+              department={department}
+              projects={games.filter((project) => project.department === department.id)}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="work" id="platform">
+      <div class="container">
+        <SectionHeader {...copy.sections.platform} />
+        <div class="grid">
+          {projectsFor('platform').map((project) => <ProjectCard project={project} locale={locale} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="work" id="tools">
+      <div class="container">
+        <SectionHeader {...copy.sections.tools} />
+        <div class="grid">
+          {projectsFor('tools').map((project) => <ProjectCard project={project} locale={locale} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="work" id="events">
+      <div class="container">
+        <SectionHeader {...copy.sections.events} />
+        <div class="grid">
+          {projectsFor('events').map((project) => <ProjectCard project={project} locale={locale} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="work" id="press">
+      <div class="container">
+        <SectionHeader {...copy.sections.press} />
+        <div class="press-grid">
+          {pressItems.map((item) => <PressCard item={item} locale={locale} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="container">
+        <div class="about-card">
+          <div class="about-grid">
+            <div>
+              <h2>{copy.about.title} <span class="accent">{copy.about.accent}</span></h2>
+              {copy.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+            </div>
+            <div class="stats">
+              {
+                copy.stats.map((stat) => (
+                  <div class="stat">
+                    <div class="n">{stat.value}</div>
+                    <div class="l">{stat.label}</div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <MediaDialog locale={locale} />
+  <SiteFooter locale={locale} />
+</BaseLayout>
