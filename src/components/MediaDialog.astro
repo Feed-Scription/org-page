@@ -1,0 +1,55 @@
+---
+import type { Locale } from '../data/types';
+import { siteCopy } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = siteCopy[locale].dialog;
+---
+
+<dialog class="media-dialog" id="pamper-media" aria-labelledby="pamper-media-title">
+  <div class="media-dialog-shell">
+    <div class="media-dialog-head">
+      <h2 class="media-dialog-title" id="pamper-media-title">{copy.title}</h2>
+      <button class="dialog-close" type="button" data-dialog-close aria-label={copy.close}>×</button>
+    </div>
+    <div class="media-dialog-grid">
+      <div class="media-video">
+        <video
+          controls
+          playsinline
+          preload="metadata"
+          poster="/assets/jiu_chong_ta_ba_cover.webp"
+          data-video-player
+          data-src-smooth="/assets/jiu_chong_ta_ba_pv_smooth.mp4"
+          data-src-hd="/assets/jiu_chong_ta_ba_pv.mp4"
+        >
+          <span>{copy.unsupported}</span>
+        </video>
+        <div class="video-quality-controls" role="group" aria-label={copy.qualityGroup}>
+          <span class="video-quality-label">{copy.quality}</span>
+          <button class="video-quality-button" type="button" data-video-quality="smooth" aria-pressed="false">
+            {copy.smooth}
+          </button>
+          <button class="video-quality-button" type="button" data-video-quality="hd" aria-pressed="false">
+            {copy.hd}
+          </button>
+        </div>
+      </div>
+      <figure class="media-photo">
+        <img
+          src="/assets/jiu_chong_ta_ba_chinajoy.webp"
+          alt={copy.photoAlt}
+          loading="lazy"
+          decoding="async"
+          width="1280"
+          height="854"
+        />
+        <figcaption class="media-caption">{copy.photoCaption}</figcaption>
+      </figure>
+    </div>
+  </div>
+</dialog>

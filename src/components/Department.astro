@@ -1,0 +1,30 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import type { Locale, Project } from '../data/types';
+
+interface Props {
+  locale: Locale;
+  department: {
+    id: string;
+    number: string;
+    title: string;
+    englishLabel: string;
+    variant?: string;
+  };
+  projects: Project[];
+}
+
+const { locale, department, projects } = Astro.props;
+const headingId = `department-${department.id}`;
+---
+
+<section class:list={['dept', department.variant]} aria-labelledby={headingId}>
+  <header class="dept-meta">
+    <div class="dept-num">{department.number}</div>
+    <h3 id={headingId}>{department.title}</h3>
+    <span class="dept-en">{department.englishLabel}</span>
+  </header>
+  <div class="dept-cards">
+    {projects.map((project) => <ProjectCard project={project} locale={locale} headingLevel="h4" />)}
+  </div>
+</section>

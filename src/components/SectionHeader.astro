@@ -1,0 +1,16 @@
+---
+interface Props {
+  chapter: string;
+  title: string;
+  accent: string;
+}
+
+const { chapter, title, accent } = Astro.props;
+---
+
+<div class="sec-head">
+  <div class="sec-head-l">
+    <div class="sec-num">{chapter}</div>
+    <h2>{title} <span class="accent">{accent}</span></h2>
+  </div>
+</div>

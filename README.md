@@ -34,7 +34,7 @@ AI 叙事 · AI 对话 · Agent 博弈 · 算法可玩化
 **就“宠”他吧** · *Just “Pamper” Him*
 多人语音 · AI NPC · ChinaJoy 试玩
 和好友实时开麦，轮流向同一个 AI NPC 对话，诱导 AI NPC 说出各自的关键词。可以脑洞大开地引导 AI，也能故意“污染上下文”给对手挖坑。多样任务，不可预测的回应，让每一局都不重样，“笑”果满满。
-[观看 PV（高清）](./assets/jiu_chong_ta_ba_pv.mp4) · [流畅版](./assets/jiu_chong_ta_ba_pv_smooth.mp4) · [ChinaJoy 现场](./assets/jiu_chong_ta_ba_chinajoy.webp) · *敬请期待*
+[观看 PV（高清）](./public/assets/jiu_chong_ta_ba_pv.mp4) · [流畅版](./public/assets/jiu_chong_ta_ba_pv_smooth.mp4) · [ChinaJoy 现场](./public/assets/jiu_chong_ta_ba_chinajoy.webp) · *敬请期待*
 
 ### Agent 博弈
 *Multi-Agent Arena — 人当观众，AI 之间互相勾心斗角，这是以前难做的体验。*
@@ -113,3 +113,14 @@ Local-first 的 AI 互动小说应用：前台快速叙事，后台 Agent 维护
 每个 demo 都坚持端到端跑通到能让陌生人玩到。过程里沉淀出的 KAL 引擎和自动化测试也开源出来——希望下一波做 AI 游戏的人，少踩几个我们已经踩过的坑。
 
 **7 款 AI 游戏 · 3 套开源工具 · 4 个探索方向**
+
+---
+
+## 本地开发
+
+```bash
+npm install
+npm run dev
+```
+
+提交前运行 `npm run check` 和 `npm run build`。站点使用 Astro 生成静态文件，并通过 GitHub Pages 工作流部署。

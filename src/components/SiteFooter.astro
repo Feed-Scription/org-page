@@ -1,0 +1,22 @@
+---
+import type { Locale } from '../data/types';
+import { siteCopy } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = siteCopy[locale].footer;
+---
+
+<footer>
+  <div class="container foot">
+    <div>
+      <span class="brand-small">{copy.brand}</span>
+      <span class="sep" aria-hidden="true"></span>
+      <a href="https://github.com/Feed-Scription" target="_blank" rel="noopener noreferrer">{copy.github}</a>
+    </div>
+    <div>{copy.tagline}</div>
+  </div>
+</footer>

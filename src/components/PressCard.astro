@@ -1,0 +1,20 @@
+---
+import { textFor, type Locale, type PressItem } from '../data/types';
+
+interface Props {
+  item: PressItem;
+  locale: Locale;
+}
+
+const { item, locale } = Astro.props;
+---
+
+<a class="press-card" href={item.href} target="_blank" rel="noopener noreferrer">
+  <div class="press-meta">
+    <span class:list={['press-outlet', { intl: item.international }]}>{textFor(item.outlet, locale)}</span>
+    <span class="press-dot" aria-hidden="true"></span>
+    <span>{item.date}</span>
+  </div>
+  <p class="press-headline">{textFor(item.headline, locale)}</p>
+  <span class="press-tag">{textFor(item.tag, locale)}</span>
+</a>
